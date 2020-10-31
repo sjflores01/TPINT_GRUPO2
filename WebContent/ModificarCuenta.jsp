@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nuevo usuario</title>
+<title>Modificar Cuenta</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
@@ -78,12 +78,12 @@
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
-				<h3 class="display-4 text-info">Alta cliente</h3>
-				<div style="height: 50px"></div>
+				<h3 class="display-4 text-info">Modificar Cuenta</h3>
+				<div style="height:50px"></div>	
 			</div>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
-			<h2>Contacto</h2>
+		<h2>Informacion de la cuenta</h2>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
@@ -92,58 +92,57 @@
 					<div class="form-row">
 
 						<div class="col">
-							<label for="provincia">Provincia:
-							</label> <select class="form-control"
-								id="provincia" name=provincia>
-								<option value="M">Masculino</option>
-								<option value="F">Femenino</option>
-							</select>
+						 <label for="nombre">Nombre:</label>
+							<input type="text" class="form-control" name="TXTnombre"
+								id="nombre" aria-describedby="emailHelp" placeholder="Nombres">
 						</div>
 						<div class="col">
-							<input type="text" style="position:relative; top:30px" class="form-control" name="TXTlocalidad"
-								id="localidad" aria-describedby="emailHelp"
-								placeholder="Localidad">
+						 <label for="apellido">Apellido:</label>
+							<input type="text" class="form-control" name="TXTapellido"
+								id="apellido" aria-describedby="emailHelp"
+								placeholder="Apellidos">
 						</div>
 
 					</div>
-					<div style="height: 30px"></div>
+					<div style="height:30px"></div>	
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control" name="TXTdomicilio" id="domicilio"
-								aria-describedby="emailHelp" placeholder="Domicilio">
+						 <label for="Dni">Dni:</label>
+							<input type="text" class="form-control" name="TXTdni" id="dni"
+								aria-describedby="emailHelp" placeholder="DNI">
+						</div>
+						<div class="col">
+						 <label for="cuit">Cuit:</label>
+							<input type="text" class="form-control" name="TXTcuil"
+								id="cuil" aria-describedby="emailHelp" placeholder="Cuil">
 						</div>
 						
+						
 					</div>
-					<div style="height: 30px"></div>
+					<div style="height:30px"></div>	
 					<div class="form-row">
+					 <label for="MontoInicial">Monto Inicial:</label>
+							<input type="text" class="form-control" name="TXTmonoInicial" id="montoinicial"
+								aria-describedby="emailHelp" >
+						
 						<div class="col">
-							 <input	type="text" class="form-control" name="TXTtelefono"
-								id="telefono" aria-describedby="emailHelp"
-								placeholder="telefono">
+							<label for="Tipo de cuenta">Tipo de cuenta:</label>
+							<select class="form-control"  id="sexo" name=sexo>
+							<option value="C_ahorro">Caja de ahorro</option>
+							<option value="C_corriente">Cuenta Corriente</option>
+							</select>
 						</div>
+					</div>
+					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
+					<input type="submit" name="BtnModificarCuenta" value= "Modificar">
+					</div>
+						
 					
-					</div>
-					<div style="height: 30px"></div>
-					<div class="form-row">
-						<div class="col">
-							 <input	type="text" class="form-control" name="TXTcorreo"
-								id="mail" aria-describedby="emailHelp"
-								placeholder="Correo electronico">
-						</div>
-					
-					</div>
-					<div class="row d-flex justify-content-center"
-						style="position: relative; top: 30px">
-						<input type="submit" name="BtnSiguiente" value="Siguiente">
-					</div>
-
-
 
 				</form>
 			</div>
 
 		</div>
 	</div>
-
 </body>
 </html>

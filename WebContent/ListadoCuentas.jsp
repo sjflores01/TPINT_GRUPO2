@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nuevo usuario</title>
+<title>Listado de cuentas</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
@@ -26,7 +26,7 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-large navbar-light"
+	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
 		href="#">BANCO JAVA ADMIN</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -78,54 +78,63 @@
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
-				<h3 class="display-4 text-info">Alta cliente</h3>
-				<div style="height: 50px"></div>
+				<h3 class="display-4 text-info">Nomina del Banco</h3>
+				
 			</div>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
-			<h2>Datos de sesion</h2>
+		<h2>Listado de Cuentas</h2>
+			
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
 				<form>
-					<div class="form-row">
-						<div class="col">
-							<input type="text" class="form-control" name="TXTusuario" id="usuario"
-								aria-describedby="emailHelp" placeholder="Nombre de usuario">
-						</div>
-						
-					</div>
-					<div style="height: 30px"></div>
-					<div class="form-row">
-						<div class="col">
-							 <input	type="password" class="form-control" name="TXTpass"
-								id="pass" aria-describedby="emailHelp"placeholder="Contraseña">
-								<small id="passHelp" class="form-text text-muted">El usuario deberá cambiarla en su primir inicio de sesion.</small>
-						</div>
+				<label for="">Buscar</label>
+				<input type="text" class="form-control" name="TXTbuscador"
+								id="Buscador" aria-describedby="emailHelp" placeholder="Ingrese numero de cuenta">
+				<div style="height:50px"></div>
+					<table class="table">
+  <thead class="table-info">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Numero de cuenta</th>
+      <th scope="col">Tipo de Cuenta</th>
+      <th scope="col">Nombre</th>
+       <th scope="col">Apellido</th>
+       <th></th>
+         <th></th>
+         <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+    <td>aa23T##2</td>
+    <td>Cuenta Corriente</td>
+    <td>Pedro</td>
+    <td>Perez</td>
+	<td><input type="submit" name="BtnCrearCuenta" value= "Nueva Cuenta"></td>
+	<td><input type="submit" name="BtnModificiar" value= "Modificar"></td>
+	<td><input type="submit" name="BtnEliminar" value= "Eliminar"></td>
 					
-					</div>
-					<div style="height: 30px"></div>
-					<div class="form-row">
-						<div class="col">
-							 <input	type="password" class="form-control" name="TXTrepetirpass"
-								id="repetirpass" aria-describedby="emailHelp"	placeholder="Repetir contraseña">
-						</div>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+     
+    </tr>
+  </tbody>
+</table>
 					
-					</div>
-					<div class="row d-flex justify-content-center"
-						style="position: relative; top: 30px">
-						<input type="submit" name="BtnSiguiente" value="Siguiente">
-					</div>
-
-
 
 				</form>
 			</div>
 
 		</div>
 	</div>
-
-
 </body>
 </html>
