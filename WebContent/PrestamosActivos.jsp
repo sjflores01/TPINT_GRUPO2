@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Prestamos pendientes</title>
+<title>Prestamos activos</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
@@ -24,6 +24,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
 	integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
 	crossorigin="anonymous"></script>
+</head>
 </head>
 <body>
 	<nav class="navbar navbar-expand-large navbar-light"
@@ -78,12 +79,9 @@
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
-				<h3 class="display-4 text-info">Solicitudes de prestamos</h3>
+				<h3 class="display-4 text-info">Prestamos activos</h3>
 				<div style="height: 50px"></div>
 			</div>
-		</div>
-		<div class="row mt-2 d-flex justify-content-center">
-			<h2>Solicutudes pendientes</h2>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
 			<div class="col-md-11">
@@ -94,8 +92,9 @@
 						<div class="row">
 							<div class="col-sm-3">Nombre:</div>
 							<div class="col-sm-2">DNI:</div>
-							<div class="col-sm-2">Monto solicitado:</div>
-							<div class="col-sm-2">Cuotas:</div>
+							<div class="col-sm-2">Monto otorgado:</div>
+							<div class="col-sm-2">Monto de cuota:</div>
+							<div class="col-sm-2">Cuotas pagas:</div>
 						</div>
 					</div>
 				
@@ -106,16 +105,14 @@
 
 					<div class="container-fluid">
 						<% // Foreach de cada solicutud %> 
-						<div class="row"   style="border-bottom: 1px solid black;">
-							<div class="col-sm-3">Tomas de Pamphilis</div>
+						<div class="row" style="border-bottom: 1px solid black;">
+							<div class="col-sm-3"> <a class="" href="#">Tomas de pamphilis</a></div>
 							<div class="col-sm-2">24.257.420</div>
-							<div class="col-sm-2">$56.000.000</div>
-							<div class="col-sm-1">6</div>
-							<div class="col-sm-1"> <a class="" href="#">info</a> </div>
-							<div class="col-sm-3 d-flex justify-content-center" style="position:relative; bottom:5px"> 
-							<button class="mx-2" type="submit" name="Cancelar" value="24.257.420">Cancelar</button>
-							<button class="mx-2" type="submit" name="Aprobar" value="24.257.420">Aprobar</button>														
-							 </div>
+							<div class="col-sm-2">$56.000</div>
+							<div class="col-sm-2">$12.000</div>
+							<div class="col-sm-1">3/6</div>
+							
+							
 						</div>
 					</div>
 
@@ -126,7 +123,6 @@
 			</div>
 		</div>
 	</div>
-
 
 </body>
 </html>

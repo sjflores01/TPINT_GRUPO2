@@ -85,22 +85,24 @@
 		</div>
 		<div style="height: 100px"></div>
 		<div class="row mt-2 d-flex justify-content-center">
-			<div class="col-md-10">
+			<div class="col-md-4">
 
 
-				<div class="card-deck">
-					<div class="card">
-						<img style="height: 200px;"
-							card-img-top" src="https://media.ambito.com/p/2cce0c925a0291de0e7a4f4c1aa7520a/adjuntos/239/imagenes/038/099/0038099715/transferencia-dinerojpg.jpg"
+							
+					<div class="card" style="width:300px">
+						<img style="height: 200px;" class="card-img-top"
+							src="https://www.bapesa.com/wp-content/uploads/2018/12/prueba1_5e0a2c41.jpg"
 							alt="Card image cap">
 						<div class="card-body">
-							<h5 style="center" class="card-title">Ultimas transacciones</h5>
+							<h5 class="card-title">Prestamos activos</h5>
 							<div style="height:20px"></div>	
-							<a style="position:relative; left:75px; " class="btn btn-primary" href="#">continuar</a>
+						<a  style="position:relative; left:75px" class="btn btn-primary" href="#">continuar</a>
 
 						</div>
 					</div>
-					<div class="card">
+			</div>
+				<div class="col-md-4">
+					<div class="card" style="width:300px">
 						<img style="height: 200px;" class="card-img-top"
 							src="https://image.freepik.com/vector-gratis/mensaje-alerta-notificacion-movil-alertas-error-peligro-problema-virus-telefono-inteligente-o-notificaciones-problemas-mensajes-correo-no-deseado-inseguros_100456-460.jpg"
 							alt="Card image cap">
@@ -112,18 +114,7 @@
 
 						</div>
 					</div>
-					<div class="card">
-						<img style="height: 200px;" class="card-img-top"
-							src="https://www.bapesa.com/wp-content/uploads/2018/12/prueba1_5e0a2c41.jpg"
-							alt="Card image cap">
-						<div class="card-body">
-							<h5 class="card-title">Prestamos activos</h5>
-							<div style="height:20px"></div>	
-						<a  style="position:relative; left:75px" class="btn btn-primary" href="#">continuar</a>
-
-						</div>
-					</div>
-				</div>
+			</div>		
 
 
 
@@ -133,7 +124,6 @@
 
 
 
-			</div>
 
 		</div>
 	</div>
