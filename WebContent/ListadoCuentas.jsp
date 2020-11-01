@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nuevo Usuario</title>
+<title>Listado de cuentas</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
@@ -78,60 +78,57 @@
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
-				<h3 class="display-4 text-info">Alta cliente</h3>
-				<div style="height:50px"></div>	
+				<h3 class="display-4 text-info">Nomina del Banco</h3>
+				
 			</div>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
-		<h2>Datos personales</h2>
+		<h2>Listado de Cuentas</h2>
+			
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
 				<form>
-					<div class="form-row">
-
-						<div class="col">
-							<input type="text" class="form-control" name="TXTnombre"
-								id="nombre" aria-describedby="emailHelp" placeholder="Nombres">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control" name="TXTapellido"
-								id="apellido" aria-describedby="emailHelp"
-								placeholder="Apellidos">
-						</div>
-
-					</div>
-					<div style="height:30px"></div>	
-					<div class="form-row">
-						<div class="col">
-							<input type="text" class="form-control" name="TXTdni" id="nombre"
-								aria-describedby="emailHelp" placeholder="DNI">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control" name="TXTcuil"
-								id="nombre" aria-describedby="emailHelp" placeholder="Cuil">
-						</div>
-					</div>
-					<div style="height:30px"></div>	
-					<div class="form-row">
-						<div class="col">
-							 <label for="exampleInputEmail1">Fecha de nacimiento:</label>
-							<input type="text" class="form-control" name="TXTnacimiento" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="DD-MM-YYYY">
-						</div>
-						<div class="col">
-							<label for="sexo">Sexo:</label>
-							<select class="form-control"  id="sexo" name=sexo>
-							<option value="M">Masculino</option>
-							<option value="F">Femenino</option>
-							</select>
-						</div>
-					</div>
-					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
-					<input type="submit" name="BtnSiguiente" value= "Siguiente">
-					</div>
-						
+				<label for="">Buscar</label>
+				<input type="text" class="form-control" name="TXTbuscador"
+								id="Buscador" aria-describedby="emailHelp" placeholder="Ingrese numero de cuenta">
+				<div style="height:50px"></div>
+					<table class="table">
+  <thead class="table-info">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Numero de cuenta</th>
+      <th scope="col">Tipo de Cuenta</th>
+      <th scope="col">Nombre</th>
+       <th scope="col">Apellido</th>
+       <th></th>
+         <th></th>
+         <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+    <td>aa23T##2</td>
+    <td>Cuenta Corriente</td>
+    <td>Pedro</td>
+    <td>Perez</td>
+	<td><input type="submit" name="BtnCrearCuenta" value= "Nueva Cuenta"></td>
+	<td><input type="submit" name="BtnModificiar" value= "Modificar"></td>
+	<td><input type="submit" name="BtnEliminar" value= "Eliminar"></td>
+					
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+     
+    </tr>
+  </tbody>
+</table>
 					
 
 				</form>

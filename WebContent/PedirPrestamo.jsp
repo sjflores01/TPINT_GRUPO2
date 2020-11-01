@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nuevo usuario</title>
+<title>Prestamos</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
@@ -75,75 +75,44 @@
 		</ul>
 	</div>
 	</nav>
+	
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
-				<h3 class="display-4 text-info">Alta cliente</h3>
-				<div style="height: 50px"></div>
+				<h3 class="display-4 text-info">Solicitud de Prestamos</h3>
 			</div>
 		</div>
-		<div class="row mt-2 d-flex justify-content-center">
-			<h2>Contacto</h2>
-		</div>
+
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
 				<form>
-					<div class="form-row">
+				
+				<label for="">Monto a pedir:</label>
+				<input type="text" class="form-control" name="TXTmonto"
+								id="Monto" aria-describedby="mon toHelp" placeholder="Ingrese la cantidad de dinero deseada">
+				
+				<label for="">Seleccione cantidad de Cuotas</label> <select
+						class="form-control" id="sexo" name=sexo>
+						<option value="12">12</option>
+						<option value="24">24</option>
+						<option value="36">36</option>
+					</select>
+				
+					<label for="">Seleccione una cuenta</label> <select
+						class="form-control" id="sexo" name=sexo>
+						<option value="ahorroPesos">CA - Pesos</option>
+						<option value="ahorroDolares">CA - U$</option>
+						<option value="corrientePesos">CC - Pesos</option>
+					</select>
 
-						<div class="col">
-							<label for="provincia">Provincia:
-							</label> <select class="form-control"
-								id="provincia" name=provincia>
-								<option value="M">Masculino</option>
-								<option value="F">Femenino</option>
-							</select>
-						</div>
-						<div class="col">
-							<input type="text" style="position:relative; top:30px" class="form-control" name="TXTlocalidad"
-								id="localidad" aria-describedby="emailHelp"
-								placeholder="Localidad">
-						</div>
-
-					</div>
-					<div style="height: 30px"></div>
-					<div class="form-row">
-						<div class="col">
-							<input type="text" class="form-control" name="TXTdomicilio" id="domicilio"
-								aria-describedby="emailHelp" placeholder="Domicilio">
-						</div>
-						
-					</div>
-					<div style="height: 30px"></div>
-					<div class="form-row">
-						<div class="col">
-							 <input	type="text" class="form-control" name="TXTtelefono"
-								id="telefono" aria-describedby="emailHelp"
-								placeholder="telefono">
-						</div>
+					<div style="height: 50px"></div>
 					
-					</div>
-					<div style="height: 30px"></div>
-					<div class="form-row">
-						<div class="col">
-							 <input	type="text" class="form-control" name="TXTcorreo"
-								id="mail" aria-describedby="emailHelp"
-								placeholder="Correo electronico">
-						</div>
-					
-					</div>
-					<div class="row d-flex justify-content-center"
-						style="position: relative; top: 30px">
-						<input type="submit" name="BtnSiguiente" value="Siguiente">
-					</div>
-
-
 
 				</form>
 			</div>
 
 		</div>
 	</div>
-
 </body>
 </html>
