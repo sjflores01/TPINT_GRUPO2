@@ -88,7 +88,7 @@
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
-				<form>
+				<form action="ServletUsuario" method="get">
 					<div class="form-row">
 
 						<div class="col">
@@ -100,7 +100,6 @@
 								id="apellido" aria-describedby="emailHelp"
 								placeholder="Apellidos">
 						</div>
-
 					</div>
 					<div style="height:30px"></div>	
 					<div class="form-row">
@@ -129,7 +128,7 @@
 						</div>
 					</div>
 					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
-					<input type="submit" name="BtnSiguiente" value= "Siguiente">
+					<input type="submit" name="BtnSiguiente1" value= "Siguiente">
 					</div>
 						
 					

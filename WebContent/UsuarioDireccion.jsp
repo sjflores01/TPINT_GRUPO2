@@ -134,7 +134,7 @@
 					</div>
 					<div class="row d-flex justify-content-center"
 						style="position: relative; top: 30px">
-						<input type="submit" name="BtnSiguiente" value="Siguiente">
+						<input type="submit" name="BtnSiguiente2" value="Siguiente">
 					</div>
 
 

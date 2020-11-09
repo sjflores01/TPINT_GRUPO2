@@ -3,7 +3,7 @@ package dominio;
 public class Persona {
 
 	Integer id;
-	Integer dni;
+	String dni;
 	String nombre;
 	String apellido;
 	String telefono;
@@ -14,7 +14,7 @@ public class Persona {
 
 	//Constructor
 	
-	public Persona(Integer id, Integer dni, String nombre, String apellido, String telefono, String email, char sexo,
+	public Persona(Integer id, String dni, String nombre, String apellido, String telefono, String email, char sexo,
 			Direccion direccion) {
 		super();
 		this.id = id;
@@ -38,11 +38,11 @@ public class Persona {
 		this.id = id;
 	}
 
-	public Integer getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(Integer dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
