@@ -17,6 +17,7 @@ provincia varchar(50)
 CREATE TABLE Personas (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 dni varchar(10),
+cuil varchar(10),
 nombre varchar(50),
 apellido varchar(50),
 sexo char,
@@ -37,7 +38,7 @@ id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 idPersona int,
 estado bool,
 nombreUsuario varchar(50),
-clave varchar(10),
+clave varchar(50),
 FOREIGN KEY (idPersona) REFERENCES Personas(id)
 
 );
@@ -86,8 +87,55 @@ plazoPago int,
 FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
 );
 
-Select * from Usuarios;
-Select * from Direcciones;
-Select * from Personas;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE cargaUsuario(
+in calle varchar(100),
+in numero int,
+in dpto varchar(10),
+in localidad varchar(100),
+in provincia varchar(50),
+in dni varchar(10),
+in cuil varchar(10),
+in nombre varchar(50),
+in apellido varchar(50),
+in sexo char,
+in email varchar(100),
+in telefono varchar(20),
+in nacimiento datetime,
+in nombreUsuario varchar(50),
+in clave varchar(50)
+
+)
+
+BEGIN
+	DECLARE idDireccion INT DEFAULT 0;
+	DECLARE idPersona INT DEFAULT 0;
+    Insert into Direcciones(calle,numero,dpto,localidad,provincia) values (calle,numero,dpto,localidad,provincia);
+    
+	SELECT  id
+    INTO idDireccion
+    FROM Direcciones ORDER BY id DESC LIMIT 1;
+    
+	 
+	Insert into Personas(dni,cuil,nombre,apellido,sexo,idDireccion,email,telefono) values (dni,cuil,nombre,apellido,sexo,idDireccion,email,telefono);
+	
+    SELECT  id
+    INTO idPersona
+    FROM Personas ORDER BY id DESC LIMIT 1;
+    
+    Insert into Usuarios(idPersona,estado,nombreUsuario,clave) values (idPersona,true,nombreUsuario,clave);
+    
+    
+	  
+END$$
+DELIMITER ;
+
+call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', CURRENT_TIMESTAMP,'tomUsuario','tomContraseña');
+select * from Direcciones;
+select * from Personas;
+select * from Usuarios;
 
 

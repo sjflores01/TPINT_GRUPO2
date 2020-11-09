@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"	
+	%>
+<%@page import="dominio.Direccion" %>
+<%@page import="dominio.Persona" %>
+<%@page import="dominio.Usuario" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -75,6 +79,8 @@
 		</ul>
 	</div>
 	</nav>
+	
+	<% Usuario usuario = (Usuario) request.getAttribute("Usuario"); %>
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
@@ -88,21 +94,45 @@
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
-				<form>
+				<form action="ServletUsuario" method="get">
 					<div class="form-row">
 
 						<div class="col">
 							<label for="provincia">Provincia:
 							</label> <select class="form-control"
 								id="provincia" name=provincia>
-								<option value="M">Masculino</option>
-								<option value="F">Femenino</option>
+								<option value="CABA">CABA</option>
+								<option value="Buenos Aires">Buenos Aires</option>
+								<option value="Catamarca">Catamarca</option>
+								<option value="Chaco">Chaco</option>
+								<option value="Chubut">Chubut</option>
+								<option value="Cordoba">Cordoba</option>
+								<option value="Corrientes">Corrientes</option>
+								<option value="Entre rios">Entre rios</option>
+								<option value="Formosa">Formosa</option>
+								<option value="Jujuy">Jujuy</option>
+								<option value="La Pampa">La Pampa</option>
+								<option value="La rioja">La rioja</option>
+								<option value="Mendoza">Mendoza</option>
+								<option value="Misiones">Misiones</option>
+								<option value="Neuquen">Neuquen</option>
+								<option value="Rio Negro">Rio Negro</option>
+								<option value="Salta">Salta</option>
+								<option value="San Juan">San Juan</option>
+								<option value="San Luis">San Luis</option>
+								<option value="Santa fe">Santa fe</option>
+								<option value="Santiago del estero">Santiago del estero</option>
+								<option value="Tierra del fuego">Tierra del fuego</option>
+								<option value="Tucuman">Tucuman</option>
+							
+								
+								
 							</select>
 						</div>
 						<div class="col">
 							<input type="text" style="position:relative; top:30px" class="form-control" name="TXTlocalidad"
 								id="localidad" aria-describedby="emailHelp"
-								placeholder="Localidad">
+								placeholder="localidad">
 						</div>
 
 					</div>
@@ -111,6 +141,19 @@
 						<div class="col">
 							<input type="text" class="form-control" name="TXTdomicilio" id="domicilio"
 								aria-describedby="emailHelp" placeholder="Domicilio">
+						</div>
+						
+					</div>
+					<div style="height: 30px"></div>
+					<div class="form-row">
+						<div class="col">
+							<input type="text" class="form-control" name="TXTnumero" id="numero"
+								aria-describedby="emailHelp" placeholder="Numero">
+						</div>
+						
+						<div class="col">
+							<input type="text" class="form-control" name="TXTdepto" id="depto"
+								aria-describedby="emailHelp" placeholder="Depto">
 						</div>
 						
 					</div>
@@ -132,11 +175,22 @@
 						</div>
 					
 					</div>
-					<div class="row d-flex justify-content-center"
-						style="position: relative; top: 30px">
+					<div class="row d-flex justify-content-center" style="position: relative; top: 30px">
+
+					<input type="hidden" name="TXTnombreUsuario" value="<%=usuario.getNombre() %>" />
+					<input type="hidden" name="TXTclave" value="<%=usuario.getClave() %>" />
+					<input type="hidden" name="TXTdni" value="<%=usuario.getPersona().getDni() %>" />
+					<input type="hidden" name="TXTnombrePersona" value="<%=usuario.getPersona().getNombre() %>" />
+					<input type="hidden" name="TXTapellido" value="<%=usuario.getPersona().getApellido() %>" />					
+					<input type="hidden" name="TXTsexo" value="<%=usuario.getPersona().getSexo() %>" />
+					<input type="hidden" name="TXTcuil" value="<%=usuario.getPersona().getCuil() %>" />
+						
 						<input type="submit" name="BtnSiguiente2" value="Siguiente">
 					</div>
 
+					
+					
+					
 
 
 				</form>

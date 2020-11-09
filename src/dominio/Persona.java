@@ -4,6 +4,7 @@ public class Persona {
 
 	Integer id;
 	String dni;
+	String cuil;
 	String nombre;
 	String apellido;
 	String telefono;
@@ -14,11 +15,12 @@ public class Persona {
 
 	//Constructor
 	
-	public Persona(Integer id, String dni, String nombre, String apellido, String telefono, String email, char sexo,
+	public Persona(Integer id, String dni,String cuil , String nombre, String apellido, String telefono, String email, char sexo,
 			Direccion direccion) {
 		super();
 		this.id = id;
 		this.dni = dni;
+		this.cuil = cuil;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
@@ -30,6 +32,16 @@ public class Persona {
 	
 	//Getters and setters
 	
+	public String getCuil() {
+		return cuil;
+	}
+
+
+	public void setCuil(String cuil) {
+		this.cuil = cuil;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

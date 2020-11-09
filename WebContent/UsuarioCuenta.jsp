@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="dominio.Direccion" %>
+<%@page import="dominio.Persona" %>
+<%@page import="dominio.Usuario" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -75,6 +78,7 @@
 		</ul>
 	</div>
 	</nav>
+	<% Usuario usuario = (Usuario) request.getAttribute("Usuario"); %>
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
@@ -88,7 +92,7 @@
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
-				<form>
+				<form action="ServletUsuario" method="get">
 					<div class="form-row">
 						<div class="col">
 							<input type="text" class="form-control" name="TXTusuario" id="usuario"
@@ -115,7 +119,25 @@
 					</div>
 					<div class="row d-flex justify-content-center"
 						style="position: relative; top: 30px">
-						<input type="submit" name="BtnSiguiente" value="Siguiente">
+						
+					<input type="hidden" name="TXTnombreUsuario" value="<%=usuario.getNombre() %>" />
+					<input type="hidden" name="TXTclave" value="<%=usuario.getClave() %>" />
+					<input type="hidden" name="TXTdni" value="<%=usuario.getPersona().getDni() %>" />
+					<input type="hidden" name="TXTnombrePersona" value="<%=usuario.getPersona().getNombre() %>" />
+					<input type="hidden" name="TXTapellido" value="<%=usuario.getPersona().getApellido() %>" />					
+					<input type="hidden" name="TXTsexo" value="<%=usuario.getPersona().getSexo() %>" />
+					<input type="hidden" name="TXTprovincia" value="<%=usuario.getPersona().getDireccion().getProvincia() %>" />
+					<input type="hidden" name="TXTlocalidad" value="<%=usuario.getPersona().getDireccion().getLocalidad() %>" />
+					<input type="hidden" name="TXTdomicilio" value="<%=usuario.getPersona().getDireccion().getCalle() %>" />
+					<input type="hidden" name="TXTdepto" value="<%=usuario.getPersona().getDireccion().getDepto() %>" />
+					<input type="hidden" name="TXTtelefono" value="<%=usuario.getPersona().getTelefono() %>" />	
+					<input type="hidden" name="TXTnumero" value="<%=usuario.getPersona().getDireccion().getNumero() %>" />					
+					<input type="hidden" name="TXTcuil" value="<%=usuario.getPersona().getCuil() %>" />
+					<input type="hidden" name="TXTcorreo" value="<%=usuario.getPersona().getEmail() %>" />
+						
+						
+						
+						<input type="submit" name="BtnSiguiente3" value="Siguiente">
 					</div>
 
 

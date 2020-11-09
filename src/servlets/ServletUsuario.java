@@ -50,6 +50,7 @@ public class ServletUsuario extends HttpServlet {
 			String sexo;
 			
 			
+			
 			nombre = request.getParameter("TXTnombre");
 			apellido = request.getParameter("TXTapellido");
 			dni = request.getParameter("TXTdni");
@@ -57,27 +58,112 @@ public class ServletUsuario extends HttpServlet {
 			fnac = request.getParameter("TXTnacimiento");
 			sexo = request.getParameter("sexo");
 			nombre = request.getParameter("TXTnombre");
-			
+			cuil = request.getParameter("TXTcuil");
 			
 			Direccion direccion = new Direccion("ph", 0, "ph", "ph", "ph");
-			Persona persona = new Persona(0, dni , nombre, apellido, "ph", "ph", sexo.charAt(0), direccion);
+			Persona persona = new Persona(0, dni,cuil , nombre, apellido, "ph", "ph", sexo.charAt(0), direccion);
 			Usuario usuario = new Usuario(0, "ph", "ph", persona);
+			
+			
+			
+			
+						
+			request.setAttribute("Usuario", usuario);
+			redireccion = "UsuarioDireccion.jsp";
+			
+		}else if(request.getParameter("BtnSiguiente2") != null) {
+		
+			//Boton alta usuario 2
+		
+			
+			
+			
+			String provincia;
+			String localidad;
+			String domicilio;
+			String telefono;
+			String correo;
+			String depto;
+			String nombreUsuario;
+			String clave;
+			String dni;
+			String nombrePersona;
+			String apellido;
+			String sexo;
+			String numero;
+			String cuil;
+			
+			
+			provincia = request.getParameter("provincia");
+			localidad =  request.getParameter("TXTlocalidad");
+			domicilio =  request.getParameter("TXTdomicilio");
+			numero = request.getParameter("TXTnumero");
+			telefono = request.getParameter("TXTtelefono");
+			correo = request.getParameter("TXTcorreo");
+			depto = request.getParameter("TXTdepto");
+			nombreUsuario = request.getParameter("TXTnombreUsuario");
+			clave = request.getParameter("TXTclave");
+			dni = request.getParameter("TXTdni");
+			nombrePersona = request.getParameter("TXTnombrePersona");
+			apellido = request.getParameter("TXTapellido");
+			sexo = request.getParameter("TXTsexo");
+			cuil = request.getParameter("TXTcuil");
+			
+			Direccion direccion = new Direccion(domicilio, Integer.parseInt(numero), depto, localidad, provincia);		
+			Persona persona = new Persona(0, dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0), direccion);
+			Usuario usuario = new Usuario(0, nombreUsuario, clave, persona);
+															
+				
+			
+			
+			request.setAttribute("Usuario", usuario);
+			redireccion = "UsuarioCuenta.jsp";
+			
+			
+			
+			
+		}else if(request.getParameter("BtnSiguiente3") != null) {
+			
+			
+			String provincia;
+			String localidad;
+			String domicilio;
+			String telefono;
+			String correo;
+			String depto;
+			String nombreUsuario;
+			String clave;
+			String dni;
+			String nombrePersona;
+			String apellido;
+			String sexo;
+			String numero;
+			String cuil;
+			
+			
+			numero = request.getParameter("TXTnumero");
+			provincia = request.getParameter("TXTprovincia");
+			localidad =  request.getParameter("TXTlocalidad");
+			domicilio =  request.getParameter("TXTdomicilio");
+			telefono = request.getParameter("TXTtelefono");
+			correo = request.getParameter("TXTcorreo");
+			depto = request.getParameter("TXTdepto");
+			nombreUsuario = request.getParameter("TXTusuario");
+			clave = request.getParameter("TXTpass");
+			dni = request.getParameter("TXTdni");
+			nombrePersona = request.getParameter("TXTnombrePersona");
+			apellido = request.getParameter("TXTapellido");
+			sexo = request.getParameter("TXTsexo");
+			cuil = request.getParameter("TXTcuil");
+			
+			Direccion direccion = new Direccion(domicilio, Integer.parseInt(numero), depto, localidad, provincia);		
+			Persona persona = new Persona(0, dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0), direccion);
+			Usuario usuario = new Usuario(0, nombreUsuario, clave, persona);
 			
 			UsuarioDao usuarioDao = new UsuarioDao();
 			usuarioDao.cargarUsuario(usuario);
-						
-			request.setAttribute("persona", persona);
-			redireccion = "Index.jsp";
 			
-		}else if(request.getParameter("BtnSiguiente") != "Siguiente2") {
-		
-			//Boton alta usuario 2
-			
-			
-			
-			
-			
-			
+			redireccion ="Index.jsp";
 			
 		}else
 		{
