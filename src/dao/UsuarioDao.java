@@ -89,28 +89,28 @@ public class UsuarioDao {
 				Persona persona = new Persona(0, "ph","ph" , "ph", "ph", "ph", "ph", 'h', null , direccion);
 				Usuario usuario = new Usuario(0, "ph", "ph", persona);
 				
-				direccion.setCalle(rs.getString(16));
-				direccion.setDepto(rs.getString(18));
-				direccion.setLocalidad(rs.getString(19));
-				direccion.setNumero(rs.getInt(17));
-				direccion.setProvincia(rs.getString(20));
-				direccion.setId(rs.getInt(15));
+				direccion.setCalle(rs.getString(17));
+				direccion.setDepto(rs.getString(19));
+				direccion.setLocalidad(rs.getString(20));
+				direccion.setNumero(rs.getInt(18));
+				direccion.setProvincia(rs.getString(21));
+				direccion.setId(rs.getInt(16));
 				
-				persona.setApellido(rs.getString(9));
-				persona.setNombre(rs.getString(8));
-				persona.setDni(rs.getString(6));
-				persona.setCuil(rs.getString(7));
-				persona.setEmail(rs.getString(12));
-				persona.setTelefono(rs.getString(13));
-			//	persona.setFnac(rs.getDate(14));		 		
-			//	persona.setSexo('m');
+				persona.setApellido(rs.getString(10));
+				persona.setNombre(rs.getString(9));
+				persona.setDni(rs.getString(7));
+				persona.setCuil(rs.getString(8));
+				persona.setEmail(rs.getString(13));
+				persona.setTelefono(rs.getString(14));
+				persona.setFnac(rs.getDate(15));		 		
+				persona.setSexo(rs.getString(11).charAt(0));
 				persona.setDireccion(direccion);
-				persona.setId(rs.getInt(5));
+				persona.setId(rs.getInt(6));
 				
-				usuario.setClave(rs.getString(4));
-				usuario.setNombre(rs.getString(3));
+				usuario.setClave(rs.getString(7));
+				usuario.setNombre(rs.getString(8));
 				usuario.setPersona(persona);
-				usuario.setId(rs.getInt(0));
+				usuario.setId(rs.getInt(1));
 				
 				lista.add(usuario);
 				
