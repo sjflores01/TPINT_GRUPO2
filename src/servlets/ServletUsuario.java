@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +49,9 @@ public class ServletUsuario extends HttpServlet {
 			String cuil;
 			String fnac;
 			String sexo;
-			
+			String day;
+			String month;
+			String year;
 			
 			
 			nombre = request.getParameter("TXTnombre");
@@ -59,15 +62,21 @@ public class ServletUsuario extends HttpServlet {
 			sexo = request.getParameter("sexo");
 			nombre = request.getParameter("TXTnombre");
 			cuil = request.getParameter("TXTcuil");
+			day = request.getParameter("TXTdia");
+			month = request.getParameter("TXTmes");
+			year = request.getParameter("TXTanio");
+			
 			
 			Direccion direccion = new Direccion("ph", 0, "ph", "ph", "ph");
-			Persona persona = new Persona(0, dni,cuil , nombre, apellido, "ph", "ph", sexo.charAt(0), direccion);
+			Persona persona = new Persona(0, dni,cuil , nombre, apellido, "ph", "ph", sexo.charAt(0),null , direccion);
 			Usuario usuario = new Usuario(0, "ph", "ph", persona);
 			
 			
 			
 			
-						
+			request.setAttribute("dia", day);
+			request.setAttribute("mes", month);
+			request.setAttribute("anio", year);
 			request.setAttribute("Usuario", usuario);
 			redireccion = "UsuarioDireccion.jsp";
 			
@@ -92,6 +101,9 @@ public class ServletUsuario extends HttpServlet {
 			String sexo;
 			String numero;
 			String cuil;
+			String day;
+			String month;
+			String year;
 			
 			
 			provincia = request.getParameter("provincia");
@@ -108,14 +120,19 @@ public class ServletUsuario extends HttpServlet {
 			apellido = request.getParameter("TXTapellido");
 			sexo = request.getParameter("TXTsexo");
 			cuil = request.getParameter("TXTcuil");
+			day = request.getParameter("TXTdia");
+			month = request.getParameter("TXTmes");
+			year = request.getParameter("TXTanio");
 			
 			Direccion direccion = new Direccion(domicilio, Integer.parseInt(numero), depto, localidad, provincia);		
-			Persona persona = new Persona(0, dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0), direccion);
+			Persona persona = new Persona(0, dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0),null ,direccion);
 			Usuario usuario = new Usuario(0, nombreUsuario, clave, persona);
 															
 				
 			
-			
+			request.setAttribute("dia", day);
+			request.setAttribute("mes", month);
+			request.setAttribute("anio", year);
 			request.setAttribute("Usuario", usuario);
 			redireccion = "UsuarioCuenta.jsp";
 			
@@ -139,6 +156,9 @@ public class ServletUsuario extends HttpServlet {
 			String sexo;
 			String numero;
 			String cuil;
+			String day;
+			String month;
+			String year;
 			
 			
 			numero = request.getParameter("TXTnumero");
@@ -155,9 +175,16 @@ public class ServletUsuario extends HttpServlet {
 			apellido = request.getParameter("TXTapellido");
 			sexo = request.getParameter("TXTsexo");
 			cuil = request.getParameter("TXTcuil");
+			day = request.getParameter("TXTdia");
+			month = request.getParameter("TXTmes");
+			year = request.getParameter("TXTanio");
+			
+			
+			Date fecha = new Date(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		
 			
 			Direccion direccion = new Direccion(domicilio, Integer.parseInt(numero), depto, localidad, provincia);		
-			Persona persona = new Persona(0, dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0), direccion);
+			Persona persona = new Persona(0, dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0),fecha, direccion);
 			Usuario usuario = new Usuario(0, nombreUsuario, clave, persona);
 			
 			UsuarioDao usuarioDao = new UsuarioDao();

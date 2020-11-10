@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -75,6 +76,8 @@
 		</ul>
 	</div>
 	</nav>		
+	
+	
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
@@ -112,14 +115,26 @@
 								id="nombre" aria-describedby="emailHelp" placeholder="Cuil">
 						</div>
 					</div>
-					<div style="height:30px"></div>	
+					<div style="height:30px">
+							 <label for="exampleInputEmail1">Fecha de nacimiento:</label>
+					
+					</div>	
 					<div class="form-row">
 						<div class="col">
-							 <label for="exampleInputEmail1">Fecha de nacimiento:</label>
-							<input type="text" class="form-control" name="TXTnacimiento" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="DD-MM-YYYY">
+							<input type="number" class="form-control" name="TXTdia" id="nacimiento"
+								aria-describedby="emailHelp" placeholder="DD">
 						</div>
 						<div class="col">
+							 
+							<input type="number" class="form-control" name="TXTmes" id="nacimiento"
+								aria-describedby="emailHelp" placeholder="MM">
+						</div>
+						<div class="col">
+							
+							<input type="number" class="form-control" name="TXTanio" id="nacimiento"
+								aria-describedby="emailHelp" placeholder="YYYY">
+						</div>
+						<div class="col" style="position:relative; bottom:30px">
 							<label for="sexo">Sexo:</label>
 							<select class="form-control"  id="sexo" name=sexo>
 							<option value="M">Masculino</option>

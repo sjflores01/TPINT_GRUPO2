@@ -1,5 +1,7 @@
 package dominio;
 
+import java.sql.Date;
+
 public class Persona {
 
 	Integer id;
@@ -10,12 +12,13 @@ public class Persona {
 	String telefono;
 	String email;
 	char sexo;
+	Date fnac;
 	
 	Direccion direccion;
 
 	//Constructor
 	
-	public Persona(Integer id, String dni,String cuil , String nombre, String apellido, String telefono, String email, char sexo,
+	public Persona(Integer id, String dni,String cuil , String nombre, String apellido, String telefono, String email, char sexo, Date fnac,
 			Direccion direccion) {
 		super();
 		this.id = id;
@@ -26,12 +29,23 @@ public class Persona {
 		this.telefono = telefono;
 		this.email = email;
 		this.sexo = sexo;
+		this.fnac = fnac;
 		this.direccion = direccion;
 	}
 
 	
 	//Getters and setters
 	
+	public Date getFnac() {
+		return fnac;
+	}
+
+
+	public void setFnac(Date fnac) {
+		this.fnac = fnac;
+	}
+
+
 	public String getCuil() {
 		return cuil;
 	}

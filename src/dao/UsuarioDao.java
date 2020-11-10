@@ -34,7 +34,7 @@ public class UsuarioDao {
 		
 		
 		
-		String query = "call cargaUsuario('"+direccion.getCalle()+"',"+direccion.getNumero()+",'"+direccion.getDepto()+"','"+direccion.getLocalidad()+"','"+direccion.getProvincia()+"','"+persona.getDni()+"','"+persona.getCuil() +"','"+persona.getNombre()+"','"+persona.getApellido()+"','"+persona.getSexo()+"','"+persona.getEmail()+"','"+persona.getTelefono()+"', CURRENT_TIMESTAMP,'"+usuario.getNombre()+"','"+usuario.getClave()+"')";
+		String query = "call cargaUsuario('"+direccion.getCalle()+"',"+direccion.getNumero()+",'"+direccion.getDepto()+"','"+direccion.getLocalidad()+"','"+direccion.getProvincia()+"','"+persona.getDni()+"','"+persona.getCuil() +"','"+persona.getNombre()+"','"+persona.getApellido()+"','"+persona.getSexo()+"','"+persona.getEmail()+"','"+persona.getTelefono()+"','"+ persona.getFnac().getYear()+"-"+persona.getFnac().getMonth()+"-"+persona.getFnac().getDay()+"','"+usuario.getNombre()+"','"+usuario.getClave()+"')";
 		java.sql.Connection cn = null;
 		
 		try {
@@ -60,7 +60,14 @@ public class UsuarioDao {
 	
 	
 	
-	
+	public void modificarUsuario(Usuario usuario) {
+		
+		
+		
+		
+		
+		
+	}
 	
 	
 	

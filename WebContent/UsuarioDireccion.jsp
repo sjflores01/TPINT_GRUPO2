@@ -184,6 +184,9 @@
 					<input type="hidden" name="TXTapellido" value="<%=usuario.getPersona().getApellido() %>" />					
 					<input type="hidden" name="TXTsexo" value="<%=usuario.getPersona().getSexo() %>" />
 					<input type="hidden" name="TXTcuil" value="<%=usuario.getPersona().getCuil() %>" />
+					<input type="hidden" name="TXTdia" value="<%=request.getAttribute("dia") %>" />
+					<input type="hidden" name="TXTmes" value="<%=request.getAttribute("mes")%>" />
+					<input type="hidden" name="TXTanio" value="<%=request.getAttribute("anio") %>" />
 						
 						<input type="submit" name="BtnSiguiente2" value="Siguiente">
 					</div>
