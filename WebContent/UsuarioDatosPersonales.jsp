@@ -46,9 +46,8 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="#">Nuevo cliente</a> <a
-								class="dropdown-item" href="#">Modificar cliente</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Eliminar cliente</a>
+								class="dropdown-item" href="ServletUsuario?ListaClientes=1">Listar clientes</a>
+							
 						</div></li>
 				</div>
 				<div class="col-md-2">

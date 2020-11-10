@@ -7,9 +7,13 @@ public class Direccion {
 	String depto;
 	String localidad;
 	String provincia;
+	Integer id;
 
 	//Constructor
 	
+
+
+
 	public Direccion(String calle, Integer numero, String depto, String localidad, String provincia) {
 		super();
 		this.calle = calle;
@@ -22,6 +26,15 @@ public class Direccion {
 	
 	
 	//Getters and setters
+	public Integer getId() {
+		return id;
+	}
+	
+	
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	public String getCalle() {
 		return calle;

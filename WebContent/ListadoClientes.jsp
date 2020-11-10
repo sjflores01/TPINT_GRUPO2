@@ -1,5 +1,9 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="dominio.Direccion" %>
+<%@page import="dominio.Persona" %>
+<%@page import="dominio.Usuario" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,6 +30,20 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
+	<%
+	ArrayList<Usuario> lista; 
+	if(request.getAttribute("lista") == null){
+		
+		 lista = new ArrayList<Usuario>();
+	} else{
+		
+		 lista = (ArrayList<Usuario>)request.getAttribute("lista");
+	}								
+	
+	
+		%>
+	
+	
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
 		href="#">BANCO JAVA ADMIN</a>
@@ -107,24 +125,25 @@
     </tr>
   </thead>
   <tbody>
+   
+   <% for(Usuario user : lista )  {
+	   
+	   %>
+   
     <tr>
+      
       <th scope="row">1</th>
-    <td>Juan</td>
-    <td>Perez</td>
-    <td>000010</td>
+    <td><%=user.getPersona().getNombre() %></td>
+    <td><%=user.getPersona().getApellido() %></td>
+    <td><%=user.getPersona().getDni() %></td>
 	<td><input type="submit" name="BtnCrearCuenta" value= "Nueva Cuenta"></td>
 	<td><input type="submit" name="BtnModificiar" value= "Modificar"></td>
 	<td><input type="submit" name="BtnEliminar" value= "Eliminar"></td>
 					
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-     
-    </tr>
+    
+    <%} %>
+
   </tbody>
 </table>
 					

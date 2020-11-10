@@ -24,7 +24,7 @@ sexo char,
 idDireccion int,
 email varchar(100),
 telefono varchar(20),
-nacimiento datetime,
+nacimiento date,
 FOREIGN KEY (idDireccion) REFERENCES Direcciones(id)
 );
 
@@ -104,7 +104,7 @@ in apellido varchar(50),
 in sexo char,
 in email varchar(100),
 in telefono varchar(20),
-in nacimiento datetime,
+in nacimiento date,
 in nombreUsuario varchar(50),
 in clave varchar(50)
 
@@ -120,7 +120,7 @@ BEGIN
     FROM Direcciones ORDER BY id DESC LIMIT 1;
     
 	 
-	Insert into Personas(dni,cuil,nombre,apellido,sexo,idDireccion,email,telefono) values (dni,cuil,nombre,apellido,sexo,idDireccion,email,telefono);
+	Insert into Personas(dni,cuil,nacimiento,nombre,apellido,sexo,idDireccion,email,telefono) values (dni,cuil,nacimiento,nombre,apellido,sexo,idDireccion,email,telefono);
 	
     SELECT  id
     INTO idPersona
@@ -133,9 +133,46 @@ BEGIN
 END$$
 DELIMITER ;
 
-call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', CURRENT_TIMESTAMP,'tomUsuario','tomContraseña');
-select * from Direcciones;
-select * from Personas;
-select * from Usuarios;
+DELIMITER $$
+
+CREATE PROCEDURE leerUsuario(
+in idleer int
+)
+
+BEGIN
+	
+    Select * from Usuarios 
+    inner join Personas on Usuarios.idPersona = Personas.id
+    inner join Direcciones on Personas.idDireccion = Direcciones.id;
+    
+    
+	  
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE listarUsuarios(
+
+)
+
+BEGIN
+	
+    Select * from Usuarios 
+    inner join Personas on Usuarios.idPersona = Personas.id
+    inner join Direcciones on Personas.idDireccion = Direcciones.id
+    where estado = 1;
+    
+    
+	  
+END$$
+DELIMITER ;
+
+
+
+call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
+
+call listarUsuarios();
+call listarUsuarios()
+
 
 

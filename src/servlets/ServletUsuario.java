@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -141,6 +142,7 @@ public class ServletUsuario extends HttpServlet {
 			
 		}else if(request.getParameter("BtnSiguiente3") != null) {
 			
+			// boton alta usuario 3
 			
 			String provincia;
 			String localidad;
@@ -191,6 +193,25 @@ public class ServletUsuario extends HttpServlet {
 			usuarioDao.cargarUsuario(usuario);
 			
 			redireccion ="Index.jsp";
+			
+		}else if(request.getParameter("ListaClientes") != null) {
+		
+			ArrayList<Usuario> lista = new ArrayList<Usuario>();
+			UsuarioDao dao = new UsuarioDao();
+			
+			lista = dao.listarUsuarios();
+			
+			Direccion direccion = new Direccion("ph", 0, "ph", "ph", "ph");
+			Persona persona = new Persona(0, "15489","ph" , "tomas", "dp", "ph", "ph", 'd',null , direccion);
+			Usuario usuario = new Usuario(0, "ph", "ph", persona);
+			
+			
+			
+			request.setAttribute("lista", lista);
+			redireccion = "ListadoClientes.jsp";
+			
+			
+			
 			
 		}else
 		{
