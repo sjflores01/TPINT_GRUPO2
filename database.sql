@@ -153,8 +153,8 @@ BEGIN
 	
     Select * from Usuarios 
     inner join Personas on Usuarios.idPersona = Personas.id
-    inner join Direcciones on Personas.idDireccion = Direcciones.id;
-    
+    inner join Direcciones on Personas.idDireccion = Direcciones.id
+    where Usuarios.id = idleer;
     
 	  
 END$$
@@ -197,7 +197,7 @@ DELIMITER ;
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call asignarCuenta(1,1,'000332312312',10000);
-call listarUsuarios('');
+call leerUsuario(1);
 
 
 

@@ -140,9 +140,9 @@
 							<td><%=user.getPersona().getDni()%></td>
 							<td><input type="submit" name="BtnCrearCuenta"
 								value="Nueva Cuenta"></td>
-							<td><input type="submit" name="BtnModificiar"
-								value="Modificar"></td>
-							<td><input type="submit" name="BtnEliminar" value="Eliminar"></td>
+							<td><a class="btn btn-secondary" href="ServletUsuario?cargaModificar=<%=user.getId()%>">Modificar</a></td>
+							<td><input type="submit" name="BtnEliminar"
+								value="Eliminar"></td>
 
 						</tr>
 

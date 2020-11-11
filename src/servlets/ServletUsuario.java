@@ -213,7 +213,23 @@ public class ServletUsuario extends HttpServlet {
 			
 			
 			
-		}else
+		}else if(request.getParameter("cargaModificar") != null) {
+		
+			String parametro = request.getParameter("cargaModificar");
+			Integer id = Integer.parseInt(parametro);
+			
+			
+			UsuarioDao dao = new UsuarioDao();
+			Usuario usuario = null;
+
+			
+			usuario = dao.leerUsuario(id);
+			
+			request.setAttribute("usuario", usuario);
+			redireccion = "ModificarUsuario.jsp";
+			
+		}		
+		else
 		{
 			response.getWriter().append("Sedsdssddssrved at: ").append(request.getContextPath());
 		}
