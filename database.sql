@@ -11,9 +11,6 @@ localidad varchar(100),
 provincia varchar(50)
 );
 
-
-
-
 CREATE TABLE Personas (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 dni varchar(10),
@@ -40,27 +37,35 @@ estado bool,
 nombreUsuario varchar(50),
 clave varchar(50),
 FOREIGN KEY (idPersona) REFERENCES Personas(id)
-
 );
 
-
+create table UsuariosAdmin (
+id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+estado bool,
+nombreUsuario varchar(50),
+clave varchar(50)
+);
+INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'AdminUser','admin1');
 
 CREATE TABLE TiposDeCuenta (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 descripcion varchar(10));
+INSERT INTO tiposdecuenta (descripcion) values ('CA$');
+INSERT INTO tiposdecuenta (descripcion) values ('CTA.CTE$');
+INSERT INTO tiposdecuenta (descripcion) values ('CAUSD');
+
 
 CREATE TABLE Cuentas (
-id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-idUsuario int,
-numero int,
-fechaCreacion date,
+id int NOT NULL AUTO_INCREMENT,
+idUsuario int NOT NULL,
+fechaCreacion datetime,
 tipoCta int,
-cbu varchar(20),
+cbu varchar(30) unique,
 saldo decimal,
 FOREIGN KEY (tipoCta) REFERENCES TiposDeCuenta(id),
-FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
+FOREIGN KEY (idUsuario) REFERENCES Usuarios(id),
+PRIMARY KEY (id)
 );
-
 CREATE TABLE TiposDeMovimiento (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 descripcion varchar(50)
@@ -87,6 +92,11 @@ plazoPago int,
 FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
 );
 
+CREATE TABLE PagosCuotas (
+idPrestamo int not null,
+importe decimal,
+FOREIGN KEY (idPrestamo) REFERENCES Prestamos(id)
+);
 
 
 DELIMITER $$
@@ -167,11 +177,26 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
 
+CREATE PROCEDURE asignarCuenta (
+in nuevoIdUsuario int,
+in nuevoTipoCta int,
+in nuevoCbu varchar(30),
+in nuevoSaldo decimal
+)
+BEGIN
+
+INSERT INTO Cuentas (idUsuario, fechaCreacion, tipoCta, cbu, saldo)
+VALUES (nuevoIdUsuario, CURRENT_TIMESTAMP ,nuevoTipoCta, nuevoCbu, nuevoSaldo);
+
+END$$
+
+DELIMITER ;
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
-
+call asignarCuenta(1,1,'000332312312',10000);
 call listarUsuarios('');
 
 
