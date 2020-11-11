@@ -228,6 +228,63 @@ public class ServletUsuario extends HttpServlet {
 			request.setAttribute("usuario", usuario);
 			redireccion = "ModificarUsuario.jsp";
 			
+		}else if(request.getParameter("BtnModificar") != null) {
+			
+			String provincia;
+			String localidad;
+			String domicilio;
+			String telefono;
+			String correo;
+			String depto;
+			String clave;
+			String dni;
+			String nombrePersona;
+			String apellido;
+			String sexo;
+			String numero;
+			String cuil;
+			String day;
+			String month;
+			String year;
+			String idUsuario;
+			String idPersona;
+			String idDireccion;
+			
+			
+			numero = request.getParameter("TXTnumero");
+			provincia = request.getParameter("TXTprovincia");
+			localidad =  request.getParameter("TXTlocalidad");
+			domicilio =  request.getParameter("TXTdomicilio");
+			telefono = request.getParameter("TXTtelefono");
+			correo = request.getParameter("TXTcorreo");
+			depto = request.getParameter("TXTdepto");
+			clave = request.getParameter("TXTpass");
+			dni = request.getParameter("TXTdni");
+			nombrePersona = request.getParameter("TXTnombrePersona");
+			apellido = request.getParameter("TXTapellido");
+			sexo = request.getParameter("TXTsexo");
+			cuil = request.getParameter("TXTcuil");
+			day = request.getParameter("TXTdia");
+			month = request.getParameter("TXTmes");
+			year = request.getParameter("TXTanio");
+			idUsuario = request.getParameter("TXTidUsuario");
+			idPersona = request.getParameter("TXTidPersona");
+			idDireccion = request.getParameter("TXTidDireccion");
+			
+			Date fecha = new Date(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+			
+			
+			Direccion direccion = new Direccion(domicilio, Integer.parseInt(numero), depto, localidad, provincia);
+			direccion.setId(Integer.parseInt(idDireccion));
+			Persona persona = new Persona(Integer.parseInt(idPersona), dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0),fecha, direccion);
+			Usuario usuario = new Usuario(Integer.parseInt(idDireccion), "ph", clave, persona);
+			
+			UsuarioDao dao = new UsuarioDao();
+			dao.modificarUsuario(usuario);
+			
+			redireccion ="Index.jsp";
+			
+			
 		}		
 		else
 		{

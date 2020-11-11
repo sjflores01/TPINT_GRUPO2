@@ -111,12 +111,12 @@
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
-				<form>
+				<form action="ServletUsuario" method="get">
 					<div class="form-row">
 
 						<div class="col">
 						 <label for="Nombre">Nombre:</label>
-							<input type="text" class="form-control" name="TXTnombre"
+							<input type="text" class="form-control" name="TXTnombrePersona"
 								id="nombre" aria-describedby="emailHelp" placeholder="Nombres" value=<%=usuario.getPersona().getNombre() %>>
 						</div>
 						<div class="col">
@@ -142,7 +142,7 @@
 						
 						<div class="col">
 						 <label for="contraseña">Contraseña:</label>
-							<input type="password" class="form-control" name="TXTpassword"
+							<input type="password" class="form-control" name="TXTpass"
 								id="password" aria-describedby="emailHelp" placeholder="contraseña" value=<%=usuario.getClave() %>>
 						</div>
 					</div>
@@ -164,7 +164,7 @@
 						</div>
 						<div class="col" style="position:relative; bottom:30px">
 							<label for="sexo">Sexo:</label>
-							<select class="form-control"  id="sexo" name=sexo>
+							<select class="form-control"  id="sexo" name=TXTsexo>
 							<option value="M">Masculino</option>
 							<option value="F">Femenino</option>
 							</select>
@@ -175,7 +175,7 @@
 						<div class="col">
 							<label for="provincia">Provincia:
 							</label> <select class="form-control"
-								id="provincia" name=provincia>
+								id="provincia" name=TXTprovincia>
 								<option value="CABA">CABA</option>
 								<option value="Buenos Aires">Buenos Aires</option>
 								<option value="Catamarca">Catamarca</option>
@@ -250,6 +250,10 @@
 						</div>
 					
 					</div>
+					<input type="hidden" name="TXTidUsuario" value="<%=usuario.getId() %>" />
+					<input type="hidden" name="TXTidPersona" value="<%=usuario.getPersona().getId()%>" />
+					<input type="hidden" name="TXTidDireccion" value="<%=usuario.getPersona().getDireccion().getId()%>" />
+					
 					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
 					<input type="submit" name="BtnModificar" value= "Modificar">
 					</div>

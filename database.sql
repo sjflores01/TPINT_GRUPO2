@@ -145,6 +145,42 @@ DELIMITER ;
 
 DELIMITER $$
 
+CREATE PROCEDURE modificarUsuario(
+in idUsuario int,
+in idPersona int,
+in idDireccion int,
+in calle varchar(100),
+in numero int,
+in dpto varchar(10),
+in localidad varchar(100),
+in provincia varchar(50),
+in dni varchar(10),
+in cuil varchar(10),
+in nombre varchar(50),
+in apellido varchar(50),
+in sexo char,
+in email varchar(100),
+in telefono varchar(20),
+in nacimiento date,
+in clave varchar(50)
+
+)
+
+BEGIN
+	Update Direcciones set calle = calle, numero = numero, dpto = dpto, localidad = localidad, provincia = provincia where id = idDireccion;
+    Update Personas set dni = dni, cuil = cuil, nacimiento = nacimiento, nombre = nombre, apellido = apellido, sexo = sexo, email = email, telefono = telefono where id = idPersona;
+    Update Usuarios set clave = clave where id = idUsuario;
+
+   
+END$$
+DELIMITER ;
+
+
+
+
+
+DELIMITER $$
+
 CREATE PROCEDURE leerUsuario(
 in idleer int
 )
@@ -194,10 +230,14 @@ END$$
 
 DELIMITER ;
 
+
+
+
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
+call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','99554','5478945','pedro','rodrigues','f','tom@sdd','542', '1998-01-30','nueva contraseña');
 call asignarCuenta(1,1,'000332312312',10000);
-call leerUsuario(1);
+call leerUsuario(3);
 
 
 
