@@ -194,19 +194,19 @@ public class ServletUsuario extends HttpServlet {
 			
 			redireccion ="Index.jsp";
 			
-		}else if(request.getParameter("ListaClientes") != null) {
+		}else if(request.getParameter("ListaClientes") != null || request.getParameter("TXTbuscador") != null) {
 		
 			ArrayList<Usuario> lista = new ArrayList<Usuario>();
 			UsuarioDao dao = new UsuarioDao();
 			
-			lista = dao.listarUsuarios();
+			String search = "";
+			if(request.getParameter("TXTbuscador") != null)
+			{
+				search = request.getParameter("TXTbuscador");
+			}
 			
-			Direccion direccion = new Direccion("ph", 0, "ph", "ph", "ph");
-			Persona persona = new Persona(0, "15489","ph" , "tomas", "dp", "ph", "ph", 'd',null , direccion);
-			Usuario usuario = new Usuario(0, "ph", "ph", persona);
-			
-			
-			
+			lista = dao.listarUsuarios(search);
+											
 			request.setAttribute("lista", lista);
 			redireccion = "ListadoClientes.jsp";
 			

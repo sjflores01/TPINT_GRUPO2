@@ -152,7 +152,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE listarUsuarios(
-
+in search varchar(30)
 )
 
 BEGIN
@@ -160,7 +160,7 @@ BEGIN
     Select * from Usuarios 
     inner join Personas on Usuarios.idPersona = Personas.id
     inner join Direcciones on Personas.idDireccion = Direcciones.id
-    where estado = 1;
+    where estado = 1 AND ( apellido like concat('%', search,'%') OR  dni =  search);
     
     
 	  
@@ -170,9 +170,10 @@ DELIMITER ;
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
+call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 
-call listarUsuarios();
-call listarUsuarios()
+call listarUsuarios('');
+
 
 
 

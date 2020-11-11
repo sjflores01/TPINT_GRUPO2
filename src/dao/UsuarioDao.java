@@ -61,7 +61,7 @@ public class UsuarioDao {
 	
 	
 	
-	public ArrayList<Usuario> listarUsuarios() {
+	public ArrayList<Usuario> listarUsuarios(String search) {
 		
 		
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
@@ -79,7 +79,7 @@ public class UsuarioDao {
 		java.sql.Connection cn = null;
 		try {
 			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
-			String query = "call listarUsuarios()";
+			String query = "call listarUsuarios('"+search+"')";
 			java.sql.Statement st = cn.createStatement();
 			java.sql.ResultSet rs = st.executeQuery(query);		
 			
