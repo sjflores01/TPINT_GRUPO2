@@ -1,14 +1,14 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="dominio.Direccion"%>
 <%@page import="dominio.Persona"%>
 <%@page import="dominio.Usuario"%>
+<%@page import="java.sql.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Listado de clientes</title>
+<title>Eliminar cliente</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
@@ -31,16 +31,19 @@
 </head>
 <body>
 	<%
-		ArrayList<Usuario> lista;
-		if (request.getAttribute("lista") == null) {
+		Usuario usuario;
+		if (request.getAttribute("usuario") == null) {
 
-			lista = new ArrayList<Usuario>();
+			Date fecha = new Date(2000, 5, 5);
+			Direccion direccion = new Direccion("ph", 0, "ph", "ph", "ph");
+			Persona persona = new Persona(0, "ph", "ph", "ph", "ph", "ph", "ph", 'p', fecha, direccion);
+			usuario = new Usuario(0, "ph", "ph", persona);
+
 		} else {
-			lista = (ArrayList<Usuario>) request.getAttribute("lista");
+
+			usuario = (Usuario) request.getAttribute("usuario");
 		}
 	%>
-
-
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
 		href="#">BANCO JAVA ADMIN</a>
@@ -93,83 +96,69 @@
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
-				<h3 class="display-4 text-info">Nomina de Clientes</h3>
-
+				<h3 class="display-4 text-info">Modificar cliente</h3>
+				<div style="height: 50px"></div>
 			</div>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
-			<h2>Listado de Clientes</h2>
-
+			<h2>Eliminar cliente</h2>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
 				<form action="ServletUsuario" method="get">
-					<label for="">Buscar</label> <input type="text"
-						class="form-control" name="TXTbuscador" id="Buscador"
-						aria-describedby="emailHelp"
-						placeholder="apellido o dni">
-						<input type="submit" name="ListaClientes" value= "Buscar">
-						
+
+					<div class="row mt-2 d-flex justify-content-center">
+						<div class="col-md-6" style="">
+							<div class="from-row"></div>
+							<div class="col">
+							<label for="exampleInputEmail1">Nombre </label>
+								<input type="text" class="form-control" name="TXTnombre"
+									id="nombre" aria-describedby="emailHelp" placeholder="Nombres" value=<%=usuario.getPersona().getApellido()+"_"+usuario.getPersona().getNombre() %>   >
+							</div>
+							<div class="col" style="position:relative; top:20px">
+								<label for="exampleInputEmail1">Dni</label>
+								<input type="text" class="form-control" name="TXTdni"
+									id="apellido" aria-describedby="emailHelp"
+									placeholder="Apellidos" value=<%=usuario.getPersona().getDni()%>  >
+							</div>
+
+
+
+
+
+						</div>
+
+
+
+					</div>
+
+
+
+
+
+
+
+					<div style="height: 30px"></div>
+
+
+
+					<input type="hidden" name="TXTidUsuario"
+						value="<%=usuario.getId()%>" />
+					<div class="row d-flex justify-content-center"
+						style="position: relative; top: 30px">
+						<input type="submit" name="BtnEliminar" value="Modificar">
+					</div>
+
+
+
 				</form>
-				<div style="height: 50px"></div>
-				<table class="table">
-					<thead class="table-info">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Apellido</th>
-							<th scope="col">Numero de cliente</th>
-							<th scope="col">Opciones</th>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<%
-							for (Usuario user : lista) {
-						%>
-
-						<tr>
-
-							<th scope="row">1</th>
-							<td><%=user.getPersona().getNombre()%></td>
-							<td><%=user.getPersona().getApellido()%></td>
-							<td><%=user.getPersona().getDni()%></td>
-							<td><input type="submit" name="BtnCrearCuenta"
-								value="Nueva Cuenta"></td>
-							<td><a class="btn btn-secondary" href="ServletUsuario?cargaEliminar=<%=user.getId()%>">Modificar</a></td>
-							<td><a class="btn btn-secondary" href="ServletUsuario?cargaModificar=<%=user.getId()%>">Eliminar</a>  </td>
-
-						</tr>
-
-						<%
-							}
-						%>
-
-					</tbody>
-				</table>
-				<div class="row">
-				<%
-					int cantPaginas = lista.size()/5;
-						
-					if(cantPaginas >1)
-					{
-						for(int i = 0; i< cantPaginas; i++)
-						{%>
-						<div class="col">
-						<a class="text-info" href="ServletUsuario?ListaClientes=1&pagina=<%= i+1 %>"><%= i+1 %></a>
-						</div>	
-						<%}
-					}
-				%>
-				</div>
-
-
 			</div>
 
 		</div>
 	</div>
+
+
+
 </body>
 </html>

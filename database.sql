@@ -218,6 +218,19 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE PROCEDURE eliminarUsuario(
+in idUsuario int
+)
+
+BEGIN
+	
+    Update Usuarios set estado = false where id = idUsuario;
+    
+    
+	  
+END$$
+DELIMITER ;
+DELIMITER $$
 
 CREATE PROCEDURE asignarCuenta (
 in nuevoIdUsuario int,
@@ -243,4 +256,4 @@ call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','
 call asignarCuenta(1,1,'000332312312',10000);
 call leerUsuario(1);
 
-
+call listarUsuarios("",1,10)

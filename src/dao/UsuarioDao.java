@@ -93,6 +93,38 @@ public class UsuarioDao {
 			
 		}
 	}
+
+	public void eliminarUsuario(int id) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+		} catch (ClassNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+		
+	
+		
+		
+		String query = "call modificarUsuario("+id+")";
+		java.sql.Connection cn = null;
+		
+		try {
+			
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			java.sql.Statement st = cn.createStatement();
+			st.executeUpdate(query);
+			
+			
+		} catch (Exception e) {
+			
+			
+			e.printStackTrace();
+			
+		}
+	}
 	
 	// LECTURA
 	

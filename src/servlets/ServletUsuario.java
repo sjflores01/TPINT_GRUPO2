@@ -218,7 +218,7 @@ public class ServletUsuario extends HttpServlet {
 				search = request.getParameter("TXTbuscador");
 			}
 			
-			lista = dao.listarUsuarios(search,pageId,total);
+			lista = dao.listarUsuarios(search,1,10);
 											
 			request.setAttribute("lista", lista);
 			redireccion = "ListadoClientes.jsp";
@@ -298,8 +298,34 @@ public class ServletUsuario extends HttpServlet {
 			redireccion ="Index.jsp";
 			
 			
-		}		
-		else
+		}else if(request.getParameter("cargaEliminar") != null) {
+			
+			String parametro = request.getParameter("cargaEliminar");
+			Integer id = Integer.parseInt(parametro);
+			
+			
+			UsuarioDao dao = new UsuarioDao();
+			Usuario usuario = null;
+
+			
+			usuario = dao.leerUsuario(id);
+			
+			request.setAttribute("usuario", usuario);
+			redireccion = "EliminarCliente.jsp";
+	
+			
+			
+		}else if(request.getParameter("BtnEliminar") != null) {
+		
+			String id = request.getParameter("TXTidUsuario");
+			Integer idnum = Integer.parseInt(id);
+			
+			UsuarioDao dao = new UsuarioDao();
+			dao.eliminarUsuario(idnum);
+			
+			redireccion = "Index.jsp";
+			
+		}else
 		{
 			response.getWriter().append("Sedsdssddssrved at: ").append(request.getContextPath());
 		}
