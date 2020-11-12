@@ -11,9 +11,6 @@ localidad varchar(100),
 provincia varchar(50)
 );
 
-
-
-
 CREATE TABLE Personas (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 dni varchar(10),
@@ -40,27 +37,36 @@ estado bool,
 nombreUsuario varchar(50),
 clave varchar(50),
 FOREIGN KEY (idPersona) REFERENCES Personas(id)
-
 );
 
-
+create table UsuariosAdmin (
+id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+estado bool,
+nombreUsuario varchar(50),
+clave varchar(50)
+);
+INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'AdminUser','admin1');
 
 CREATE TABLE TiposDeCuenta (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 descripcion varchar(10));
+INSERT INTO tiposdecuenta (descripcion) values ('CA$');
+INSERT INTO tiposdecuenta (descripcion) values ('CTA.CTE$');
+INSERT INTO tiposdecuenta (descripcion) values ('CAUSD');
+
 
 CREATE TABLE Cuentas (
-id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-idUsuario int,
-numero int,
-fechaCreacion date,
+id int NOT NULL AUTO_INCREMENT,
+idUsuario int NOT NULL,
+fechaCreacion datetime,
 tipoCta int,
-cbu varchar(20),
+cbu varchar(30) unique,
 saldo decimal,
+eliminada bool,
 FOREIGN KEY (tipoCta) REFERENCES TiposDeCuenta(id),
-FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
+FOREIGN KEY (idUsuario) REFERENCES Usuarios(id),
+PRIMARY KEY (id)
 );
-
 CREATE TABLE TiposDeMovimiento (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 descripcion varchar(50)
@@ -87,6 +93,11 @@ plazoPago int,
 FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
 );
 
+CREATE TABLE PagosCuotas (
+idPrestamo int not null,
+importe decimal,
+FOREIGN KEY (idPrestamo) REFERENCES Prestamos(id)
+);
 
 
 DELIMITER $$
@@ -135,6 +146,42 @@ DELIMITER ;
 
 DELIMITER $$
 
+CREATE PROCEDURE modificarUsuario(
+in idUsuario int,
+in idPersona int,
+in idDireccion int,
+in calle varchar(100),
+in numero int,
+in dpto varchar(10),
+in localidad varchar(100),
+in provincia varchar(50),
+in dni varchar(10),
+in cuil varchar(10),
+in nombre varchar(50),
+in apellido varchar(50),
+in sexo char,
+in email varchar(100),
+in telefono varchar(20),
+in nacimiento date,
+in clave varchar(50)
+
+)
+
+BEGIN
+	Update Direcciones set calle = calle, numero = numero, dpto = dpto, localidad = localidad, provincia = provincia where id = idDireccion;
+    Update Personas set dni = dni, cuil = cuil, nacimiento = nacimiento, nombre = nombre, apellido = apellido, sexo = sexo, email = email, telefono = telefono where id = idPersona;
+    Update Usuarios set clave = clave where id = idUsuario;
+
+   
+END$$
+DELIMITER ;
+
+
+
+
+
+DELIMITER $$
+
 CREATE PROCEDURE leerUsuario(
 in idleer int
 )
@@ -143,8 +190,8 @@ BEGIN
 	
     Select * from Usuarios 
     inner join Personas on Usuarios.idPersona = Personas.id
-    inner join Direcciones on Personas.idDireccion = Direcciones.id;
-    
+    inner join Direcciones on Personas.idDireccion = Direcciones.id
+    where Usuarios.id = idleer;
     
 	  
 END$$
@@ -152,28 +199,48 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE listarUsuarios(
-in search varchar(30)
+in search varchar(30),
+in inicio int,
+in total int
 )
 
 BEGIN
 	
-    Select * from Usuarios 
+    Select * from Usuarios
     inner join Personas on Usuarios.idPersona = Personas.id
     inner join Direcciones on Personas.idDireccion = Direcciones.id
-    where estado = 1 AND ( apellido like concat('%', search,'%') OR  dni =  search);
+    where estado = 1 AND ( apellido like concat('%', search,'%') OR  dni =  search)
+	limit inicio,total;
     
     
 	  
 END$$
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE PROCEDURE asignarCuenta (
+in nuevoIdUsuario int,
+in nuevoTipoCta int,
+in nuevoCbu varchar(30),
+in nuevoSaldo decimal
+)
+BEGIN
+
+INSERT INTO Cuentas (idUsuario, fechaCreacion, tipoCta, cbu, saldo, eliminada)
+VALUES (nuevoIdUsuario, CURRENT_TIMESTAMP ,nuevoTipoCta, nuevoCbu, nuevoSaldo, 1);
+
+END$$
+
+DELIMITER ;
+
+
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
-
-call listarUsuarios('');
-
-
+call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','99554','5478945','pedro','rodrigues','f','tom@sdd','542', '1998-01-30','nueva contraseña');
+call asignarCuenta(1,1,'000332312312',10000);
+call leerUsuario(1);
 
 

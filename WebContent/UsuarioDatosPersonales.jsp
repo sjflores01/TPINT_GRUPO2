@@ -46,7 +46,7 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="#">Nuevo cliente</a> <a
-								class="dropdown-item" href="ServletUsuario?ListaClientes=1">Listar clientes</a>
+								class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Listar clientes</a>
 							
 						</div></li>
 				</div>

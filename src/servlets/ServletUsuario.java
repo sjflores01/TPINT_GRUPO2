@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -196,6 +197,18 @@ public class ServletUsuario extends HttpServlet {
 			
 		}else if(request.getParameter("ListaClientes") != null || request.getParameter("TXTbuscador") != null) {
 		
+			PrintWriter out = response.getWriter();
+			
+			String spageid = request.getParameter("pagina");
+			int pageId = Integer.parseInt(spageid);
+			int total = 5;
+			
+			if(pageId ==1) {}
+			else {
+				pageId = pageId-1;
+				pageId = pageId*total+1;
+			}
+			
 			ArrayList<Usuario> lista = new ArrayList<Usuario>();
 			UsuarioDao dao = new UsuarioDao();
 			
@@ -205,7 +218,7 @@ public class ServletUsuario extends HttpServlet {
 				search = request.getParameter("TXTbuscador");
 			}
 			
-			lista = dao.listarUsuarios(search);
+			lista = dao.listarUsuarios(search,pageId,total);
 											
 			request.setAttribute("lista", lista);
 			redireccion = "ListadoClientes.jsp";
@@ -213,7 +226,80 @@ public class ServletUsuario extends HttpServlet {
 			
 			
 			
-		}else
+		}else if(request.getParameter("cargaModificar") != null) {
+		
+			String parametro = request.getParameter("cargaModificar");
+			Integer id = Integer.parseInt(parametro);
+			
+			
+			UsuarioDao dao = new UsuarioDao();
+			Usuario usuario = null;
+
+			
+			usuario = dao.leerUsuario(id);
+			
+			request.setAttribute("usuario", usuario);
+			redireccion = "ModificarUsuario.jsp";
+			
+		}else if(request.getParameter("BtnModificar") != null) {
+			
+			String provincia;
+			String localidad;
+			String domicilio;
+			String telefono;
+			String correo;
+			String depto;
+			String clave;
+			String dni;
+			String nombrePersona;
+			String apellido;
+			String sexo;
+			String numero;
+			String cuil;
+			String day;
+			String month;
+			String year;
+			String idUsuario;
+			String idPersona;
+			String idDireccion;
+			
+			
+			numero = request.getParameter("TXTnumero");
+			provincia = request.getParameter("TXTprovincia");
+			localidad =  request.getParameter("TXTlocalidad");
+			domicilio =  request.getParameter("TXTdomicilio");
+			telefono = request.getParameter("TXTtelefono");
+			correo = request.getParameter("TXTcorreo");
+			depto = request.getParameter("TXTdepto");
+			clave = request.getParameter("TXTpass");
+			dni = request.getParameter("TXTdni");
+			nombrePersona = request.getParameter("TXTnombrePersona");
+			apellido = request.getParameter("TXTapellido");
+			sexo = request.getParameter("TXTsexo");
+			cuil = request.getParameter("TXTcuil");
+			day = request.getParameter("TXTdia");
+			month = request.getParameter("TXTmes");
+			year = request.getParameter("TXTanio");
+			idUsuario = request.getParameter("TXTidUsuario");
+			idPersona = request.getParameter("TXTidPersona");
+			idDireccion = request.getParameter("TXTidDireccion");
+			
+			Date fecha = new Date(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+			
+			
+			Direccion direccion = new Direccion(domicilio, Integer.parseInt(numero), depto, localidad, provincia);
+			direccion.setId(Integer.parseInt(idDireccion));
+			Persona persona = new Persona(Integer.parseInt(idPersona), dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0),fecha, direccion);
+			Usuario usuario = new Usuario(Integer.parseInt(idDireccion), "ph", clave, persona);
+			
+			UsuarioDao dao = new UsuarioDao();
+			dao.modificarUsuario(usuario);
+			
+			redireccion ="Index.jsp";
+			
+			
+		}		
+		else
 		{
 			response.getWriter().append("Sedsdssddssrved at: ").append(request.getContextPath());
 		}

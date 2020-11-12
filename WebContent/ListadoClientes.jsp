@@ -36,7 +36,6 @@
 
 			lista = new ArrayList<Usuario>();
 		} else {
-
 			lista = (ArrayList<Usuario>) request.getAttribute("lista");
 		}
 	%>
@@ -140,9 +139,9 @@
 							<td><%=user.getPersona().getDni()%></td>
 							<td><input type="submit" name="BtnCrearCuenta"
 								value="Nueva Cuenta"></td>
-							<td><input type="submit" name="BtnModificiar"
-								value="Modificar"></td>
-							<td><input type="submit" name="BtnEliminar" value="Eliminar"></td>
+							<td><a class="btn btn-secondary" href="ServletUsuario?cargaModificar=<%=user.getId()%>">Modificar</a></td>
+							<td><input type="submit" name="BtnEliminar"
+								value="Eliminar"></td>
 
 						</tr>
 
@@ -152,6 +151,21 @@
 
 					</tbody>
 				</table>
+				<div class="row">
+				<%
+					int cantPaginas = lista.size()/5;
+						
+					if(cantPaginas >1)
+					{
+						for(int i = 0; i< cantPaginas; i++)
+						{%>
+						<div class="col">
+						<a class="text-info" href="ServletUsuario?ListaClientes=1&pagina=<%= i+1 %>"><%= i+1 %></a>
+						</div>	
+						<%}
+					}
+				%>
+				</div>
 
 
 			</div>
