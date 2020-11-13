@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Modificar Cuenta</title>
+<title>BANCO AGUANTE JAVA!</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
+	
+	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -46,9 +47,8 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="#">Nuevo cliente</a> <a
-								class="dropdown-item" href="#">Modificar cliente</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Eliminar cliente</a>
+								class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Listar clientes</a>
+							
 						</div></li>
 				</div>
 				<div class="col-md-2">
@@ -59,7 +59,7 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="#">Nueva cuenta</a> <a
-								class="dropdown-item" href="#">Modificar cuenta</a>
+								class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Listar cuentas</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">Eliminar cuenta</a>
 						</div></li>
@@ -75,75 +75,41 @@
 			</div>
 		</ul>
 	</div>
-	</nav>
+	</nav>	
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
-				<h3 class="display-4 text-info">Modificar Cuenta</h3>
-				<div style="height:50px"></div>	
+				<h3 class="display-4 text-info">Banco java Admin</h3>				
 			</div>
 		</div>
-		<div class="row mt-2 d-flex justify-content-center">
-		<h2>Informacion de la cuenta</h2>
-		</div>
-		<div class="row mt-2 d-flex justify-content-center"
-			style="position: relative; top: 50px">
-			<div class="col-md-6" style="">
-				<form>
-					<div class="form-row">
-
-						<div class="col">
-						 <label for="nombre">Nombre:</label>
-							<input type="text" class="form-control" name="TXTnombre"
-								id="nombre" aria-describedby="emailHelp" placeholder="Nombres">
-						</div>
-						<div class="col">
-						 <label for="apellido">Apellido:</label>
-							<input type="text" class="form-control" name="TXTapellido"
-								id="apellido" aria-describedby="emailHelp"
-								placeholder="Apellidos">
-						</div>
-
-					</div>
-					<div style="height:30px"></div>	
-					<div class="form-row">
-						<div class="col">
-						 <label for="Dni">Dni:</label>
-							<input type="text" class="form-control" name="TXTdni" id="dni"
-								aria-describedby="emailHelp" placeholder="DNI">
-						</div>
-						<div class="col">
-						 <label for="cuit">Cuit:</label>
-							<input type="text" class="form-control" name="TXTcuil"
-								id="cuil" aria-describedby="emailHelp" placeholder="Cuil">
-						</div>
-						
-						
-					</div>
-					<div style="height:30px"></div>	
-					<div class="form-row">
-					 <label for="MontoInicial">Monto Inicial:</label>
-							<input type="text" class="form-control" name="TXTmonoInicial" id="montoinicial"
-								aria-describedby="emailHelp" >
-						
-						<div class="col">
-							<label for="Tipo de cuenta">Tipo de cuenta:</label>
-							<select class="form-control"  id="sexo" name=sexo>
-							<option value="C_ahorro">Caja de ahorro</option>
-							<option value="C_corriente">Cuenta Corriente</option>
-							</select>
-						</div>
-					</div>
-					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
-					<input type="submit" name="BtnModificarCuenta" value= "Modificar">
-					</div>
-						
-					
-
-				</form>
+		
+		<%if(request.getAttribute("mensaje") != null) {
+			%>
+		
+		<div class="row mt-2 d-flex justify-content-center" style="position:relative; top:40px">
+			<div class="col-3 card title d-flex justify-content-center">
+			
+			<h6 style="text-align:center"><%=request.getAttribute("mensaje") %> </h6>
 			</div>
-
+		
 		</div>
+		<%
+		}
+		%>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

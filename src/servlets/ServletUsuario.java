@@ -74,14 +74,23 @@ public class ServletUsuario extends HttpServlet {
 			Usuario usuario = new Usuario(0, "ph", "ph", persona);
 			
 			
-			
-			
 			request.setAttribute("dia", day);
 			request.setAttribute("mes", month);
 			request.setAttribute("anio", year);
 			request.setAttribute("Usuario", usuario);
-			redireccion = "UsuarioDireccion.jsp";
 			
+			UsuarioDao dao = new UsuarioDao();
+			if(dao.chequearDni(dni)) {
+				redireccion = "UsuarioDireccion.jsp";
+				
+			} else {
+			
+				String error = "Dni ya registrado";
+				request.setAttribute("errorDni", error);
+				redireccion = "UsuarioDatosPersonales.jsp";
+			}
+			
+		
 		}else if(request.getParameter("BtnSiguiente2") != null) {
 		
 			//Boton alta usuario 2
@@ -136,7 +145,18 @@ public class ServletUsuario extends HttpServlet {
 			request.setAttribute("mes", month);
 			request.setAttribute("anio", year);
 			request.setAttribute("Usuario", usuario);
-			redireccion = "UsuarioCuenta.jsp";
+			
+			UsuarioDao dao = new UsuarioDao();
+			if(dao.chequearEmail(correo)) {
+				redireccion = "UsuarioCuenta.jsp";
+				
+			} else{
+				
+				String error = "mail en uso";
+				request.setAttribute("errorMail", error);
+				redireccion = "UsuarioDireccion.jsp";
+			}
+			
 			
 			
 			
@@ -153,6 +173,7 @@ public class ServletUsuario extends HttpServlet {
 			String depto;
 			String nombreUsuario;
 			String clave;
+			String repetirClave;
 			String dni;
 			String nombrePersona;
 			String apellido;
@@ -173,6 +194,7 @@ public class ServletUsuario extends HttpServlet {
 			depto = request.getParameter("TXTdepto");
 			nombreUsuario = request.getParameter("TXTusuario");
 			clave = request.getParameter("TXTpass");
+			repetirClave = request.getParameter("TXTrepetirpass");
 			dni = request.getParameter("TXTdni");
 			nombrePersona = request.getParameter("TXTnombrePersona");
 			apellido = request.getParameter("TXTapellido");
@@ -191,9 +213,45 @@ public class ServletUsuario extends HttpServlet {
 			Usuario usuario = new Usuario(0, nombreUsuario, clave, persona);
 			
 			UsuarioDao usuarioDao = new UsuarioDao();
-			usuarioDao.cargarUsuario(usuario);
 			
-			redireccion ="Index.jsp";
+			if(clave.equals(repetirClave) == false) {
+			
+				String error = "Las contraseñas no coinciden";
+				request.setAttribute("errorNombre", error);
+				request.setAttribute("dia", day);
+				request.setAttribute("mes", month);
+				request.setAttribute("anio", year);
+				request.setAttribute("Usuario", usuario);
+				redireccion = "UsuarioCuenta.jsp";
+				
+			}else if(usuarioDao.chequearNombreUsuario(nombreUsuario)){
+			
+				usuarioDao.cargarUsuario(usuario);
+				String mensaje = "Alta usuario exitosa";
+				request.setAttribute("mensaje", mensaje);
+				redireccion ="IndexAdmin.jsp";
+				
+			} else {
+			
+				String error = "Nombre de usuario en uso";
+				request.setAttribute("errorNombre", error);
+				request.setAttribute("dia", day);
+				request.setAttribute("mes", month);
+				request.setAttribute("anio", year);
+				request.setAttribute("Usuario", usuario);
+				redireccion = "UsuarioCuenta.jsp";
+
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		}else if(request.getParameter("ListaClientes") != null || request.getParameter("TXTbuscador") != null) {
 		
@@ -300,7 +358,9 @@ public class ServletUsuario extends HttpServlet {
 			UsuarioDao dao = new UsuarioDao();
 			dao.modificarUsuario(usuario);
 			
-			redireccion ="Index.jsp";
+			String mensaje = "Modificacion de usuario exitosa";
+			request.setAttribute("mensaje", mensaje);
+			redireccion ="IndexAdmin.jsp";
 			
 			
 		}else if(request.getParameter("cargaEliminar") != null) {
@@ -328,7 +388,9 @@ public class ServletUsuario extends HttpServlet {
 			UsuarioDao dao = new UsuarioDao();
 			dao.eliminarUsuario(idnum);
 			
-			redireccion = "Index.jsp";
+			String mensaje = "Baja de usuario exitosa";
+			request.setAttribute("mensaje", mensaje);
+			redireccion = "IndexAdmin.jsp";
 			
 		}else
 		{

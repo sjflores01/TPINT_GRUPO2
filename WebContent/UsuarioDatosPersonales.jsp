@@ -46,8 +46,10 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="#">Nuevo cliente</a> <a
-								class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Listar clientes</a>
-							
+								class="dropdown-item"
+								href="ServletUsuario?ListaClientes=1&pagina=1">Listar
+								clientes</a>
+
 						</div></li>
 				</div>
 				<div class="col-md-2">
@@ -58,7 +60,8 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="#">Nueva cuenta</a> <a
-								class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Listar cuentas</a>
+								class="dropdown-item"
+								href="ServletCuenta?ListaCuentas=1&pagina=1">Listar cuentas</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">Eliminar cuenta</a>
 						</div></li>
@@ -74,18 +77,18 @@
 			</div>
 		</ul>
 	</div>
-	</nav>		
-	
-	
+	</nav>
+
+
 	<div class="container">
 		<div class="row mt-2">
 			<div class="col-md-12">
 				<h3 class="display-4 text-info">Alta cliente</h3>
-				<div style="height:50px"></div>	
+				<div style="height: 50px"></div>
 			</div>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
-		<h2>Datos personales</h2>
+			<h2>Datos personales</h2>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
@@ -95,57 +98,76 @@
 
 						<div class="col">
 							<input type="text" class="form-control" name="TXTnombre"
-								id="nombre" aria-describedby="emailHelp" placeholder="Nombres">
+								id="nombre" aria-describedby="emailHelp" placeholder="Nombres" required>
 						</div>
 						<div class="col">
 							<input type="text" class="form-control" name="TXTapellido"
 								id="apellido" aria-describedby="emailHelp"
-								placeholder="Apellidos">
+								placeholder="Apellidos" required>
 						</div>
 					</div>
-					<div style="height:30px"></div>	
+					<div style="height: 30px"></div>
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control" name="TXTdni" id="nombre"
-								aria-describedby="emailHelp" placeholder="DNI">
+							<input type="number" class="form-control" name="TXTdni" id="nombre"
+								aria-describedby="emailHelp" placeholder="DNI" required>
 						</div>
 						<div class="col">
-							<input type="text" class="form-control" name="TXTcuil"
-								id="nombre" aria-describedby="emailHelp" placeholder="Cuil">
+							<input type="number" class="form-control" name="TXTcuil"
+								id="nombre" aria-describedby="emailHelp" placeholder="Cuil" required>
 						</div>
 					</div>
-					<div style="height:30px">
-							 <label for="exampleInputEmail1">Fecha de nacimiento:</label>
-					
-					</div>	
+					<div style="height: 30px">
+						<label for="exampleInputEmail1">Fecha de nacimiento:</label>
+
+					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="number" class="form-control" name="TXTdia" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="DD">
+							<input type="number" class="form-control" name="TXTdia"
+								id="nacimiento" aria-describedby="emailHelp" placeholder="DD" required>
 						</div>
 						<div class="col">
-							 
-							<input type="number" class="form-control" name="TXTmes" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="MM">
+
+							<input type="number" class="form-control" name="TXTmes"
+								id="nacimiento" aria-describedby="emailHelp" placeholder="MM" required>
 						</div>
 						<div class="col">
-							
-							<input type="number" class="form-control" name="TXTanio" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="YYYY">
+
+							<input type="number" class="form-control" name="TXTanio"
+								id="nacimiento" aria-describedby="emailHelp" placeholder="YYYY" required>
 						</div>
-						<div class="col" style="position:relative; bottom:30px">
-							<label for="sexo">Sexo:</label>
-							<select class="form-control"  id="sexo" name=sexo>
-							<option value="M">Masculino</option>
-							<option value="F">Femenino</option>
+						<div class="col" style="position: relative; bottom: 30px">
+							<label for="sexo">Sexo:</label> <select class="form-control"
+								id="sexo" name=sexo>
+								<option value="M">Masculino</option>
+								<option value="F">Femenino</option>
 							</select>
 						</div>
 					</div>
-					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
-					<input type="submit" name="BtnSiguiente1" value= "Siguiente">
-					</div>
-						
 					
+						<%
+							if (request.getAttribute("errorDni") != null) {
+						%>
+						<div class="row d-flex justify-content-center"
+						style="position: relative; top: 30px" >
+						<label for="inputEmail4" style="color: red">Dni en uso</label>
+						</div>
+						
+						
+						
+						<%
+							}
+						%>
+					
+					<div class="row d-flex justify-content-center"
+						style="position: relative; top: 30px">
+
+					
+
+						<input type="submit" name="BtnSiguiente1" value="Siguiente">
+					</div>
+
+
 
 				</form>
 			</div>

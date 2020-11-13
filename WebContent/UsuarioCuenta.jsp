@@ -96,7 +96,7 @@
 					<div class="form-row">
 						<div class="col">
 							<input type="text" class="form-control" name="TXTusuario" id="usuario"
-								aria-describedby="emailHelp" placeholder="Nombre de usuario">
+								aria-describedby="emailHelp" placeholder="Nombre de usuario" required>
 						</div>
 						
 					</div>
@@ -104,7 +104,7 @@
 					<div class="form-row">
 						<div class="col">
 							 <input	type="password" class="form-control" name="TXTpass"
-								id="pass" aria-describedby="emailHelp"placeholder="Contraseña">
+								id="pass" aria-describedby="emailHelp"placeholder="Contraseña" required>
 								<small id="passHelp" class="form-text text-muted">El usuario deberá cambiarla en su primir inicio de sesion.</small>
 						</div>
 					
@@ -113,10 +113,25 @@
 					<div class="form-row">
 						<div class="col">
 							 <input	type="password" class="form-control" name="TXTrepetirpass"
-								id="repetirpass" aria-describedby="emailHelp"	placeholder="Repetir contraseña">
+								id="repetirpass" aria-describedby="emailHelp"	placeholder="Repetir contraseña" required>
 						</div>
 					
 					</div>
+					
+					<%
+							if (request.getAttribute("errorNombre") != null) {
+						%>
+						<div class="row d-flex justify-content-center"
+						style="position: relative; top: 30px" >
+						<label for="inputEmail4" style="color: red"><%=request.getAttribute("errorNombre") %></label>
+						</div>
+						
+						
+						
+						<%
+							}
+						%>
+					
 					<div class="row d-flex justify-content-center"
 						style="position: relative; top: 30px">
 						
@@ -137,6 +152,8 @@
 					<input type="hidden" name="TXTdia" value="<%=request.getAttribute("dia") %>" />
 					<input type="hidden" name="TXTmes" value="<%=request.getAttribute("mes")%>" />
 					<input type="hidden" name="TXTanio" value="<%=request.getAttribute("anio") %>" />
+						
+						
 						
 						
 						<input type="submit" name="BtnSiguiente3" value="Siguiente">

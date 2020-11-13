@@ -132,7 +132,7 @@
 						<div class="col">
 							<input type="text" style="position:relative; top:30px" class="form-control" name="TXTlocalidad"
 								id="localidad" aria-describedby="emailHelp"
-								placeholder="localidad">
+								placeholder="localidad" required>
 						</div>
 
 					</div>
@@ -140,29 +140,29 @@
 					<div class="form-row">
 						<div class="col">
 							<input type="text" class="form-control" name="TXTdomicilio" id="domicilio"
-								aria-describedby="emailHelp" placeholder="Domicilio">
+								aria-describedby="emailHelp" placeholder="Domicilio" required>
 						</div>
 						
 					</div>
 					<div style="height: 30px"></div>
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control" name="TXTnumero" id="numero"
-								aria-describedby="emailHelp" placeholder="Numero">
+							<input type="number" class="form-control" name="TXTnumero" id="numero"
+								aria-describedby="emailHelp" placeholder="Numero" required>
 						</div>
 						
 						<div class="col">
 							<input type="text" class="form-control" name="TXTdepto" id="depto"
-								aria-describedby="emailHelp" placeholder="Depto">
+								aria-describedby="emailHelp" placeholder="Depto" required>
 						</div>
 						
 					</div>
 					<div style="height: 30px"></div>
 					<div class="form-row">
 						<div class="col">
-							 <input	type="text" class="form-control" name="TXTtelefono"
+							 <input	type="number" class="form-control" name="TXTtelefono"
 								id="telefono" aria-describedby="emailHelp"
-								placeholder="telefono">
+								placeholder="telefono" required>
 						</div>
 					
 					</div>
@@ -171,10 +171,26 @@
 						<div class="col">
 							 <input	type="text" class="form-control" name="TXTcorreo"
 								id="mail" aria-describedby="emailHelp"
-								placeholder="Correo electronico">
+								placeholder="Correo electronico" required>
 						</div>
 					
 					</div>
+					
+						<%
+							if (request.getAttribute("errorMail") != null) {
+						%>
+						<div class="row d-flex justify-content-center"
+						style="position: relative; top: 30px" >
+						<label for="inputEmail4" style="color: red">Correo ya registrado</label>
+						</div>
+						
+						
+						
+						<%
+							}
+						%>
+					
+					
 					<div class="row d-flex justify-content-center" style="position: relative; top: 30px">
 
 					<input type="hidden" name="TXTnombreUsuario" value="<%=usuario.getNombre() %>" />

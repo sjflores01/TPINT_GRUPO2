@@ -22,7 +22,7 @@ public class UsuarioDao {
 	{
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -63,7 +63,7 @@ public class UsuarioDao {
 	public void modificarUsuario(Usuario usuario)
 	{
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -97,7 +97,7 @@ public class UsuarioDao {
 	public void eliminarUsuario(int id) {
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -134,7 +134,7 @@ public class UsuarioDao {
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -205,7 +205,7 @@ public class UsuarioDao {
 	public Usuario leerUsuario(Integer id)
 	{
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -268,6 +268,127 @@ public class UsuarioDao {
 		
 	}
 	
+	
+	public Boolean chequearEmail(String mail) {
+		
+		boolean result = true;
+		Integer cantidad;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		java.sql.Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			String query = "call contarMails('"+mail+"')";
+			java.sql.Statement st = cn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(query);		
+			
+			rs.next();			
+			cantidad = rs.getInt(1);
+			
+			
+			if(cantidad > 0)
+			{
+				result = false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+
+	
+	public Boolean chequearDni(String dni) {
+	
+		boolean result = true;
+		Integer cantidad;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		java.sql.Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			String query = "call contarDni('"+dni+"')";
+			java.sql.Statement st = cn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(query);		
+			
+			rs.next();			
+			cantidad = rs.getInt(1);
+			
+			
+			if(cantidad > 0)
+			{
+				result = false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+		
+	}
+
+	public Boolean chequearNombreUsuario(String nombre) {
+		
+		boolean result = true;
+		Integer cantidad;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		java.sql.Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			String query = "call contarUsuario('"+nombre+"')";
+			java.sql.Statement st = cn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(query);		
+			
+			rs.next();			
+			cantidad = rs.getInt(1);
+			
+			
+			if(cantidad > 0)
+			{
+				result = false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+	
+	
 	//VERIFICAR LOG IN
 	
 		//funcion que verifica si se logea un administrador
@@ -275,7 +396,7 @@ public class UsuarioDao {
 		
 		{
 			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
+				Class.forName("com.mysql.jdbc.Driver");
 				
 				
 			} catch (ClassNotFoundException e) {
@@ -311,7 +432,7 @@ public class UsuarioDao {
 		
 		{
 			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
+				Class.forName("com.mysql.jdbc.Driver");
 				
 				
 			} catch (ClassNotFoundException e) {

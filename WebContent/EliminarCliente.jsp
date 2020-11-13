@@ -147,7 +147,7 @@
 						value="<%=usuario.getId()%>" />
 					<div class="row d-flex justify-content-center"
 						style="position: relative; top: 30px">
-						<input type="submit" name="BtnEliminar" value="Modificar">
+						<input type="submit" name="BtnEliminar" value="Eliminar">
 					</div>
 
 
