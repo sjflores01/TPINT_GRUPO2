@@ -105,11 +105,12 @@
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
 				<form action="ServletUsuario" method="get">
-					<label for="">Buscar</label> <input type="text"
+					<label for="">Buscar</label> 
+					<input type="text"
 						class="form-control" name="TXTbuscador" id="Buscador"
 						aria-describedby="emailHelp"
 						placeholder="apellido o dni">
-						<input type="submit" name="ListaClientes" value= "Buscar">
+						<input type="submit" name="ListaClientes" value="Buscar">
 						
 				</form>
 				<div style="height: 50px"></div>
@@ -137,10 +138,9 @@
 							<td><%=user.getPersona().getNombre()%></td>
 							<td><%=user.getPersona().getApellido()%></td>
 							<td><%=user.getPersona().getDni()%></td>
-							<td><input type="submit" name="BtnCrearCuenta"
-								value="Nueva Cuenta"></td>
-							<td><a class="btn btn-secondary" href="ServletUsuario?cargaEliminar=<%=user.getId()%>">Modificar</a></td>
-							<td><a class="btn btn-secondary" href="ServletUsuario?cargaModificar=<%=user.getId()%>">Eliminar</a>  </td>
+						    <td><a class="btn btn-primary" href="ServletCuenta?nuevaCuenta=<%=user.getId()%>">Nueva Cuenta</a></td>
+							<td><a class="btn btn-info" href="ServletUsuario?cargaModificar=<%=user.getId()%>">Modificar</a></td>
+							<td><a class="btn btn-warning" href="ServletUsuario?cargaEliminar=<%=user.getId()%>">Eliminar</a></td>
 
 						</tr>
 

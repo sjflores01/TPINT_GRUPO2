@@ -6,7 +6,7 @@ public class Fecha {
 	
 	public boolean probarFecha(String fecha)
 	{
-		boolean result = true;
+		/*boolean result = true;
 		
 		boolean day = false;
 		boolean month = false;
@@ -28,17 +28,8 @@ public class Fecha {
 			
 			}
 			
-			
-			
-			
-			
-		}
-												
-		
-		
-		return result;
-		
-		
+		}*/
+		return true;
 	}
 	
 	

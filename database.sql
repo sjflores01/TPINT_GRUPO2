@@ -248,6 +248,17 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE PROCEDURE `cargaCuenta`(
+in idUsuario int,
+in tipoCta int
+)
+BEGIN
+    Insert into Cuentas(idUsuario, fechaCreacion, tipoCta, cbu, saldo, eliminada) 
+                values (idUsuario, NOW(), tipoCta, FLOOR(RAND() * 9999999999), 10000, false);
+END$$
+
+DELIMITER ;
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
