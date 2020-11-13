@@ -22,7 +22,7 @@ public class UsuarioDao {
 	{
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -63,7 +63,7 @@ public class UsuarioDao {
 	public void modificarUsuario(Usuario usuario)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -97,7 +97,7 @@ public class UsuarioDao {
 	public void eliminarUsuario(int id) {
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -134,7 +134,7 @@ public class UsuarioDao {
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -205,7 +205,7 @@ public class UsuarioDao {
 	public Usuario leerUsuario(Integer id)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -268,43 +268,82 @@ public class UsuarioDao {
 		
 	}
 	
+	//VERIFICAR LOG IN
 	
-	
+		//funcion que verifica si se logea un administrador
+		public Usuario confirmarAdmin(String nombre,String contraseña)
+		
+		{
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				
+				
+			} catch (ClassNotFoundException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			java.sql.Connection cn = null;
+			Usuario usuarioAdim = new Usuario();
+			
+			try {
+				cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+				String query = "call Login_Admin("+nombre+", "+contraseña+")";
+				java.sql.Statement st = cn.createStatement();
+				java.sql.ResultSet rs = st.executeQuery(query);		
+				
+				rs.next();
+				
+				usuarioAdim.setId(rs.getInt(1));
+				usuarioAdim.setNombre(rs.getString(3));
+				usuarioAdim.setClave(rs.getString(4));
+		
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return usuarioAdim;
+			
+		}	
+		
+		//funcion que verifica si se logea un usuario
+	public Usuario confirmarUser(String nombre,String contraseña)
+		
+		{
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				
+				
+			} catch (ClassNotFoundException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			java.sql.Connection cn = null;
+			Usuario usuarioUser = new Usuario();
+			
+			try {
+				cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+				String query = "call Login_User("+nombre+", "+contraseña+")";
+				java.sql.Statement st = cn.createStatement();
+				java.sql.ResultSet rs = st.executeQuery(query);		
+				
+				rs.next();
+				
+				usuarioUser.setId(rs.getInt(1));
+				usuarioUser.setNombre(rs.getString(3));
+				usuarioUser.setClave(rs.getString(4));
+		
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return usuarioUser;
+			
+		}		
 	
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

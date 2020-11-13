@@ -16,6 +16,12 @@ public class Usuario {
 		this.clave = clave;
 		this.persona = persona;
 	}
+	
+
+	public Usuario() {
+		super();
+	}
+
 
 	//Getters and setters
 

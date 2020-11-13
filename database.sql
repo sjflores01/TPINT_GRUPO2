@@ -300,13 +300,44 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `eliminarCuenta`(
-n id int
+in id int
 )
 BEGIN
     Update Cuentas set eliminada = true where Cuentas.id = id;
 END$$
 
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE Login_Admin(
+in nombre varchar(50),
+in contraseña varchar(50)
+
+)
+BEGIN
+
+select * from usuariosadmin
+where (nombreUsuario = nombre and clave = contraseña and estado = 1);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE Login_User(
+in nombre varchar(50),
+in contraseña varchar(50)
+
+)
+BEGIN
+
+select * from usuarios
+where (nombreUsuario = nombre and clave = contraseña and estado = 1);
+
+END$$
+
+DELIMITER ;
+
 
 
 
