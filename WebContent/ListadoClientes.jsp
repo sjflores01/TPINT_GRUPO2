@@ -32,11 +32,13 @@
 <body>
 	<%
 		ArrayList<Usuario> lista;
+		int cantPaginas = 0;
 		if (request.getAttribute("lista") == null) {
 
 			lista = new ArrayList<Usuario>();
 		} else {
 			lista = (ArrayList<Usuario>) request.getAttribute("lista");
+			cantPaginas = lista.size();
 		}
 	%>
 
@@ -152,8 +154,7 @@
 				</table>
 				<div class="row">
 				<%
-					int cantPaginas = lista.size()/5;
-						
+					
 					if(cantPaginas >1)
 					{
 						for(int i = 0; i< cantPaginas; i++)

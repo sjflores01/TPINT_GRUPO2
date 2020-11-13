@@ -198,9 +198,14 @@ public class ServletUsuario extends HttpServlet {
 		}else if(request.getParameter("ListaClientes") != null || request.getParameter("TXTbuscador") != null) {
 		
 			PrintWriter out = response.getWriter();
+			int pageId;
 			
-			String spageid = request.getParameter("pagina");
-			int pageId = Integer.parseInt(spageid);
+			if(request.getParameter("pagina") != null) {
+				String spageid = request.getParameter("pagina");				
+				pageId = Integer.parseInt(spageid);
+			}else {
+				pageId = 1;
+			}
 			int total = 5;
 			
 			if(pageId ==1) {}
