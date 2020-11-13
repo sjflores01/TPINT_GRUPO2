@@ -58,7 +58,7 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="#">Nueva cuenta</a> <a
-								class="dropdown-item" href="#">Modificar cuenta</a>
+								class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Listar cuentas</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">Eliminar cuenta</a>
 						</div></li>

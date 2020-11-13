@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Persona"%>
+<%@page import="dominio.Usuario"%>
+<%@page import="dominio.Cuenta"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,6 +30,17 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
+
+	<%
+		ArrayList<Cuenta> lista;
+		if (request.getAttribute("lista") == null) {
+
+			lista = new ArrayList<Cuenta>();
+		} else {
+			lista = (ArrayList<Cuenta>) request.getAttribute("lista");
+		}
+	%>
+
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
 		href="#">BANCO JAVA ADMIN</a>
@@ -79,57 +94,67 @@
 		<div class="row mt-2">
 			<div class="col-md-12">
 				<h3 class="display-4 text-info">Nomina del Banco</h3>
-				
+
 			</div>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
-		<h2>Listado de Cuentas</h2>
-			
+			<h2>Listado de Cuentas</h2>
+
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
 				<form>
-				<label for="">Buscar</label>
-				<input type="text" class="form-control" name="TXTbuscador"
-								id="Buscador" aria-describedby="emailHelp" placeholder="Ingrese numero de cuenta">
-				<div style="height:50px"></div>
+					<label for="">Buscar</label> <input type="text"
+						class="form-control" name="TXTbuscador" id="Buscador"
+						aria-describedby="emailHelp"
+						placeholder="Ingrese numero de cuenta"> <input
+						type="submit" name="ListaCuentas" value="Buscar">
+
+					<div style="height: 50px"></div>
 					<table class="table">
-  <thead class="table-info">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Numero de cuenta</th>
-      <th scope="col">Tipo de Cuenta</th>
-      <th scope="col">Nombre</th>
-       <th scope="col">Apellido</th>
-       <th></th>
-         <th></th>
-         <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-    <td>aa23T##2</td>
-    <td>Cuenta Corriente</td>
-    <td>Pedro</td>
-    <td>Perez</td>
-	<td><input type="submit" name="BtnCrearCuenta" value= "Nueva Cuenta"></td>
-	<td><input type="submit" name="BtnModificiar" value= "Modificar"></td>
-	<td><input type="submit" name="BtnEliminar" value= "Eliminar"></td>
-					
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-     
-    </tr>
-  </tbody>
-</table>
-					
+						<thead class="table-info">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">N° Cuenta</th>
+								<th scope="col">Tipo de Cuenta</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Apellido</th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<%
+								for (Cuenta c : lista) {
+							%>
+
+							<tr>
+
+								<th scope="row"></th>
+								<td><%=c.getId()%></td>
+								<td><%=c.getTipoCuenta().getDescripcion()%></td>
+								<td><%=c.getUsuario().getPersona().getNombre()%></td>
+								<td><%=c.getUsuario().getPersona().getApellido()%></td>
+								<td><a class="btn btn-primary"
+									href="ServletCuenta?nuevaCuenta=<%=c.getUsuario().getId()%>">Nueva
+										Cuenta</a></td>
+								<td><a class="btn btn-info"
+									href="ServletCuenta?cargaModificar=<%=c.getId()%>">Modificar</a></td>
+								<td><a class="btn btn-warning"
+									href="ServletCuenta?cargaEliminar=<%=c.getId()%>">Eliminar</a></td>
+
+							</tr>
+
+							<%
+								}
+							%>
+
+						</tbody>
+					</table>
+
 
 				</form>
 			</div>

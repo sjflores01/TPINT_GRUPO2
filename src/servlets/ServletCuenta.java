@@ -57,6 +57,7 @@ public class ServletCuenta extends HttpServlet {
 			request.setAttribute("usuario", usuario);
 			redireccion = "NuevaCuenta.jsp";
 			
+			
 		} else if(request.getParameter("BtnNuevaCuenta") != null) {
 			
 			// boton alta cuenta
@@ -71,6 +72,37 @@ public class ServletCuenta extends HttpServlet {
 			cuentaDao.cargarCuenta(idUsuario, tipoCta);
 			
 			redireccion ="Index.jsp";
+			
+			
+		} else if(request.getParameter("ListaCuentas") != null || request.getParameter("TXTbuscador") != null) {
+		
+			PrintWriter out = response.getWriter();
+			
+			String spageid = request.getParameter("pagina");
+			int pageId = Integer.parseInt(spageid);
+			int total = 5;
+			
+			if(pageId ==1) {}
+			else {
+				pageId = pageId-1;
+				pageId = pageId*total+1;
+			}
+			
+			ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
+			CuentaDao dao = new CuentaDao();
+			
+			String search = "";
+			if(request.getParameter("TXTbuscador") != null)
+			{
+				search = request.getParameter("TXTbuscador");
+			}
+			
+			lista = dao.listarCuentas(search,1,10);
+											
+			request.setAttribute("lista", lista);
+			redireccion = "ListadoCuentas.jsp";
+			
+			
 		}
 		 else
 		{

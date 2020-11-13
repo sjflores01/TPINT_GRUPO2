@@ -8,24 +8,33 @@ public class Cuenta {
 	Integer id;
 	Usuario usuario;
 	Date fechaCreacion;
-	int tipoCta;
+	TipoCuenta tipoCuenta;
 	String cbu;
 	double saldo;
 
 	//Contstructor
-	public Cuenta(Integer id, int tipoCta, String cbu, double saldo, Usuario usuario) {
+	public Cuenta(Integer id, String cbu, double saldo, Usuario usuario, Date fechaCreacion, TipoCuenta tipoCuenta) {
 		super();
 		this.id = id;
-		this.tipoCta = tipoCta;
 		this.cbu = cbu;
 		this.saldo = saldo;
 		this.usuario = usuario;
+		this.fechaCreacion = fechaCreacion;
+		this.tipoCuenta = tipoCuenta;
 	}
 
 	//Getters and setters
 
 	public Integer getId() {
 		return id;
+	}
+
+	public TipoCuenta getTipoCuenta() {
+		return tipoCuenta;
+	}
+
+	public void setTipoCuenta(TipoCuenta tipoCuenta) {
+		this.tipoCuenta = tipoCuenta;
 	}
 
 	public void setId(Integer id) {
@@ -47,15 +56,7 @@ public class Cuenta {
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
-
-	public int getTipoCta() {
-		return tipoCta;
-	}
-
-	public void setTipoCta(int tipoCta) {
-		this.tipoCta = tipoCta;
-	}
-
+	
 	public String getCbu() {
 		return cbu;
 	}
