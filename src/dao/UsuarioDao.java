@@ -108,7 +108,7 @@ public class UsuarioDao {
 	
 		
 		
-		String query = "call modificarUsuario("+id+")";
+		String query = "call eliminarUsuario("+id+")";
 		java.sql.Connection cn = null;
 		
 		try {

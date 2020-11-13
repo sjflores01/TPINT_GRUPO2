@@ -22,6 +22,9 @@ public class Cuenta {
 		this.fechaCreacion = fechaCreacion;
 		this.tipoCuenta = tipoCuenta;
 	}
+	public Cuenta() {
+		super();
+	}
 
 	//Getters and setters
 

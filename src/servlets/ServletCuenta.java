@@ -103,6 +103,30 @@ public class ServletCuenta extends HttpServlet {
 			redireccion = "ListadoCuentas.jsp";
 			
 			
+		} else if(request.getParameter("cargaEliminar") != null) {
+			
+			String parametro = request.getParameter("cargaEliminar");
+			Integer id = Integer.parseInt(parametro);
+			
+			CuentaDao dao = new CuentaDao();
+			Cuenta cuenta = null;
+
+			cuenta = dao.getCuenta(id);
+			
+			request.setAttribute("cuenta", cuenta);
+			redireccion = "EliminarCuenta.jsp";
+	
+			
+		} else if(request.getParameter("BtnEliminar") != null) {
+		
+			String id = request.getParameter("TXTid");
+			int idnum = Integer.parseInt(id);
+			
+			CuentaDao dao = new CuentaDao();
+			dao.eliminarCuenta(idnum);
+			
+			redireccion = "Index.jsp";
+			
 		}
 		 else
 		{

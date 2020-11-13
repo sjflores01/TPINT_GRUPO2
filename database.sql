@@ -280,6 +280,34 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE PROCEDURE `getCuenta`(
+in idcuenta int
+)
+BEGIN
+	
+    Select * from Cuentas
+    inner join Tiposdecuenta on Cuentas.tipoCta = Tiposdecuenta.id
+    inner join Usuarios on Cuentas.idUsuario = Usuarios.id
+    inner join Personas on Usuarios.idPersona = Personas.id
+    inner join Direcciones on Personas.idDireccion = Direcciones.id
+    where Cuentas.id = idcuenta;
+	  
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE `eliminarCuenta`(
+n id int
+)
+BEGIN
+    Update Cuentas set eliminada = true where Cuentas.id = id;
+END$$
+
+DELIMITER ;
+
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
