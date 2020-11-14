@@ -287,6 +287,21 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE PROCEDURE `modificarCuenta`(
+in tipoCta int,
+in saldo decimal,
+in id int
+)
+BEGIN
+	Update Cuentas set Cuentas.tipoCta = tipoCta,
+                       Cuentas.saldo = saldo
+			where Cuentas.id = id;
+END$$
+
+DELIMITER ;
+
+
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','99554','5478945','pedro','rodrigues','f','tom@sdd','542', '1998-01-30','nueva contraseña');

@@ -40,6 +40,28 @@ public class CuentaDao {
 		}
 
 	}
+	
+	public void modificarCuenta(int tipoCta, double saldo, int id)
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		String query = "call modificarCuenta("+tipoCta+","+saldo+","+id+")";
+		java.sql.Connection cn = null;
+		
+		try {
+			
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			java.sql.Statement st = cn.createStatement();
+			st.executeUpdate(query);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public ArrayList<Cuenta> listarCuentas(String search, int start, int total) {
 

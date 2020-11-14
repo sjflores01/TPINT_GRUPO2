@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@page import="dominio.Direccion"%>
+<%@page import="dominio.Persona"%>
+<%@page import="dominio.Usuario"%>
+<%@page import="java.sql.Date"%>
+<%@page import="dominio.Cuenta"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,7 +31,16 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-large navbar-light"
+	<%
+		Cuenta cuenta;
+		if (request.getAttribute("cuenta") == null) {
+			cuenta = new Cuenta();
+
+		} else {
+			cuenta = (Cuenta) request.getAttribute("cuenta");
+		}
+	%>
+	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
 		href="#">BANCO JAVA ADMIN</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -80,11 +93,11 @@
 		<div class="row mt-2">
 			<div class="col-md-12">
 				<h3 class="display-4 text-info">Modificar Cuenta</h3>
-				<div style="height:50px"></div>	
+				<div style="height: 50px"></div>
 			</div>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center">
-		<h2>Informacion de la cuenta</h2>
+			<h2>Informacion de la cuenta</h2>
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
@@ -92,53 +105,69 @@
 				<form>
 					<div class="form-row">
 
-						<div class="col">
-						 <label for="nombre">Nombre:</label>
-							<input type="text" class="form-control" name="TXTnombre"
-								id="nombre" aria-describedby="emailHelp" placeholder="Nombres">
+						<div class="row">
+
+							<div class="col">
+								<label for="exampleInputEmail1">Cuenta: </label>
+							</div>
+
+							<div class="col">
+								<input type="text" readonly class="form-control-plaintext"
+									name="TXTid" id="nombre" value=<%=cuenta.getId()%>>
+							</div>
+
+
+							<div class="col">
+								<label for="exampleInputEmail1">Cliente: </label> <label
+									for="exampleInputEmail2"><%=cuenta.getUsuario().getPersona().getNombre()%></label>
+								<label for="exampleInputEmail2"><%=cuenta.getUsuario().getPersona().getApellido()%></label>
+							</div>
 						</div>
-						<div class="col">
-						 <label for="apellido">Apellido:</label>
-							<input type="text" class="form-control" name="TXTapellido"
-								id="apellido" aria-describedby="emailHelp"
-								placeholder="Apellidos">
+
+						<div class="row">
+
+							<div class="col-12" style="height: 30px">
+								<label for="exampleInputEmail1">Tipo Cuenta Actual: </label> <label
+									for="exampleInputEmail2"><%=cuenta.getTipoCuenta().getDescripcion()%></label>
+							</div>
+
+
+							<div class="col-12" style="height: 30px">
+								<label for="Tipo de cuenta">Nuevo Tipo:</label> <select
+									class="form-control" id="cuentas" name=Cuentas>
+									<option value="1">Caja de ahorro</option>
+									<option value="2">Cuenta Corriente</option>
+									<option value="3">Caja de ahorro USD</option>
+								</select>
+							</div>
+
 						</div>
 
 					</div>
-					<div style="height:30px"></div>	
-					<div class="form-row">
-						<div class="col">
-						 <label for="Dni">Dni:</label>
-							<input type="text" class="form-control" name="TXTdni" id="dni"
-								aria-describedby="emailHelp" placeholder="DNI">
+
+					<div class="row">
+
+						<div class="col-12" style="margin-top: 50px;">
+							<label for="Tipo de cuenta">Nuevo Saldo:</label> <input
+								type="text" class="form-control" name="TXTsaldo" id="saldo"
+								aria-describedby="emailHelp" value=<%=cuenta.getSaldo()%>>
+
 						</div>
-						<div class="col">
-						 <label for="cuit">Cuit:</label>
-							<input type="text" class="form-control" name="TXTcuil"
-								id="cuil" aria-describedby="emailHelp" placeholder="Cuil">
-						</div>
-						
-						
+
 					</div>
-					<div style="height:30px"></div>	
-					<div class="form-row">
-					 <label for="MontoInicial">Monto Inicial:</label>
-							<input type="text" class="form-control" name="TXTmonoInicial" id="montoinicial"
-								aria-describedby="emailHelp" >
-						
-						<div class="col">
-							<label for="Tipo de cuenta">Tipo de cuenta:</label>
-							<select class="form-control"  id="sexo" name=sexo>
-							<option value="C_ahorro">Caja de ahorro</option>
-							<option value="C_corriente">Cuenta Corriente</option>
-							</select>
-						</div>
+
+
+					<div style="height: 30px"></div>
+
+					<input type="hidden" name="TXTid"
+						value="<%=cuenta.getId()%>" />
+
+					<div class="row d-flex justify-content-center"
+						style="position: relative; top: 30px">
+						<input type="submit" name="BtnModificar" value="Modificar">
 					</div>
-					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
-					<input type="submit" name="BtnModificarCuenta" value= "Modificar">
-					</div>
-						
-					
+
+
 
 				</form>
 			</div>

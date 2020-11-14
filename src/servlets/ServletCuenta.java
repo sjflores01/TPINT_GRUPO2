@@ -127,6 +127,45 @@ public class ServletCuenta extends HttpServlet {
 			
 			redireccion = "Index.jsp";
 			
+		} else if(request.getParameter("cargaModificar") != null) {
+		
+			String parametro = request.getParameter("cargaModificar");
+			Integer id = Integer.parseInt(parametro);
+			
+			CuentaDao dao = new CuentaDao();
+			Cuenta cuenta = null;
+
+			cuenta = dao.getCuenta(id);
+			
+			request.setAttribute("cuenta", cuenta);
+			redireccion = "ModificarCuenta.jsp";
+			
+		}else if(request.getParameter("BtnModificar") != null) {
+			
+			String ID;
+			String CTA;
+			String SALDO;
+			
+			int id;
+			int tipoCta;
+			double saldo;
+			
+			ID = request.getParameter("TXTid");
+			CTA = request.getParameter("Cuentas");
+			SALDO =  request.getParameter("TXTsaldo");
+			
+			id = Integer.parseInt(ID);
+			tipoCta  = Integer.parseInt(CTA);
+			saldo  = Double.parseDouble(SALDO);
+			
+			CuentaDao dao = new CuentaDao();
+			dao.modificarCuenta(tipoCta, saldo, id);
+			
+			String mensaje = "Modificacion de cuenta exitosa";
+			request.setAttribute("mensaje", mensaje);
+			redireccion ="IndexAdmin.jsp";
+			
+			
 		}
 		 else
 		{
