@@ -105,7 +105,7 @@
 		</div>
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
-			<div class="col-md-10" style="">
+			<div class="col-md-6" style="">
 				<form action="ServletUsuario" method="get">
 					<label for="">Buscar</label> 
 					<input type="text"
@@ -140,12 +140,7 @@
 							<td><%=user.getPersona().getNombre()%></td>
 							<td><%=user.getPersona().getApellido()%></td>
 							<td><%=user.getPersona().getDni()%></td>
-						    <%if(user.getCuentas() < 3){ %>
-						    <td><a class="btn btn-primary" href="ServletCuenta?nuevaCuenta=<%=user.getId()%>" >Nueva Cuenta</a></td>
-							
-							<%} else { %>
-							 <td><a class="btn btn-danger" href="ServletCuenta?nuevaCuenta=<%=user.getId()%>" disabled>Ya posee 3 cuentas</a></td>
-							<%} %>
+						    <td><a class="btn btn-primary" href="ServletCuenta?nuevaCuenta=<%=user.getId()%>">Nueva Cuenta</a></td>
 							<td><a class="btn btn-info" href="ServletUsuario?cargaModificar=<%=user.getId()%>">Modificar</a></td>
 							<td><a class="btn btn-warning" href="ServletUsuario?cargaEliminar=<%=user.getId()%>">Eliminar</a></td>
 

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    
+    <%@page import="dominio.Usuario"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +34,15 @@
 <body>
 <nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
-		href="#">BANCO JAVA ADMIN</a>
+		
+		<%Usuario usuarioAdmin = new Usuario();
+		
+		
+		
+		usuarioAdmin =(Usuario)session.getAttribute("UsuarioAdmin"); %>
+		
+		
+		href="#">BANCO JAVA ADMINISTRADOR: <% usuarioAdmin.getNombre();%></a> 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -77,14 +89,31 @@
 	</div>
 	</nav>	
 	<div class="container">
-		<div class="row mt-2">
+		
+		
+		<% 
+			
+			if(usuarioAdmin!=null)
+			{%>
+				
+				<h3 class="display-4 text-info">Bienvenid@  <%=usuarioAdmin.getNombre() %> al Banco Java!!</h3>
+			
+			
+			<%}%>
+		
+		
+		
+		
+		
+		<%if(request.getAttribute("mensaje") != null) {
+			%>
+			
+			<div class="row mt-2">
 			<div class="col-md-12">
 				<h3 class="display-4 text-info">Banco java Admin</h3>				
 			</div>
 		</div>
-		
-		<%if(request.getAttribute("mensaje") != null) {
-			%>
+			
 		
 		<div class="row mt-2 d-flex justify-content-center" style="position:relative; top:40px">
 			<div class="col-3 card title d-flex justify-content-center">

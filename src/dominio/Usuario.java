@@ -5,7 +5,7 @@ public class Usuario {
 	Integer id;
 	String nombre;
 	String clave;
-	Integer cuentas;
+	
 	Persona persona;
 
 	//Contstructor
@@ -28,16 +28,6 @@ public class Usuario {
 	public Integer getId() {
 		return id;
 	}
-
-	public Integer getCuentas() {
-		return cuentas;
-	}
-
-
-	public void setCuentas(Integer cuentas) {
-		this.cuentas = cuentas;
-	}
-
 
 	public void setId(Integer id) {
 		this.id = id;

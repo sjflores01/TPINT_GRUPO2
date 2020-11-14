@@ -10,7 +10,7 @@
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
 	
-	
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -73,6 +73,26 @@
 		<div class="row mt-2">
 			<div class="col-md-12">
 				<h3 class="display-4 text-info">Bienvenid@ al Banco Java!!</h3>
+				
+				
+				
+				<%if(request.getAttribute("Error logueo") != null) {
+			%>
+		
+		<div class="row mt-2 d-flex justify-content-center" style="position:relative; top:40px">
+			<div class="col-3 card title d-flex justify-content-center">
+			
+			<h6 style="text-align:center"><%=request.getAttribute("Error logueo") %> </h6>
+			</div>
+		
+		</div>
+		<%
+		}
+		%>
+				
+				
+				
+				
 			</div>
 		</div>
 	</div>

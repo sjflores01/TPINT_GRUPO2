@@ -41,7 +41,7 @@ public class ServletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		if(request.getParameter("BtnIngersar") != null)
+		if(request.getParameter("BtnIngersar")!=null)
 		{
 			Usuario usuarioAdmin = new Usuario();
 			Usuario usuarioUser = new Usuario();
@@ -53,19 +53,18 @@ public class ServletLogin extends HttpServlet {
 			
 			
 			
-			if(usuarioAdmin!=null)
+			if(usuarioAdmin.getId()!=null)
 					{
-				
-				
+								
 						request.getSession().setAttribute("UsuarioAdmin", usuarioAdmin);
 						
-						RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+						RequestDispatcher rd = request.getRequestDispatcher("IndexAdmin.jsp");
 						
 						rd.forward(request, response);
 				
 				
 					}
-			else if(usuarioUser!=null)
+			else if(usuarioUser.getId()!=null)
 			{
 				request.getSession().setAttribute("UsuarioUser", usuarioUser);
 				
@@ -76,9 +75,10 @@ public class ServletLogin extends HttpServlet {
 			}
 			else {
 				
-				System.out.println("Error de logueo");
+				String error = "error de logueo";
+				request.setAttribute("Error logueo", error);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 				
 				rd.forward(request, response);
 				
