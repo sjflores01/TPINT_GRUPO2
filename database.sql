@@ -301,6 +301,38 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE Login_Admin(
+in nombre varchar(50),
+in contraseña varchar(50)
+
+)
+BEGIN
+
+select * from usuariosadmin
+where (nombreUsuario = nombre and clave = contraseña and estado = 1);
+
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE Login_User(
+in nombre varchar(50),
+in contraseña varchar(50)
+
+)
+BEGIN
+
+select * from usuarios
+where (nombreUsuario = nombre and clave = contraseña and estado = 1);
+
+END$$
+
+DELIMITER ;
+
+
+
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');

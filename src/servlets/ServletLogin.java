@@ -41,7 +41,7 @@ public class ServletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		if(request.getParameter("btnIngresar")==null)
+		if(request.getParameter("BtnIngersar")==null)
 		{
 			Usuario usuarioAdmin = new Usuario();
 			Usuario usuarioUser = new Usuario();

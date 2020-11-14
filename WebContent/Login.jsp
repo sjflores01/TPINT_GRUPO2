@@ -94,7 +94,7 @@
 					</div>
 					<div class="form-row mt-2">
 						<div class="col-md-2">
-							<input type="submit" class="btn btn-info" id="btnIngresar"
+							<input type="submit" class="btn btn-info" id="btnIngresar" name="BtnIngersar"
 								value="Ingresar">
 						</div>
 					</div>

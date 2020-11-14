@@ -408,12 +408,12 @@ public class UsuarioDao {
 			
 			try {
 				cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
-				String query = "call Login_Admin("+nombre+", "+contraseña+")";
+				String query = "call Login_Admin('"+nombre+"','"+contraseña+"')";
 				java.sql.Statement st = cn.createStatement();
 				java.sql.ResultSet rs = st.executeQuery(query);		
 				
 				rs.next();
-				
+				//apartir de aca rompe
 				usuarioAdim.setId(rs.getInt(1));
 				usuarioAdim.setNombre(rs.getString(3));
 				usuarioAdim.setClave(rs.getString(4));
@@ -444,7 +444,7 @@ public class UsuarioDao {
 			
 			try {
 				cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
-				String query = "call Login_User("+nombre+", "+contraseña+")";
+				String query = "call Login_User('"+nombre+"','"+contraseña+"')";
 				java.sql.Statement st = cn.createStatement();
 				java.sql.ResultSet rs = st.executeQuery(query);		
 				
