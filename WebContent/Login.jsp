@@ -83,13 +83,13 @@
 					<div class="form-row">
 						<div class="col-md-4">
 							<label>Usuario</label> <input type="text" class="form-control"
-								id="txtBoxUsuario" placeholder="Usuario">
+								id="txtBoxUsuario" placeholder="Usuario" name="txtBoxUsuario">
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="col-md-4">
 							<label>Clave</label> <input type="password" class="form-control"
-								id="txtBoxClave" placeholder="Clave">
+								id="txtBoxClave" placeholder="Clave" name="txtBoxClave">
 						</div>
 					</div>
 					<div class="form-row mt-2">

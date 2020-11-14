@@ -107,8 +107,8 @@
 			{%>
 				
 				<h3 class="display-4 text-info">Bienvenid@ <%=usuarioAdmin.getNombre() %> al Banco Java!!</h3>
-			
-			
+				
+				
 			<%}%>
 			
 
