@@ -282,7 +282,13 @@ public class ServletUsuario extends HttpServlet {
 			}
 			
 			lista = dao.listarUsuarios(search,1,10);
-											
+			
+			
+			for(Usuario user : lista)
+			{
+				user.setCuentas(dao.contarCuentas(user.getId()));
+			}
+			
 			request.setAttribute("lista", lista);
 			redireccion = "ListadoClientes.jsp";
 			
