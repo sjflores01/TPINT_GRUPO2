@@ -99,6 +99,38 @@ public class FechaNegImpl implements FechaNeg {
 		return result;
 	}
 
+	@Override
+	public String getStringNoDatabase(Date date) {
+		
+		
+	String result = "";
+		
+		result += date.getYear();
+		result += '-';
+		
+		if(date.getMonth() < 9)
+		{
+			result += '0';
+		}		
+		result += date.getMonth() ;
+				
+		result += '-';
+
+		if(date.getDate() < 10)
+		{
+			result += '0';
+		}
+		
+		
+		result += date.getDate();
+		
+		
+		return result;
+		
+		
+		
+	}
+
 }
 
 

@@ -38,7 +38,9 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<% Usuario usuario; 
+	<% Usuario usuario;
+		String mailorg = "ph";
+		String dniorg = "ph";
 	if(request.getAttribute("usuario") == null)
 	{
 		
@@ -50,6 +52,8 @@
 	} else{		
 		
 		usuario = (Usuario) request.getAttribute("usuario");
+		mailorg = (String) request.getAttribute("mailOriginal");
+		dniorg = (String) request.getAttribute("dniOriginal");
 	}
 	
 	
@@ -265,8 +269,8 @@
 					<input type="hidden" name="TXTidUsuario" value="<%=usuario.getId() %>" />
 					<input type="hidden" name="TXTidPersona" value="<%=usuario.getPersona().getId()%>" />
 					<input type="hidden" name="TXTidDireccion" value="<%=usuario.getPersona().getDireccion().getId()%>" />
-					
-					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
+					<input type="hidden" name="TXTmailOriginal" value="<%=mailorg%>" />
+					<input type="hidden" name="TXTdniOriginal" value="<%=dniorg%>" />
 					
 					<%if(request.getAttribute("mensajeError") != null){  %>
 					
@@ -276,6 +280,8 @@
 						</div>
 					
 					<%} %>
+					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
+					
 					
 					<input type="submit" name="BtnModificar" value= "Modificar">
 					</div>

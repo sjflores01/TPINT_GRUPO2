@@ -282,8 +282,15 @@ public class ServletUsuario extends HttpServlet {
 			FechaNegImpl fechaNegImpl = new FechaNegImpl();
 			String fecha = fechaNegImpl.getString(usuario.getPersona().getFnac());
 
+			String dniOriginal = usuario.getPersona().getDni();
+			String mailOriginal = usuario.getPersona().getEmail();
+			
+			
+			
 			request.setAttribute("fecha", fecha);
 			request.setAttribute("usuario", usuario);
+			request.setAttribute("dniOriginal", dniOriginal );
+			request.setAttribute("mailOriginal", mailOriginal );
 			redireccion = "ModificarUsuario.jsp";
 
 		} else if (request.getParameter("BtnModificar") != null) {
@@ -308,7 +315,12 @@ public class ServletUsuario extends HttpServlet {
 			String idUsuario;
 			String idPersona;
 			String idDireccion;
-
+			String mailOriginal;
+			String dniOriginal;
+			
+			
+			mailOriginal = request.getParameter("TXTmailOriginal");
+			dniOriginal = request.getParameter("TXTdniOriginal");
 			numero = request.getParameter("TXTnumero");
 			provincia = request.getParameter("TXTprovincia");
 			localidad = request.getParameter("TXTlocalidad");
@@ -334,6 +346,7 @@ public class ServletUsuario extends HttpServlet {
 
 			Date fecha = new Date(year, month, day);
 
+			
 			Direccion direccion = new Direccion(domicilio, Integer.parseInt(numero), depto, localidad, provincia);
 			direccion.setId(Integer.parseInt(idDireccion));
 			Persona persona = new Persona(Integer.parseInt(idPersona), dni, cuil, nombrePersona, apellido, telefono,
@@ -342,21 +355,24 @@ public class ServletUsuario extends HttpServlet {
 
 			UsuarioNeg negUsuario = new UsuarioNegImpl();
 
-			if (!negUsuario.chequearEmail(correo)) {
+			if (!negUsuario.chequearEmail(correo) &&  !correo.equals(mailOriginal)) {
 				String mensaje = "Mail en uso";
-				String fechaoriginal = fechaNeg.getString(usuario.getPersona().getFnac());
+				String fechaoriginal = fechaNeg.getStringNoDatabase(usuario.getPersona().getFnac());
 
+				request.setAttribute("dniOriginal", dniOriginal );
+				request.setAttribute("mailOriginal", mailOriginal );
 				request.setAttribute("fecha", fechaoriginal);
 				request.setAttribute("mensajeError", mensaje);
 				request.setAttribute("usuario", usuario);
 
 				redireccion = "ModificarUsuario.jsp";
-			} else if (!negUsuario.chequearDni(dni)) {
+			} else if (!negUsuario.chequearDni(dni) && !dni.equals(dniOriginal)) {
 				String mensaje = "Dni en uso";
-				String fechaoriginal = fechaNeg.getString(usuario.getPersona().getFnac());
+				String fechaoriginal = fechaNeg.getStringNoDatabase(usuario.getPersona().getFnac());
 
+				request.setAttribute("dniOriginal", dniOriginal );
+				request.setAttribute("mailOriginal", mailOriginal );
 				request.setAttribute("fecha", fechaoriginal);
-
 				request.setAttribute("mensajeError", mensaje);
 				request.setAttribute("usuario", usuario);
 				redireccion = "ModificarUsuario.jsp";

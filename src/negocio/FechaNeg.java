@@ -8,6 +8,7 @@ public interface FechaNeg {
 	public Integer getMonth(String cadena);
 	public Integer getYear(String cadena);
 	public String  getString(Date date);
+	public String getStringNoDatabase(Date date);
 	
 	
 	
