@@ -19,7 +19,7 @@
 	
 	
 	
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		
 	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
@@ -170,19 +170,10 @@
 					<div style="height:30px"></div>	
 					<div class="form-row">
 						<div class="col">
-							<input type="number" class="form-control" name="TXTdia" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="DD" value=<%=usuario.getPersona().getFnac().getDate() %>>
+							<input type="date" class="form-control" name="TXTfecha" id="nacimiento"
+								aria-describedby="emailHelp" placeholder="DD" value="<%= request.getAttribute("fecha") %>">
 						</div>
-						<div class="col">
-							 
-							<input type="number" class="form-control" name="TXTmes" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="MM" value=<%=usuario.getPersona().getFnac().getMonth() %>>
-						</div>
-						<div class="col">
-							
-							<input type="number" class="form-control" name="TXTanio" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="YYYY" value=<%=usuario.getPersona().getFnac().getYear() %>>
-						</div>
+					
 						<div class="col" style="position:relative; bottom:30px">
 							<label for="sexo">Sexo:</label>
 							<select class="form-control"  id="sexo" name=TXTsexo>
@@ -276,6 +267,16 @@
 					<input type="hidden" name="TXTidDireccion" value="<%=usuario.getPersona().getDireccion().getId()%>" />
 					
 					<div  class="row d-flex justify-content-center"style="position:relative; top:30px">
+					
+					<%if(request.getAttribute("mensajeError") != null){  %>
+					
+					<div class="row d-flex justify-content-center"
+						style="position: relative; top: 30px" >
+						<label for="inputEmail4" style="color: red"><%=request.getAttribute("mensajeError") %></label>
+						</div>
+					
+					<%} %>
+					
 					<input type="submit" name="BtnModificar" value= "Modificar">
 					</div>
 				

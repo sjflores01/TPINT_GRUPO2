@@ -46,6 +46,7 @@ nombreUsuario varchar(50),
 clave varchar(50)
 );
 INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'AdminUser','admin1');
+INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'a','a');
 
 CREATE TABLE TiposDeCuenta (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -416,4 +417,7 @@ call listarUsuarios("",0,10);
 call cargaCuenta(1,1);
 call contarCuentas(1)
 
-select * from usuariosadmin
+Select * from Personas
+
+
+

@@ -14,7 +14,7 @@
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
 	
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		
 	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
@@ -153,19 +153,9 @@
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="number" class="form-control" name="TXTdia"
+							<input type="date" class="form-control" name="TXTfecha"
 								id="nacimiento" aria-describedby="emailHelp" placeholder="DD" required>
-						</div>
-						<div class="col">
-
-							<input type="number" class="form-control" name="TXTmes"
-								id="nacimiento" aria-describedby="emailHelp" placeholder="MM" required>
-						</div>
-						<div class="col">
-
-							<input type="number" class="form-control" name="TXTanio"
-								id="nacimiento" aria-describedby="emailHelp" placeholder="YYYY" required>
-						</div>
+						</div>						
 						<div class="col" style="position: relative; bottom: 30px">
 							<label for="sexo">Sexo:</label> <select class="form-control"
 								id="sexo" name=sexo>

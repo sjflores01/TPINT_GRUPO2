@@ -7,6 +7,7 @@ import daoImpl.CuentaDaoImpl;
 import dominio.Cuenta;
 import negocio.CuentaNeg;
 
+
 public class CuentaNegImpl implements CuentaNeg{
 	
 	private CuentaDao daoCuenta = new CuentaDaoImpl();
@@ -44,5 +45,7 @@ public class CuentaNegImpl implements CuentaNeg{
 	public Cuenta getCuenta(Integer id) {
 		return daoCuenta.getCuenta(id);
 	}
+
+	
 	
 }
