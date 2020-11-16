@@ -13,6 +13,10 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
+	
+	
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -32,7 +36,18 @@
 <body>
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
-		href="#">BANCO JAVA ADMIN</a>
+		
+<%Usuario usuarioAdmin = new Usuario();
+		
+		
+		
+		usuarioAdmin =(Usuario)session.getAttribute("UsuarioAdminLogin"); %>
+		
+		
+		href="#">BANCO JAVA ADMINISTRADOR: <%= usuarioAdmin.getNombre()%></a> 		
+
+
+
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +56,14 @@
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
 			<div class="row">
+			
+			<div class="col-md-2">
+						<li class="nav-item active"><a class="nav-link" href="IndexAdmin.jsp">Home
+								<span class="sr-only">(current)</span>
+						</a></li>
+					</div>
+			
+			
 				<div class="col-md-2">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -48,33 +71,35 @@
 						aria-haspopup="true" aria-expanded="false"> Clientes </a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Nuevo cliente</a> <a
-								class="dropdown-item" href="#">Modificar cliente</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Eliminar cliente</a>
+							<a class="dropdown-item" href="UsuarioDatosPersonales.jsp">Nuevo cliente</a>
+							<a class="dropdown-item" href="UsuarioDatosPersonales.jsp">Nuevo cliente</a>
+							
 						</div></li>
 				</div>
 				<div class="col-md-2">
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Cuentas </a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Nueva cuenta</a> <a
-								class="dropdown-item" href="#">Modificar cuenta</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Eliminar cuenta</a>
-						</div></li>
+					
+							<a class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Cuentas</a>
+						
 				</div>
 				<div class="col-md-3">
-					<li class="nav-item"><a class="nav-link" href="#">Solicitudes
+					<li class="nav-item"><a class="nav-link" href="PedirPrestamo.jsp">Solicitudes
 							de prestamos</a></li>
 				</div>
 				<div class="col-md-2">
 					<li class="nav-item"><a class="nav-link" href="#">Informes</a>
 					</li>
 				</div>
+				
+				<div class="col-md-2">
+						<li class="nav-item active"><a class="nav-link" href="IndexAdmin.jsp">Salir
+								<span class="sr-only">(current)</span>
+						</a></li>
+					</div>
+					<div class="col-md-2">
+						<li class="nav-item active"><a class="nav-link" href="ServletUsuario?Logout=1">Salir
+								<span class="sr-only">(current)</span>
+						</a></li>
+					</div>
 			</div>
 		</ul>
 	</div>
@@ -82,6 +107,15 @@
 	
 	<% Usuario usuario = (Usuario) request.getAttribute("Usuario"); %>
 	<div class="container">
+	
+	<% 
+			
+			if(usuarioAdmin!=null)
+			{%>
+	
+	
+	
+	
 		<div class="row mt-2">
 			<div class="col-md-12">
 				<h3 class="display-4 text-info">Alta cliente</h3>
@@ -207,6 +241,16 @@
 						<input type="submit" name="BtnSiguiente2" value="Siguiente">
 					</div>
 
+						<%}%>
+			<%
+		          
+			
+			session.setAttribute("UsuarioAdminLogin",usuarioAdmin);	
+			
+		
+			
+			%>
+					
 					
 					
 					

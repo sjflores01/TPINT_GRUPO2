@@ -332,6 +332,76 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE PROCEDURE `getCuenta`(
+in idcuenta int
+)
+BEGIN
+
+    Select * from Cuentas
+    inner join Tiposdecuenta on Cuentas.tipoCta = Tiposdecuenta.id
+    inner join Usuarios on Cuentas.idUsuario = Usuarios.id
+    inner join Personas on Usuarios.idPersona = Personas.id
+    inner join Direcciones on Personas.idDireccion = Direcciones.id
+    where Cuentas.id = idcuenta;
+
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE `eliminarCuenta`(
+in id int
+)
+BEGIN
+    Update Cuentas set eliminada = true where Cuentas.id = id;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE `listarCuentas`(
+in search varchar(30),
+in inicio int,
+in total int
+)
+BEGIN
+    Select * from Cuentas
+    inner join Tiposdecuenta on Cuentas.tipoCta = Tiposdecuenta.id
+    inner join Usuarios on Cuentas.idUsuario = Usuarios.id
+    inner join Personas on Usuarios.idPersona = Personas.id
+    inner join Direcciones on Personas.idDireccion = Direcciones.id
+    where Cuentas.eliminada = 0 AND ( Cuentas.id like concat('%', search,'%') OR  search =  "")
+	limit inicio,total;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE `cargaCuenta`(
+in idUsuario int,
+in tipoCta int
+)
+BEGIN
+    Insert into Cuentas(idUsuario, fechaCreacion, tipoCta, cbu, saldo, eliminada) 
+                values (idUsuario, NOW(), tipoCta, FLOOR(RAND() * 9999999999), 10000, false);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE contarCuentas(
+in idParametro int
+
+)
+BEGIN
+    Select Count(*) from cuentas where idUsuario = idParametro;
+END$$
+
+DELIMITER ;
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
@@ -342,4 +412,8 @@ call leerUsuario(1);
 call contarMails('tom@');
 call contarDni('99');
 call contarUsuario('tomUsuario');
-call listarUsuarios("",0,10)
+call listarUsuarios("",0,10);
+call cargaCuenta(1,1);
+call contarCuentas(1)
+
+select * from usuariosadmin

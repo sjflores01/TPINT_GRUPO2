@@ -18,6 +18,10 @@ import dominio.Cuenta;
 import dominio.Direccion;
 import dominio.Persona;
 import dominio.Usuario;
+import negocio.CuentaNeg;
+import negocio.UsuarioNeg;
+import negocioImpl.CuentaNegImpl;
+import negocioImpl.UsuarioNegImpl;
 
 /**
  * Servlet implementation class ServletUsuario
@@ -48,11 +52,11 @@ public class ServletCuenta extends HttpServlet {
 			Integer id = Integer.parseInt(parametro);
 			
 			
-			UsuarioDao dao = new UsuarioDao();
+			UsuarioNeg neguUsuario = new UsuarioNegImpl();
 			Usuario usuario = null;
 
 			
-			usuario = dao.leerUsuario(id);
+			usuario = neguUsuario.leerUsuario(id);
 			
 			request.setAttribute("usuario", usuario);
 			redireccion = "NuevaCuenta.jsp";
@@ -68,10 +72,14 @@ public class ServletCuenta extends HttpServlet {
 			idUsuario = Integer.parseInt(request.getParameter("TXTidUsuario"));
 			
 			
-			CuentaDao cuentaDao = new CuentaDao();
-			cuentaDao.cargarCuenta(idUsuario, tipoCta);
+			CuentaNeg negCuenta = new CuentaNegImpl();
+			negCuenta.cargarCuenta(idUsuario, tipoCta);
 			
-			redireccion ="Index.jsp";
+String mensaje = "Cuenta Creada con exito";
+			
+			request.setAttribute("mensaje",mensaje);
+			
+			redireccion ="IndexAdmin.jsp";
 			
 			
 		} else if(request.getParameter("ListaCuentas") != null || request.getParameter("TXTbuscador") != null) {
@@ -89,7 +97,7 @@ public class ServletCuenta extends HttpServlet {
 			}
 			
 			ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
-			CuentaDao dao = new CuentaDao();
+			CuentaNeg negCuenta = new CuentaNegImpl();
 			
 			String search = "";
 			if(request.getParameter("TXTbuscador") != null)
@@ -97,7 +105,7 @@ public class ServletCuenta extends HttpServlet {
 				search = request.getParameter("TXTbuscador");
 			}
 			
-			lista = dao.listarCuentas(search,1,10);
+			lista = negCuenta.listarCuentas(search,1,10);
 											
 			request.setAttribute("lista", lista);
 			redireccion = "ListadoCuentas.jsp";
@@ -108,10 +116,10 @@ public class ServletCuenta extends HttpServlet {
 			String parametro = request.getParameter("cargaEliminar");
 			Integer id = Integer.parseInt(parametro);
 			
-			CuentaDao dao = new CuentaDao();
+			CuentaNeg negCuenta = new CuentaNegImpl();
 			Cuenta cuenta = null;
 
-			cuenta = dao.getCuenta(id);
+			cuenta = negCuenta.getCuenta(id);
 			
 			request.setAttribute("cuenta", cuenta);
 			redireccion = "EliminarCuenta.jsp";
@@ -122,20 +130,22 @@ public class ServletCuenta extends HttpServlet {
 			String id = request.getParameter("TXTid");
 			int idnum = Integer.parseInt(id);
 			
-			CuentaDao dao = new CuentaDao();
-			dao.eliminarCuenta(idnum);
+			CuentaNeg negCuenta = new CuentaNegImpl();
+			negCuenta.eliminarCuenta(idnum);
+			String mensaje = "Cuenta Eliminada con exito";
 			
-			redireccion = "Index.jsp";
+			request.setAttribute("mensaje",mensaje);
+			redireccion = "IndexAdmin.jsp";
 			
 		} else if(request.getParameter("cargaModificar") != null) {
 		
 			String parametro = request.getParameter("cargaModificar");
 			Integer id = Integer.parseInt(parametro);
 			
-			CuentaDao dao = new CuentaDao();
+			CuentaNeg negCuenta = new CuentaNegImpl();
 			Cuenta cuenta = null;
 
-			cuenta = dao.getCuenta(id);
+			cuenta = negCuenta.getCuenta(id);
 			
 			request.setAttribute("cuenta", cuenta);
 			redireccion = "ModificarCuenta.jsp";
@@ -158,8 +168,8 @@ public class ServletCuenta extends HttpServlet {
 			tipoCta  = Integer.parseInt(CTA);
 			saldo  = Double.parseDouble(SALDO);
 			
-			CuentaDao dao = new CuentaDao();
-			dao.modificarCuenta(tipoCta, saldo, id);
+			CuentaNeg negCuenta = new CuentaNegImpl();
+			negCuenta.modificarCuenta(tipoCta, saldo, id);
 			
 			String mensaje = "Modificacion de cuenta exitosa";
 			request.setAttribute("mensaje", mensaje);

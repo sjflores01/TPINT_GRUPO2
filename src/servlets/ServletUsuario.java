@@ -16,6 +16,8 @@ import dao.UsuarioDao;
 import dominio.Direccion;
 import dominio.Persona;
 import dominio.Usuario;
+import negocio.UsuarioNeg;
+import negocioImpl.UsuarioNegImpl;
 
 /**
  * Servlet implementation class ServletUsuario
@@ -79,8 +81,8 @@ public class ServletUsuario extends HttpServlet {
 			request.setAttribute("anio", year);
 			request.setAttribute("Usuario", usuario);
 			
-			UsuarioDao dao = new UsuarioDao();
-			if(dao.chequearDni(dni)) {
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
+			if(negUsuario.chequearDni(dni)) {
 				redireccion = "UsuarioDireccion.jsp";
 				
 			} else {
@@ -146,8 +148,8 @@ public class ServletUsuario extends HttpServlet {
 			request.setAttribute("anio", year);
 			request.setAttribute("Usuario", usuario);
 			
-			UsuarioDao dao = new UsuarioDao();
-			if(dao.chequearEmail(correo)) {
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
+			if(negUsuario.chequearEmail(correo)) {
 				redireccion = "UsuarioCuenta.jsp";
 				
 			} else{
@@ -212,7 +214,7 @@ public class ServletUsuario extends HttpServlet {
 			Persona persona = new Persona(0, dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0),fecha, direccion);
 			Usuario usuario = new Usuario(0, nombreUsuario, clave, persona);
 			
-			UsuarioDao usuarioDao = new UsuarioDao();
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
 			
 			if(clave.equals(repetirClave) == false) {
 			
@@ -224,9 +226,9 @@ public class ServletUsuario extends HttpServlet {
 				request.setAttribute("Usuario", usuario);
 				redireccion = "UsuarioCuenta.jsp";
 				
-			}else if(usuarioDao.chequearNombreUsuario(nombreUsuario)){
+			}else if(negUsuario.chequearNombreUsuario(nombreUsuario)){
 			
-				usuarioDao.cargarUsuario(usuario);
+				negUsuario.cargarUsuario(usuario);
 				String mensaje = "Alta usuario exitosa";
 				request.setAttribute("mensaje", mensaje);
 				redireccion ="IndexAdmin.jsp";
@@ -273,7 +275,7 @@ public class ServletUsuario extends HttpServlet {
 			}
 			
 			ArrayList<Usuario> lista = new ArrayList<Usuario>();
-			UsuarioDao dao = new UsuarioDao();
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
 			
 			String search = "";
 			if(request.getParameter("TXTbuscador") != null)
@@ -281,8 +283,13 @@ public class ServletUsuario extends HttpServlet {
 				search = request.getParameter("TXTbuscador");
 			}
 			
-			lista = dao.listarUsuarios(search,1,10);
+			lista = negUsuario.listarUsuarios(search,1,10);
 											
+			for(Usuario user : lista)
+			{
+				user.setCuentas(negUsuario.contarCuentas(user.getId()));
+			}
+			
 			request.setAttribute("lista", lista);
 			redireccion = "ListadoClientes.jsp";
 			
@@ -295,11 +302,11 @@ public class ServletUsuario extends HttpServlet {
 			Integer id = Integer.parseInt(parametro);
 			
 			
-			UsuarioDao dao = new UsuarioDao();
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
 			Usuario usuario = null;
 
 			
-			usuario = dao.leerUsuario(id);
+			usuario = negUsuario.leerUsuario(id);
 			
 			request.setAttribute("usuario", usuario);
 			redireccion = "ModificarUsuario.jsp";
@@ -355,8 +362,8 @@ public class ServletUsuario extends HttpServlet {
 			Persona persona = new Persona(Integer.parseInt(idPersona), dni,cuil, nombrePersona, apellido, telefono, correo, sexo.charAt(0),fecha, direccion);
 			Usuario usuario = new Usuario(Integer.parseInt(idDireccion), "ph", clave, persona);
 			
-			UsuarioDao dao = new UsuarioDao();
-			dao.modificarUsuario(usuario);
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
+			negUsuario.modificarUsuario(usuario);
 			
 			String mensaje = "Modificacion de usuario exitosa";
 			request.setAttribute("mensaje", mensaje);
@@ -369,11 +376,11 @@ public class ServletUsuario extends HttpServlet {
 			Integer id = Integer.parseInt(parametro);
 			
 			
-			UsuarioDao dao = new UsuarioDao();
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
 			Usuario usuario = null;
 
 			
-			usuario = dao.leerUsuario(id);
+			usuario = negUsuario.leerUsuario(id);
 			
 			request.setAttribute("usuario", usuario);
 			redireccion = "EliminarCliente.jsp";
@@ -385,14 +392,20 @@ public class ServletUsuario extends HttpServlet {
 			String id = request.getParameter("TXTidUsuario");
 			Integer idnum = Integer.parseInt(id);
 			
-			UsuarioDao dao = new UsuarioDao();
-			dao.eliminarUsuario(idnum);
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
+			negUsuario.eliminarUsuario(idnum);
 			
 			String mensaje = "Baja de usuario exitosa";
 			request.setAttribute("mensaje", mensaje);
 			redireccion = "IndexAdmin.jsp";
 			
-		}else
+		}else if(request.getParameter("Logout") != null){
+			
+			request.getSession().removeAttribute("UsuarioAdminLogin");
+			redireccion = "Login.jsp";
+			
+			
+		}else			
 		{
 			response.getWriter().append("Sedsdssddssrved at: ").append(request.getContextPath());
 		}

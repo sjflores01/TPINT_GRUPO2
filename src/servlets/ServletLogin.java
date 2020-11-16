@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDao;
 import dominio.Usuario;
+import negocio.UsuarioNeg;
+import negocioImpl.UsuarioNegImpl;
 
 /**
  * Servlet implementation class ServletLogin
@@ -45,11 +47,11 @@ public class ServletLogin extends HttpServlet {
 		{
 			Usuario usuarioAdmin = new Usuario();
 			Usuario usuarioUser = new Usuario();
-			UsuarioDao udao = new UsuarioDao();
+			UsuarioNeg negUsuario = new UsuarioNegImpl();
 			
-			usuarioAdmin = udao.confirmarAdmin(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));	
+			usuarioAdmin = negUsuario.confirmarAdmin(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));	
 			
-			usuarioUser = udao.confirmarUser(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));
+			usuarioUser = negUsuario.confirmarUser(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));
 			
 			
 			
@@ -83,6 +85,19 @@ public class ServletLogin extends HttpServlet {
 				rd.forward(request, response);
 				
 			}	
+			
+			
+			
+			
+			if(request.getParameter("Logout") != null){
+				
+				request.getSession().removeAttribute("UsuarioAdminLogin");
+               RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
+				
+				rd.forward(request, response);
+				
+				
+			}
 						
 			
 		}	

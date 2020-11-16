@@ -60,10 +60,9 @@
 						aria-haspopup="true" aria-expanded="false"> Sos Cliente? </a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="Login.jsp">Login</a> <a
-								class="dropdown-item" href="#">Mi Cuenta</a>
+							<a class="dropdown-item" href="Login.jsp">Login</a> 
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Quiero ser Cliente!</a>
+							
 						</div></li>
 				</div>
 			</div>

@@ -15,6 +15,8 @@
 	crossorigin="anonymous">
 	
 	
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -42,7 +44,7 @@
 		usuarioAdmin =(Usuario)session.getAttribute("UsuarioAdmin"); %>
 		
 		
-		href="#">BANCO JAVA ADMINISTRADOR: <% usuarioAdmin.getNombre();%></a> 
+		href="#">BANCO JAVA ADMINISTRADOR: <%= usuarioAdmin.getNombre()%></a> 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -50,40 +52,46 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
-			<div class="row">
-				<div class="col-md-2">
+		<div class="row">	
+		<div class="col-md-2">
+						<li class="nav-item active"><a class="nav-link" href="IndexAdmin.jsp">Home
+								<span class="sr-only">(current)</span>
+						</a></li>
+					</div>
+		
+		
+					<div class="col-md-2">					
+				
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"> Clientes </a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Nuevo cliente</a> <a
-								class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Listar clientes</a>
+							<a class="dropdown-item" href="UsuarioDatosPersonales.jsp">Nuevo cliente</a>
+							 <a	class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Listar clientes</a>
 							
 						</div></li>
 				</div>
 				<div class="col-md-2">
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Cuentas </a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Nueva cuenta</a> <a
-								class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Listar cuentas</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Eliminar cuenta</a>
-						</div></li>
+					
+							<a class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Cuentas</a>
+						
 				</div>
 				<div class="col-md-3">
-					<li class="nav-item"><a class="nav-link" href="#">Solicitudes
+					<li class="nav-item"><a class="nav-link" href="PedirPrestamo.jsp">Solicitudes
 							de prestamos</a></li>
 				</div>
 				<div class="col-md-2">
 					<li class="nav-item"><a class="nav-link" href="#">Informes</a>
 					</li>
 				</div>
+				<div class="col-md-2">
+						<li class="nav-item active"><a class="nav-link" href="ServletUsuario?Logout=1">Salir
+								<span class="sr-only">(current)</span>
+						</a></li>
+					</div>
+				
 			</div>
 		</ul>
 	</div>
@@ -100,6 +108,14 @@
 			
 			
 			<%}%>
+			<%
+		          
+			
+			session.setAttribute("UsuarioAdminLogin",usuarioAdmin);	
+			
+		
+			
+			%>
 		
 		
 		

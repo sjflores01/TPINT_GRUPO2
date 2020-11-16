@@ -5,7 +5,7 @@ public class Gestor {
 	//CONGIF PARAMETERS
 	String host = "jdbc:mysql://localhost:3306/";
 	String user = "root";
-	String pass = "ambar24v";
+	String pass = "root";
 	String dbname = "TPINT_GRUPO2";
 	
 	
