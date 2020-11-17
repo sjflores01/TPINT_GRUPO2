@@ -32,8 +32,8 @@ public class CuentaNegImpl implements CuentaNeg{
 	}
 
 	@Override
-	public ArrayList<Cuenta> listarCuentas(String search, int start, int total) {
-		return daoCuenta.listarCuentas(search, start, total);
+	public ArrayList<Cuenta> listarCuentas(String search) {
+		return daoCuenta.listarCuentas(search);
 	}
 
 	@Override

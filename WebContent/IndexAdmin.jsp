@@ -69,13 +69,13 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="UsuarioDatosPersonales.jsp">Nuevo cliente</a>
-							 <a	class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Listar clientes</a>
+							 <a	class="dropdown-item" href="ServletUsuario?ListaClientes=1">Listar clientes</a>
 							
 						</div></li>
 				</div>
 				<div class="col-md-2">
 					
-							<a class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Cuentas</a>
+							<a class="dropdown-item" href="ServletCuenta?ListaCuentas=1">Cuentas</a>
 						
 				</div>
 				<div class="col-md-3">

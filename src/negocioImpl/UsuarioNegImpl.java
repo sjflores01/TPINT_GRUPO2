@@ -36,8 +36,8 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	}
 
 	@Override
-	public ArrayList<Usuario> listarUsuarios(String search, int start, int total) {
-		return (ArrayList<Usuario>)daoUsuario.listarUsuarios(search, start, total);
+	public ArrayList<Usuario> listarUsuarios(String search) {
+		return (ArrayList<Usuario>)daoUsuario.listarUsuarios(search);
 	}
 
 	@Override

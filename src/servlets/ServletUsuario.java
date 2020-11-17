@@ -34,7 +34,9 @@ public class ServletUsuario extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -236,21 +238,6 @@ public class ServletUsuario extends HttpServlet {
 		} else if (request.getParameter("ListaClientes") != null || request.getParameter("TXTbuscador") != null) {
 
 			PrintWriter out = response.getWriter();
-			int pageId;
-
-			if (request.getParameter("pagina") != null) {
-				String spageid = request.getParameter("pagina");
-				pageId = Integer.parseInt(spageid);
-			} else {
-				pageId = 1;
-			}
-			int total = 5;
-
-			if (pageId == 1) {
-			} else {
-				pageId = pageId - 1;
-				pageId = pageId * total + 1;
-			}
 
 			ArrayList<Usuario> lista = new ArrayList<Usuario>();
 			UsuarioNeg negUsuario = new UsuarioNegImpl();
@@ -260,7 +247,7 @@ public class ServletUsuario extends HttpServlet {
 				search = request.getParameter("TXTbuscador");
 			}
 
-			lista = negUsuario.listarUsuarios(search, 1, 10);
+			lista = negUsuario.listarUsuarios(search);
 
 			for (Usuario user : lista) {
 				user.setCuentas(negUsuario.contarCuentas(user.getId()));

@@ -65,7 +65,7 @@ public class CuentaDaoImpl implements CuentaDao {
 		}
 	}
 
-	public ArrayList<Cuenta> listarCuentas(String search, int start, int total) {
+	public ArrayList<Cuenta> listarCuentas(String search) {
 
 		ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
 
@@ -80,7 +80,7 @@ public class CuentaDaoImpl implements CuentaDao {
 
 		try {
 			cn = DriverManager.getConnection(gestor.getConectoinString(), gestor.getUser(), gestor.getPass());
-			String query = "call listarCuentas('" + search + "', " + (start - 1) + ", " + total + ")";
+			String query = "call listarCuentas('" + search + "')";
 			java.sql.Statement st = cn.createStatement();
 			java.sql.ResultSet rs = st.executeQuery(query);
 

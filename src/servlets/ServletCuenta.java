@@ -86,15 +86,6 @@ String mensaje = "Cuenta Creada con exito";
 		
 			PrintWriter out = response.getWriter();
 			
-			String spageid = request.getParameter("pagina");
-			int pageId = Integer.parseInt(spageid);
-			int total = 5;
-			
-			if(pageId ==1) {}
-			else {
-				pageId = pageId-1;
-				pageId = pageId*total+1;
-			}
 			
 			ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
 			CuentaNeg negCuenta = new CuentaNegImpl();
@@ -105,7 +96,7 @@ String mensaje = "Cuenta Creada con exito";
 				search = request.getParameter("TXTbuscador");
 			}
 			
-			lista = negCuenta.listarCuentas(search,1,10);
+			lista = negCuenta.listarCuentas(search);
 											
 			request.setAttribute("lista", lista);
 			redireccion = "ListadoCuentas.jsp";

@@ -9,7 +9,7 @@ public interface UsuarioDao {
 	public void cargarUsuario(Usuario usuario);
 	public void modificarUsuario(Usuario usuario);
 	public void eliminarUsuario(int id);
-	public ArrayList<Usuario> listarUsuarios(String search, int start, int total);
+	public ArrayList<Usuario> listarUsuarios(String search);
 	public Usuario leerUsuario(Integer id);
 	public Boolean chequearEmail(String mail);
 	public Boolean chequearDni(String dni);

@@ -14,7 +14,7 @@ provincia varchar(50)
 CREATE TABLE Personas (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 dni varchar(10),
-cuil varchar(10),
+cuil varchar(20),
 nombre varchar(50),
 apellido varchar(50),
 sexo char,
@@ -46,7 +46,6 @@ nombreUsuario varchar(50),
 clave varchar(50)
 );
 INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'AdminUser','admin1');
-INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'a','a');
 
 CREATE TABLE TiposDeCuenta (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -110,7 +109,7 @@ in dpto varchar(10),
 in localidad varchar(100),
 in provincia varchar(50),
 in dni varchar(10),
-in cuil varchar(10),
+in cuil varchar(20),
 in nombre varchar(50),
 in apellido varchar(50),
 in sexo char,
@@ -200,9 +199,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE listarUsuarios(
-in search varchar(30),
-in inicio int,
-in total int
+in search varchar(30)
 )
 
 BEGIN
@@ -210,8 +207,7 @@ BEGIN
     Select * from Usuarios
     inner join Personas on Usuarios.idPersona = Personas.id
     inner join Direcciones on Personas.idDireccion = Direcciones.id
-    where estado = 1 AND ( apellido like concat('%', search,'%') OR  dni =  search)
-	limit inicio,total;
+    where estado = 1 AND ( apellido like concat('%', search,'%') OR  dni =  search);
     
     
 	  
@@ -364,9 +360,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `listarCuentas`(
-in search varchar(30),
-in inicio int,
-in total int
+in search varchar(30)
 )
 BEGIN
     Select * from Cuentas
@@ -374,8 +368,7 @@ BEGIN
     inner join Usuarios on Cuentas.idUsuario = Usuarios.id
     inner join Personas on Usuarios.idPersona = Personas.id
     inner join Direcciones on Personas.idDireccion = Direcciones.id
-    where Cuentas.eliminada = 0 AND ( Cuentas.id like concat('%', search,'%') OR  search =  "")
-	limit inicio,total;
+    where Cuentas.eliminada = 0 AND ( Cuentas.id like concat('%', search,'%') OR  search =  "");
 END$$
 
 DELIMITER ;
@@ -393,31 +386,24 @@ END$$
 
 DELIMITER ;
 
-DELIMITER $$
-CREATE PROCEDURE contarCuentas(
-in idParametro int
-
-)
-BEGIN
-    Select Count(*) from cuentas where idUsuario = idParametro;
-END$$
-
-DELIMITER ;
-
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
-call cargaUsuario('calle',234,'b','san fernando','buenos aires','99','54789553','juan','gonzales','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
+call cargaUsuario('calle',234,'b','san fernando','buenos aires','1','54789223','oscar','gonzales','m','tom@','542', '1998-01-30','oscar','tomContraseña');
+call cargaUsuario('hola',234,'b','san fernando','buenos aires','2','54789116','kikozonasur','gonzales','m','tom@','542', '1998-01-30','vamoniubal','tomContraseña');
+call cargaUsuario('caseros',234,'b','san fernando','buenos aires','3','54789443','allbo','gonzales','m','tom@','542', '1998-01-30','allboys','tomContraseña');
+call cargaUsuario('hudson',234,'b','san fernando','buenos aires','4','54789555','capo','gonzales','m','tom@','542', '1998-01-30','capo','tomContraseña');
+call cargaUsuario('pappo',234,'b','san fernando','buenos aires','5','54789573','teo','gonzales','m','tom@','542', '1998-01-30','teo','tomContraseña');
+call cargaUsuario('rock',234,'b','san fernando','buenos aires','6','54789513','asdasd','gonzales','m','tom@','542', '1998-01-30','aaaassUsuariaa','tomContraseña');
+call cargaUsuario('callejeros',234,'b','san fernando','buenos aires','7','54789523','jorge','gonzales','m','tom@','542', '1998-01-30','datatable','tomContraseña');
+call cargaUsuario('abc',234,'b','san fernando','buenos aires','8','54789550','especial','gonzales','m','tom@','542', '1998-01-30','aguante','tomContraseña');
+call cargaUsuario('daoachuras',234,'b','san fernando','buenos aires','9','54789551','mortal','gonzales','m','tom@','542', '1998-01-30','java','tomContraseña');
+call cargaUsuario('blabla',234,'b','san fernando','buenos aires','10','54789554','kombat','gonzales','m','tom@','542', '1998-01-30','blabla','tomContraseña');
+call cargaUsuario('blabla',234,'b','san fernando','buenos aires','11','54789552','juan','gonzales','m','tom@','542', '1998-01-30','useraa','tomContraseña');
 call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','99554','5478945','pedro','rodrigues','f','tom@sdd','542', '1998-01-30','nueva contraseña');
 call asignarCuenta(1,1,'000332312312',10000);
 call leerUsuario(1);
 call contarMails('tom@');
 call contarDni('99');
 call contarUsuario('tomUsuario');
-call listarUsuarios("",0,10);
+call listarUsuarios("");
 call cargaCuenta(1,1);
-call contarCuentas(1)
-
-Select * from Personas
-
-
-

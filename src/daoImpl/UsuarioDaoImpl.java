@@ -128,7 +128,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	
 	// LECTURA
 	
-	public ArrayList<Usuario> listarUsuarios(String search, int start, int total) {
+	public ArrayList<Usuario> listarUsuarios(String search) {
 		
 		
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
@@ -146,7 +146,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		java.sql.Connection cn = null;
 		try {
 			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
-			String query = "call listarUsuarios('"+search+"', "+(start-1)+", "+total+")";
+			String query = "call listarUsuarios('"+search+"')";
 			java.sql.Statement st = cn.createStatement();
 			java.sql.ResultSet rs = st.executeQuery(query);		
 			
