@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDao;
+import daoImpl.UsuarioDaoImpl;
 import dominio.Direccion;
 import dominio.Persona;
 import dominio.Usuario;
@@ -397,7 +398,37 @@ public class ServletUsuario extends HttpServlet {
 			request.setAttribute("mensaje", mensaje);
 			redireccion = "IndexAdmin.jsp";
 
-		} else if (request.getParameter("Logout") != null) {
+		} else if(request.getParameter("cargaInfo") != null) {
+		
+			String parametro = request.getParameter("cargaInfo");
+			String sexo;
+			String fecha;
+			Integer id = Integer.parseInt(parametro);
+			
+			UsuarioDaoImpl dao = new UsuarioDaoImpl();
+			Usuario usuario;
+			
+			usuario = dao.leerUsuario(id);
+			
+			if(usuario.getPersona().getSexo() == 'M')
+			{
+				sexo = "Masculino";
+			} else {						
+				sexo = "Femenino"; 
+			}
+			
+
+			FechaNegImpl fechaNegImpl = new FechaNegImpl();
+			fecha = fechaNegImpl.getString(usuario.getPersona().getFnac());
+			
+			
+			request.setAttribute("usuario", usuario);
+			request.setAttribute("sexo", sexo);
+			request.setAttribute("fecha", fecha);
+			redireccion = "InfoCliente.jsp";
+			
+			
+		}else if (request.getParameter("Logout") != null) {
 
 			request.getSession().removeAttribute("UsuarioAdminLogin");
 			redireccion = "Login.jsp";

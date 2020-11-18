@@ -46,7 +46,7 @@ nombreUsuario varchar(50),
 clave varchar(50)
 );
 INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'AdminUser','admin1');
-
+INSERT INTO UsuariosAdmin (estado, nombreUsuario, clave) VALUES (1,'a','a');
 CREATE TABLE TiposDeCuenta (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 descripcion varchar(10));
@@ -425,19 +425,19 @@ END$$
 DELIMITER ;
 
 
-call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','m','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
-call cargaUsuario('calle',234,'b','san fernando','buenos aires','1','54789223','oscar','gonzales','m','tom@','542', '1998-01-30','oscar','tomContraseña');
-call cargaUsuario('hola',234,'b','san fernando','buenos aires','2','54789116','kikozonasur','gonzales','m','tom@','542', '1998-01-30','vamoniubal','tomContraseña');
-call cargaUsuario('caseros',234,'b','san fernando','buenos aires','3','54789443','allbo','gonzales','m','tom@','542', '1998-01-30','allboys','tomContraseña');
-call cargaUsuario('hudson',234,'b','san fernando','buenos aires','4','54789555','capo','gonzales','m','tom@','542', '1998-01-30','capo','tomContraseña');
-call cargaUsuario('pappo',234,'b','san fernando','buenos aires','5','54789573','teo','gonzales','m','tom@','542', '1998-01-30','teo','tomContraseña');
-call cargaUsuario('rock',234,'b','san fernando','buenos aires','6','54789513','asdasd','gonzales','m','tom@','542', '1998-01-30','aaaassUsuariaa','tomContraseña');
-call cargaUsuario('callejeros',234,'b','san fernando','buenos aires','7','54789523','jorge','gonzales','m','tom@','542', '1998-01-30','datatable','tomContraseña');
-call cargaUsuario('abc',234,'b','san fernando','buenos aires','8','54789550','especial','gonzales','m','tom@','542', '1998-01-30','aguante','tomContraseña');
-call cargaUsuario('daoachuras',234,'b','san fernando','buenos aires','9','54789551','mortal','gonzales','m','tom@','542', '1998-01-30','java','tomContraseña');
-call cargaUsuario('blabla',234,'b','san fernando','buenos aires','10','54789554','kombat','gonzales','m','tom@','542', '1998-01-30','blabla','tomContraseña');
-call cargaUsuario('blabla',234,'b','san fernando','buenos aires','11','54789552','juan','gonzales','m','tom@','542', '1998-01-30','useraa','tomContraseña');
-call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','99554','5478945','pedro','rodrigues','f','tom@sdd','542', '1998-01-30','nueva contraseña');
+call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','M','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
+call cargaUsuario('calle',234,'b','san fernando','buenos aires','1','54789223','oscar','gonzales','M','tom@','542', '1998-01-30','oscar','tomContraseña');
+call cargaUsuario('hola',234,'b','san fernando','buenos aires','2','54789116','kikozonasur','gonzales','M','tom@','542', '1998-01-30','vamoniubal','tomContraseña');
+call cargaUsuario('caseros',234,'b','san fernando','buenos aires','3','54789443','allbo','gonzales','M','tom@','542', '1998-01-30','allboys','tomContraseña');
+call cargaUsuario('hudson',234,'b','san fernando','buenos aires','4','54789555','capo','gonzales','M','tom@','542', '1998-01-30','capo','tomContraseña');
+call cargaUsuario('pappo',234,'b','san fernando','buenos aires','5','54789573','teo','gonzales','M','tom@','542', '1998-01-30','teo','tomContraseña');
+call cargaUsuario('rock',234,'b','san fernando','buenos aires','6','54789513','asdasd','gonzales','M','tom@','542', '1998-01-30','aaaassUsuariaa','tomContraseña');
+call cargaUsuario('callejeros',234,'b','san fernando','buenos aires','7','54789523','jorge','gonzales','M','tom@','542', '1998-01-30','datatable','tomContraseña');
+call cargaUsuario('abc',234,'b','san fernando','buenos aires','8','54789550','especial','gonzales','M','tom@','542', '1998-01-30','aguante','tomContraseña');
+call cargaUsuario('daoachuras',234,'b','san fernando','buenos aires','9','54789551','mortal','gonzales','M','tom@','542', '1998-01-30','java','tomContraseña');
+call cargaUsuario('blabla',234,'b','san fernando','buenos aires','10','54789554','kombat','gonzales','M','tom@','542', '1998-01-30','blabla','tomContraseña');
+call cargaUsuario('blabla',234,'b','san fernando','buenos aires','11','54789552','juan','gonzales','M','tom@','542', '1998-01-30','useraa','tomContraseña');
+call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','99554','5478945','pedro','rodrigues','F','tom@sdd','542', '1998-01-30','nueva contraseña');
 call asignarCuenta(1,1,'000332312312',10000);
 call leerUsuario(1);
 call contarMails('tom@');

@@ -144,7 +144,9 @@
 
 								<tr>
 
-									<td><%=p.getUsuario().getPersona().getNombre()%></td>
+									
+									
+									<td>   <a href="ServletUsuario?cargaInfo=<%=p.getUsuario().getId()%>"> <%=p.getUsuario().getPersona().getNombre()%></a>      </td>
 									<td><%=p.getUsuario().getPersona().getDni()%></td>
 									<td><%=p.getImportePedido()%></td>
 									<td><%=p.getCantCuotas()%></td>

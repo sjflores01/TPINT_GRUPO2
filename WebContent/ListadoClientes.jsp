@@ -190,7 +190,8 @@ usuarioAdmin = (Usuario) session.getAttribute("UsuarioAdminLogin");%>
 								}
 							%>
 
-
+ 							<td><a class="btn btn-info"
+								href="ServletUsuario?cargaInfo=<%=user.getId()%>">Ver</a></td>
 							<td><a class="btn btn-info"
 								href="ServletUsuario?cargaModificar=<%=user.getId()%>">Modificar</a></td>
 							<td><a class="btn btn-warning"
