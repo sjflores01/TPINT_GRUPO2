@@ -74,6 +74,18 @@ public class UsuarioNegImpl implements UsuarioNeg{
 	public Usuario confirmarUser(String nombre, String contraseña) {
 		return daoUsuario.confirmarUser(nombre, contraseña);
 	}
+
+	@Override
+	public Boolean chequearSiEsUsuario(String nombre, String contraseña) {
+		
+		Boolean result = false;
+		UsuarioDaoImpl dao = new UsuarioDaoImpl();
+		
+		result = dao.chequeaCliente(nombre, contraseña);
+		
+		return result;
+		
+	}
 	
 	
 }

@@ -416,7 +416,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	
-	//VERIFICAR LOG IN
+	// LOG IN
 	
 		//funcion que verifica si se logea un administrador
 		public Usuario confirmarAdmin(String nombre,String contraseña)
@@ -454,7 +454,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			
 		}	
 		
-		//funcion que verifica si se logea un usuario
+		//funcion que loguea usuario
 	public Usuario confirmarUser(String nombre,String contraseña)
 		
 		{
@@ -467,7 +467,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				e.printStackTrace();
 			}
 			java.sql.Connection cn = null;
-			Usuario usuarioUser = new Usuario();
+			
+			Direccion direccion = new Direccion("ph", 0, "ph", "ph", "ph");
+			Persona persona = new Persona(0, "ph","ph" , "placeholderName", "ph", "ph", "klkklhh", 'h', null , direccion);
+			Usuario usuario = new Usuario(0, "ph", "ph", persona);
 			
 			try {
 				cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
@@ -477,18 +480,90 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				
 				rs.next();
 				
-				usuarioUser.setId(rs.getInt(1));
-				usuarioUser.setNombre(rs.getString(3));
-				usuarioUser.setClave(rs.getString(4));
-				return usuarioUser;
+				direccion.setCalle(rs.getString(17));
+				direccion.setDepto(rs.getString(19));
+				direccion.setLocalidad(rs.getString(20));
+				direccion.setNumero(rs.getInt(18));
+				direccion.setProvincia(rs.getString(21));
+				direccion.setId(rs.getInt(16));
+				
+				persona.setApellido(rs.getString(10));
+				persona.setNombre(rs.getString(9));
+				persona.setDni(rs.getString(7));
+				persona.setCuil(rs.getString(8));
+				persona.setEmail(rs.getString(13));
+				persona.setTelefono(rs.getString(14));
+				persona.setFnac(rs.getDate(15));		 		
+				persona.setSexo(rs.getString(11).charAt(0));
+				persona.setDireccion(direccion);
+				persona.setId(rs.getInt(6));
+				
+				usuario.setClave(rs.getString(7));
+				usuario.setNombre(rs.getString(8));
+				usuario.setPersona(persona);
+				usuario.setId(rs.getInt(1));
 				
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return usuarioUser;
+			return usuario;
 			
-		}		
+		}
+
+
+
+	
+	
+	// funcion que verigica si se loguea un usuario
+	@Override
+	public Boolean chequeaCliente(String nombre, String contraseña) {
+		
+		boolean result = true;
+		Integer cantidad;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		java.sql.Connection cn = null;
+		try {
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			String query = "call chequeaLoginCliente('"+nombre+"','"+contraseña+"')";
+			java.sql.Statement st = cn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(query);		
+			
+			rs.next();			
+			cantidad = rs.getInt(1);
+			
+			
+			if(cantidad == 0)
+			{
+				result = false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+		
+		
+		
+		
+		
+	}		
+	
+	
+
+	
 	
 	
 	

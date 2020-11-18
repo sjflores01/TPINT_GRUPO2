@@ -49,9 +49,14 @@ public class ServletLogin extends HttpServlet {
 			Usuario usuarioUser = new Usuario();
 			UsuarioNeg negUsuario = new UsuarioNegImpl();
 			
+			String username = request.getParameter("txtBoxUsuario");
+			String pass = request.getParameter("txtBoxClave");
+			
 			usuarioAdmin = negUsuario.confirmarAdmin(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));	
 			
-			usuarioUser = negUsuario.confirmarUser(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));
+			
+			
+			
 			
 			
 			
@@ -66,11 +71,13 @@ public class ServletLogin extends HttpServlet {
 				
 				
 					}
-			else if(usuarioUser.getId()!=null)
+			else if(negUsuario.chequearSiEsUsuario(username, pass))
 			{
-				request.getSession().setAttribute("UsuarioUser", usuarioUser);
+				usuarioUser = negUsuario.confirmarUser(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));
 				
-				RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
+				request.getSession().setAttribute("cliente", usuarioUser);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("IndexUsuario.jsp");
 				
 				rd.forward(request,response);
 				
@@ -91,7 +98,8 @@ public class ServletLogin extends HttpServlet {
 			
 			if(request.getParameter("Logout") != null){
 				
-				request.getSession().removeAttribute("UsuarioAdminLogin");
+				request.getSession().removeAttribute("UsuarioAdmin");
+				request.getSession().removeAttribute("cliente");
                RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 				
 				rd.forward(request, response);

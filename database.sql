@@ -323,8 +323,14 @@ in contraseña varchar(50)
 )
 BEGIN
 
-select * from usuarios
-where (nombreUsuario = nombre and clave = contraseña and estado = 1);
+
+
+Select * from Usuarios 
+    inner join Personas on Usuarios.idPersona = Personas.id
+    inner join Direcciones on Personas.idDireccion = Direcciones.id
+    where (nombreUsuario = nombre and clave = contraseña and estado = 1);
+
+
 
 END$$
 
@@ -424,6 +430,21 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE  chequeaLoginCliente(
+in usuario varchar(50),
+in pass varchar(50)
+)
+BEGIN
+	
+    Select Count(*) from usuarios 
+    where nombreUsuario = usuario and clave = pass and estado = 1;
+  
+  
+END$$
+
+DELIMITER ;
+
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','M','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','1','54789223','oscar','gonzales','M','tom@','542', '1998-01-30','oscar','tomContraseña');
@@ -445,3 +466,5 @@ call contarDni('99');
 call contarUsuario('tomUsuario');
 call listarUsuarios("");
 call cargaCuenta(1,1);
+call chequeaLoginCliente('teo','tomContraseña');
+call chequeaLoginCliente('dad','tomdsasdw');

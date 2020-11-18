@@ -17,5 +17,6 @@ public interface UsuarioNeg {
 	public int contarCuentas(int id);
 	public Usuario confirmarAdmin(String nombre,String contraseña);
 	public Usuario confirmarUser(String nombre,String contraseña);
+	public Boolean chequearSiEsUsuario(String nombre, String contraseña);
 	
 }
