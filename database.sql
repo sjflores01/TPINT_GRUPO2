@@ -90,6 +90,8 @@ importeTotal decimal,
 montoMensual decimal,
 cantCuotas int,
 plazoPago int,
+aprobado bool,
+rechazado bool,
 FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
 );
 
@@ -382,6 +384,42 @@ in tipoCta int
 BEGIN
     Insert into Cuentas(idUsuario, fechaCreacion, tipoCta, cbu, saldo, eliminada) 
                 values (idUsuario, NOW(), tipoCta, FLOOR(RAND() * 9999999999), 10000, false);
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE `listarPrestamos`()
+BEGIN
+    Select * from Prestamos
+    inner join Usuarios on Prestamos.idUsuario = Usuarios.id
+    inner join Personas on Usuarios.idPersona = Personas.id
+    where Prestamos.aprobado is null and Prestamos.aprobado is null;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE `aprobarPrestamo`(
+in id int
+)
+BEGIN
+    Update Prestamos set aprobado = true 
+    where Prestamos.id = id;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE `cancelarPrestamo`(
+in id int
+)
+BEGIN
+    Update Prestamos set rechazado = true 
+    where Prestamos.id = id;
 END$$
 
 DELIMITER ;

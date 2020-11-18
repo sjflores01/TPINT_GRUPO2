@@ -83,7 +83,7 @@
 				</div>
 				<div class="col-md-3">
 					<li class="nav-item"><a class="nav-link"
-						href="PedirPrestamo.jsp">Solicitudes de prestamos</a></li>
+						href="ServletPrestamo?ListaPrestamos=1">Solicitudes de prestamos</a></li>
 				</div>
 				<div class="col-md-2">
 					<li class="nav-item"><a class="nav-link" href="#">Informes</a>

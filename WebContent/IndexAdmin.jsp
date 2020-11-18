@@ -14,7 +14,7 @@
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
 	
-	
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	
 	
 <script
@@ -79,7 +79,7 @@
 						
 				</div>
 				<div class="col-md-3">
-					<li class="nav-item"><a class="nav-link" href="PedirPrestamo.jsp">Solicitudes
+					<li class="nav-item"><a class="nav-link" href="ServletPrestamo?ListaPrestamos=1">Solicitudes
 							de prestamos</a></li>
 				</div>
 				<div class="col-md-2">
