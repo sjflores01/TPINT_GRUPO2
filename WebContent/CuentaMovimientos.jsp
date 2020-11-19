@@ -94,7 +94,7 @@
 						class="form-control" id="selectCuenta">
 						<%for(Cuenta cuenta:listaCuentas)
 						{%>
-						<option value="<%= cuenta.getId()%>">Cta Nro: <%= cuenta.getId() %> - <%= cuenta.getTipoCuenta().getDescripcion() %></option>
+						<option value="<%= cuenta.getCbu()%>">Cbu: <%= cuenta.getCbu() %> - <%= cuenta.getTipoCuenta().getDescripcion() %></option>
 						<%} %>
 					</select>
 
