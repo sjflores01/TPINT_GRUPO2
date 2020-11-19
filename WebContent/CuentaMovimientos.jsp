@@ -3,6 +3,7 @@
 	<%@page import="java.util.ArrayList"%>
 <%@page import="dominio.Usuario"%>
 <%@page import="dominio.Cuenta"%>
+<%@page import="dominio.Movimiento"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,6 +46,7 @@
 		<%
 			Usuario usuario = (Usuario) request.getSession().getAttribute("cliente");
 			ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentasUsuario");
+			ArrayList<Movimiento> listaMovimientos = (ArrayList<Movimiento>) request.getAttribute("movimientos");
 		%>
 		<ul class="navbar-nav">
 			<div class="row">
@@ -88,15 +90,16 @@
 
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
-			<div class="col-md-6" style="">
+			<div class="col-md-8" style="">
 				<form action="ServletCliente" method="get">
 					<label for="">Seleccione una cuenta</label> <select
-						class="form-control" id="selectCuenta">
+						class="form-control" id="selectCuenta" name="TXTcbu">
 						<%for(Cuenta cuenta:listaCuentas)
 						{%>
-						<option value="<%= cuenta.getCbu()%>">Cbu: <%= cuenta.getCbu() %> - <%= cuenta.getTipoCuenta().getDescripcion() %></option>
+						<option value="<%= cuenta.getCbu()%>" <%if(cuenta.getCbu().equals(request.getAttribute("selected"))){ %> selected  <%} %> >Cbu: <%= cuenta.getCbu() %> - <%= cuenta.getTipoCuenta().getDescripcion() %> </option>
 						<%} %>
 					</select>
+					<input type="submit" name="BtnVerMovimientos" value="ver Movimientos">
 
 					<div style="height: 50px"></div>
 					<table class="table">
@@ -106,24 +109,25 @@
 								<th scope="col">Fecha</th>
 								<th scope="col">Concepto</th>
 								<th scope="col">Importe</th>
+								<th scope="col">Origen/Destino</th>
 							</tr>
 						</thead>
 						<tbody>
+							<%
+							
+							for(Movimiento mov : listaMovimientos) { %>
 							<tr>
 								<th scope="row">1</th>
-								<td>31/10/2018</td>
-								<td>DP sueldo</td>
-								<td>18.000</td>
-
+								<td><%=mov.getFechaAsString() %></td>
+								<td><%=mov.getConcepto() %></td>
+								<td><%=mov.getMontoAsString() %></td>
+							<%if(mov.getIngresa()){ %>
+								<td><%=mov.getOrigen() %></td>
+							<%} else { %>
+								<td><%=mov.getDestino() %></td>
+							<%} %>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-
-							</tr>
+							<%  } %>
 						</tbody>
 					</table>
 

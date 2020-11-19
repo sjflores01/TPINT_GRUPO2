@@ -76,15 +76,15 @@ INSERT INTO TiposDeMovimiento (descripcion) VALUES ('Credito');
 
 CREATE TABLE Movimientos (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-idUsuario int not null,
-idCuenta int not null,
+idDestino int not null,
 fecha date,
 detalle varchar(150),
-importe decimal,
+importe float,
 idTipo int,
-FOREIGN KEY (idUsuario) REFERENCES Usuarios(id),
-FOREIGN KEY (idCuenta) REFERENCES Cuentas(id),
-FOREIGN KEY (idTipo) REFERENCES TiposDeMovimiento(id)
+idOrigen int,
+FOREIGN KEY (idDestino) REFERENCES Cuentas(id),
+FOREIGN KEY (idTipo) REFERENCES TiposDeMovimiento(id),
+FOREIGN KEY (idOrigen) REFERENCES Cuentas(id)
 );
 
 CREATE TABLE Prestamos (
@@ -453,24 +453,40 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE hacerTransferencia(
-in idUsuarioD int,
-in idUsuarioC int,
-in nroCuentaD int,
-in nroCuentaC int,
-in importeOperacion decimal,
+in idCuentaOrigen int,
+in idCuentaDestino int,
+in importeOperacion float,
 in concepto varchar(150)
 )
 
 BEGIN
 	
-    INSERT INTO Movimientos (idUsuario, idCuenta, fecha, detalle, importe, idTipo) VALUES (idUsuarioD, nroCuentaD, current_timestamp(), concepto, importeOperacion, 1);
-    UPDATE Cuentas SET saldo = saldo - importeOperacion WHERE idUsuario = idUsuarioD AND id = nroCuentaD ;
-    INSERT INTO Movimientos (idUsuario, idCuenta, fecha, detalle, importe, idTipo) VALUES (idUsuarioC, nroCuentaC, current_timestamp(), concepto, importeOperacion, 2);
-	UPDATE Cuentas SET saldo = saldo + importeOperacion WHERE idUsuario = idUsuarioC AND id = nroCuentaC ;
+    Insert into Movimientos (idDestino, idOrigen, fecha, detalle, importe, idTipo) values (idCuentaDestino, idCuentaOrigen, CURRENT_DATE, concepto, importeOperacion, 1);
+    
     
     
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE listarMovimientos(
+in cbuCuenta varchar(30)
+)
+
+BEGIN
+	
+    select  O.cbu as cbuOrigen, D.cbu as cbuDestino, M.importe, M.fecha, M.detalle  from Movimientos as M 
+    inner join Cuentas as O on M.idOrigen = O.id
+    inner join Cuentas as D on M.idDestino = D.id
+	where O.cbu = cbuCuenta or D.cbu = cbuCuenta;
+   
+    
+    
+    
+END$$
+DELIMITER ;
+
+
 
 DELIMITER $$
 CREATE PROCEDURE traerCuentasUsuario(
@@ -513,6 +529,7 @@ call asignarCuenta(5,1,'000332312316',10000);
 call asignarCuenta(6,1,'000332312317',10000);
 call asignarCuenta(7,1,'000332312318',10000);
 call asignarCuenta(8,1,'000332312319',10000);
+call asignarCuenta(2,1,'000332312320',10000);
 call leerUsuario(1);
 call contarMails('tom@');
 call contarDni('99');
@@ -521,4 +538,12 @@ call listarUsuarios("");
 call cargaCuenta(1,1);
 call chequeaLoginCliente('teo','tomContraseña');
 call chequeaLoginCliente('dad','tomdsasdw');
-call hacerTransferencia(1,2,1,2,3000,'Varios')
+call hacerTransferencia(1,2,1000,'Transferencia');
+call hacerTransferencia(4,2,5487,'Transferencia');
+call hacerTransferencia(1,2,999,'Transferencia');
+call hacerTransferencia(2,3,457,'Transferencia');
+call hacerTransferencia(4,9,4477,'Transferencia');
+call hacerTransferencia(1,9,4477,'Transferencia');
+call hacerTransferencia(9,2,4477,'Transferencia');
+call listarMovimientos('000332312313');
+call listarMovimientos('000332312320')

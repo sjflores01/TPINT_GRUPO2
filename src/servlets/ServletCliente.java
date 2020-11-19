@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,13 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.cj.Session;
+// import com.mysql.cj.Session;
 
 import dominio.Cuenta;
+import dominio.Movimiento;
 import dominio.Usuario;
 import negocio.CuentaNeg;
+import negocio.MovimientoNeg;
 import negocio.UsuarioNeg;
 import negocioImpl.CuentaNegImpl;
+import negocioImpl.MovimientoNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
 /**
@@ -41,6 +45,10 @@ public class ServletCliente extends HttpServlet {
 		
 		String redireccion = "IndexUsuario.jsp";
 		CuentaNeg negCuenta = new CuentaNegImpl();
+		MovimientoNeg negMov = new MovimientoNegImpl();
+			
+			
+		
 		Usuario usuario = (Usuario)request.getSession().getAttribute("cliente");
 		
 		if(usuario == null)
@@ -53,10 +61,49 @@ public class ServletCliente extends HttpServlet {
 		else if(request.getParameter("cargarCuentas") != null)
 		{
 			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
+			ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>();
+			
+			
 			listaCuentasUsuario = negCuenta.listarCuentasXUsuario(usuario.getId());
+			listaMovimientos = negMov.listarMovimientos(listaCuentasUsuario.get(0).getCbu());
+
+			
+			
+			
 			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);
+			request.setAttribute("movimientos", listaMovimientos);
+			request.setAttribute("selected", listaCuentasUsuario.get(0).getCbu());
+			
+			
+			
 			redireccion = "CuentaMovimientos.jsp";
-		}
+			
+			
+			
+			
+			
+			
+		} else if(request.getParameter("BtnVerMovimientos") != null)
+		{
+			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
+			ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>();
+			String cbu = request.getParameter("TXTcbu");
+			
+			
+			listaCuentasUsuario = negCuenta.listarCuentasXUsuario(usuario.getId());
+			listaMovimientos = negMov.listarMovimientos(cbu);
+			
+			
+			
+			
+			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);
+			request.setAttribute("movimientos", listaMovimientos);
+			request.setAttribute("selected", cbu);
+			
+			redireccion = "CuentaMovimientos.jsp";
+					
+			
+		}						
 		else if(request.getParameter("cargarPrestamos") != null)
 		{
 			// boton para ir a prestamos

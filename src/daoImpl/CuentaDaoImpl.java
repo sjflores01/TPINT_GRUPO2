@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import dao.CuentaDao;
 import dao.Gestor;
 import dominio.Cuenta;
 import dominio.Direccion;
+import dominio.Movimiento;
 import dominio.Persona;
 import dominio.TipoCuenta;
 import dominio.Usuario;
@@ -256,4 +258,15 @@ public class CuentaDaoImpl implements CuentaDao {
 		return lista;
 	}
 
+	
+
 }
+
+
+
+
+
+
+
+
+
