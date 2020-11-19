@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 
 import dominio.Cuenta;
+import dominio.Usuario;
 
 public interface CuentaDao {
 	
@@ -11,5 +12,6 @@ public interface CuentaDao {
 	public ArrayList<Cuenta> listarCuentas(String search);
 	public void eliminarCuenta(int id);
 	public Cuenta getCuenta(Integer id);
+	public ArrayList<Cuenta> listarCuentasXUsuario(int idUsuario);
 	
 }

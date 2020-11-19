@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.cj.Session;
+
+import dominio.Cuenta;
+import dominio.Usuario;
+import negocio.CuentaNeg;
+import negocio.UsuarioNeg;
+import negocioImpl.CuentaNegImpl;
+import negocioImpl.UsuarioNegImpl;
 
 /**
  * Servlet implementation class ServletCliente
@@ -30,8 +40,10 @@ public class ServletCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String redireccion = "IndexUsuario.jsp";
+		CuentaNeg negCuenta = new CuentaNegImpl();
+		Usuario usuario = (Usuario)request.getSession().getAttribute("cliente");
 		
-		if(request.getSession().getAttribute("cliente") == null)
+		if(usuario == null)
 		{
 			// Si no esta logueado, al login
 			
@@ -40,7 +52,9 @@ public class ServletCliente extends HttpServlet {
 		}
 		else if(request.getParameter("cargarCuentas") != null)
 		{
-			// falta hacer 
+			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
+			listaCuentasUsuario = negCuenta.listarCuentasXUsuario(usuario.getId());
+			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);
 			redireccion = "CuentaMovimientos.jsp";
 		}
 		else if(request.getParameter("cargarPrestamos") != null)

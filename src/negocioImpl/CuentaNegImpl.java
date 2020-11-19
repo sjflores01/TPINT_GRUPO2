@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dao.CuentaDao;
 import daoImpl.CuentaDaoImpl;
 import dominio.Cuenta;
+import dominio.Usuario;
 import negocio.CuentaNeg;
 
 
@@ -44,6 +45,11 @@ public class CuentaNegImpl implements CuentaNeg{
 	@Override
 	public Cuenta getCuenta(Integer id) {
 		return daoCuenta.getCuenta(id);
+	}
+
+	@Override
+	public ArrayList<Cuenta> listarCuentasXUsuario(int idUsuario) {
+		return daoCuenta.listarCuentasXUsuario(idUsuario);
 	}
 
 	

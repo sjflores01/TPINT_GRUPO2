@@ -70,15 +70,15 @@
 						</li>
 					</div>
 					<div class="col-md-2">
-						<li class="nav-item"><a class="nav-link" href="ServletCliente?cargarPrestamos=<%=usuario.getId()%>">Prestamos</a>
+						<li class="nav-item"><a class="nav-link" href="ServletCliente?cargarPrestamos=<%=usuario.getId()%>">Ver Prestamos</a>
 						</li>
 					</div>
 					<div class="col-md-2">
-						<li class="nav-item"><a class="nav-link" href="ServletCliente?cargarPedirPrestamos=<%=usuario.getId()%>">Prestamos</a>
+						<li class="nav-item"><a class="nav-link" href="ServletCliente?cargarPedirPrestamos=<%=usuario.getId()%>">Pedí tu Prestamo</a>
 						</li>
 					</div>
 					<div class="col-md-2">
-						<li class="nav-item"><a class="nav-link" href="ServletCliente?cargarMiInfo=<%=usuario.getId()%>">Prestamos</a>
+						<li class="nav-item"><a class="nav-link" href="ServletCliente?cargarMiInfo=<%=usuario.getId()%>">Mi info</a>
 						</li>
 					</div>
 					

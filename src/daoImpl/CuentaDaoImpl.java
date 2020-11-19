@@ -212,4 +212,48 @@ public class CuentaDaoImpl implements CuentaDao {
 		return cuenta;
 	}
 
+	@Override
+	public ArrayList<Cuenta> listarCuentasXUsuario(int idUsuario) {
+		ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		java.sql.Connection cn = null;
+
+		try {
+			cn = DriverManager.getConnection(gestor.getConectoinString(), gestor.getUser(), gestor.getPass());
+			String query = "call traerCuentasUsuario("+idUsuario+")";
+			java.sql.Statement st = cn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(query);
+			Cuenta cuenta;
+			TipoCuenta tipoCuenta;
+
+			while (rs.next()) {
+
+				tipoCuenta = new TipoCuenta();
+				cuenta = new Cuenta();
+				
+				cuenta.setId(rs.getInt(1));
+				tipoCuenta.setId(rs.getInt(4));
+				tipoCuenta.setDescripcion(rs.getString(9));
+				cuenta.setTipoCuenta(tipoCuenta);
+				cuenta.setCbu(rs.getString(5));
+				cuenta.setSaldo(rs.getDouble(6));
+
+				lista.add(cuenta);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+
 }

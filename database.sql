@@ -71,13 +71,19 @@ CREATE TABLE TiposDeMovimiento (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 descripcion varchar(50)
 );
+INSERT INTO TiposDeMovimiento (descripcion) VALUES ('Debito');
+INSERT INTO TiposDeMovimiento (descripcion) VALUES ('Credito');
 
 CREATE TABLE Movimientos (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+idUsuario int not null,
+idCuenta int not null,
 fecha date,
 detalle varchar(150),
 importe decimal,
 idTipo int,
+FOREIGN KEY (idUsuario) REFERENCES Usuarios(id),
+FOREIGN KEY (idCuenta) REFERENCES Cuentas(id),
 FOREIGN KEY (idTipo) REFERENCES TiposDeMovimiento(id)
 );
 
@@ -240,7 +246,7 @@ in nuevoSaldo decimal
 BEGIN
 
 INSERT INTO Cuentas (idUsuario, fechaCreacion, tipoCta, cbu, saldo, eliminada)
-VALUES (nuevoIdUsuario, CURRENT_TIMESTAMP ,nuevoTipoCta, nuevoCbu, nuevoSaldo, 1);
+VALUES (nuevoIdUsuario, CURRENT_TIMESTAMP ,nuevoTipoCta, nuevoCbu, nuevoSaldo, 0);
 
 END$$
 
@@ -445,6 +451,46 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE hacerTransferencia(
+in idUsuarioD int,
+in idUsuarioC int,
+in nroCuentaD int,
+in nroCuentaC int,
+in importeOperacion decimal,
+in concepto varchar(150)
+)
+
+BEGIN
+	
+    INSERT INTO Movimientos (idUsuario, idCuenta, fecha, detalle, importe, idTipo) VALUES (idUsuarioD, nroCuentaD, current_timestamp(), concepto, importeOperacion, 1);
+    UPDATE Cuentas SET saldo = saldo - importeOperacion WHERE idUsuario = idUsuarioD AND id = nroCuentaD ;
+    INSERT INTO Movimientos (idUsuario, idCuenta, fecha, detalle, importe, idTipo) VALUES (idUsuarioC, nroCuentaC, current_timestamp(), concepto, importeOperacion, 2);
+	UPDATE Cuentas SET saldo = saldo + importeOperacion WHERE idUsuario = idUsuarioC AND id = nroCuentaC ;
+    
+    
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE traerCuentasUsuario(
+in idUsuarioCliente int
+)
+
+BEGIN
+	
+    Select * From Cuentas c
+    Inner Join tiposdecuenta tc
+    on c.tipoCta = tc.id
+    WHERE idUsuario = idUsuarioCliente
+    AND eliminada = false;
+    
+END$$
+DELIMITER ;
+
+
+
+
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','M','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','1','54789223','oscar','gonzales','M','tom@','542', '1998-01-30','oscar','tomContraseña');
@@ -460,6 +506,13 @@ call cargaUsuario('blabla',234,'b','san fernando','buenos aires','10','54789554'
 call cargaUsuario('blabla',234,'b','san fernando','buenos aires','11','54789552','juan','gonzales','M','tom@','542', '1998-01-30','useraa','tomContraseña');
 call modificarUsuario(1,1,1,'dbdbdbdbdbdbd',23454,'e','san isidro','catamarca','99554','5478945','pedro','rodrigues','F','tom@sdd','542', '1998-01-30','nueva contraseña');
 call asignarCuenta(1,1,'000332312312',10000);
+call asignarCuenta(2,1,'000332312313',10000);
+call asignarCuenta(3,1,'000332312314',10000);
+call asignarCuenta(4,1,'000332312315',10000);
+call asignarCuenta(5,1,'000332312316',10000);
+call asignarCuenta(6,1,'000332312317',10000);
+call asignarCuenta(7,1,'000332312318',10000);
+call asignarCuenta(8,1,'000332312319',10000);
 call leerUsuario(1);
 call contarMails('tom@');
 call contarDni('99');
@@ -468,3 +521,4 @@ call listarUsuarios("");
 call cargaCuenta(1,1);
 call chequeaLoginCliente('teo','tomContraseña');
 call chequeaLoginCliente('dad','tomdsasdw');
+call hacerTransferencia(1,2,1,2,3000,'Varios')

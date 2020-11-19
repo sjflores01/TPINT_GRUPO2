@@ -158,6 +158,7 @@ usuarioAdmin = (Usuario) session.getAttribute("UsuarioAdminLogin");%>
 							<th scope="col">Opciones</th>
 							<th></th>
 							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>

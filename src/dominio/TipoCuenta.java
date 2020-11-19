@@ -14,6 +14,10 @@ public class TipoCuenta {
 
 	//Getters and setters
 
+	public TipoCuenta() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}
