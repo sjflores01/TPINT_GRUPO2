@@ -43,24 +43,24 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				Persona persona = new Persona(0, "ph", "ph", "ph", "ph", "ph", "ph", 'h', null, direccion);
 				Usuario usuario = new Usuario(0, "ph", "ph", persona);
 
-				persona.setApellido(rs.getString(20));
-				persona.setNombre(rs.getString(19));
-				persona.setDni(rs.getString(17));
-				persona.setCuil(rs.getString(18));
-				persona.setEmail(rs.getString(23));
-				persona.setTelefono(rs.getString(24));
-				persona.setFnac(rs.getDate(25));
-				persona.setSexo(rs.getString(21).charAt(0));
+				persona.setApellido(rs.getString(22));
+				persona.setNombre(rs.getString(21));
+				persona.setDni(rs.getString(19));
+				persona.setCuil(rs.getString(20));
+				persona.setEmail(rs.getString(25));
+				persona.setTelefono(rs.getString(26));
+				persona.setFnac(rs.getDate(27));
+				persona.setSexo(rs.getString(23).charAt(0));
 				persona.setDireccion(direccion);
-				persona.setId(rs.getInt(16));
+				persona.setId(rs.getInt(18));
 
-				usuario.setClave(rs.getString(15));
-				usuario.setNombre(rs.getString(14));
+				usuario.setClave(rs.getString(17));
+				usuario.setNombre(rs.getString(16));
 				usuario.setPersona(persona);
-				usuario.setId(rs.getInt(11));
+				usuario.setId(rs.getInt(13));
 
 				
-				Prestamo prestamo = new Prestamo(rs.getInt(1), usuario, rs.getDate(3), rs.getFloat(4),rs.getFloat(5),rs.getFloat(6),0, rs.getInt(7), rs.getInt(8),"d");
+				Prestamo prestamo = new Prestamo(rs.getInt(1), usuario, rs.getDate(3), rs.getFloat(4),rs.getFloat(5),rs.getFloat(6), rs.getInt(7), rs.getInt(9), rs.getInt(8), rs.getString(12));
 
 				lista.add(prestamo);
 

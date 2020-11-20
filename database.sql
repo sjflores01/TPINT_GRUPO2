@@ -409,7 +409,7 @@ BEGIN
     Select * from Prestamos
     inner join Usuarios on Prestamos.idUsuario = Usuarios.id
     inner join Personas on Usuarios.idPersona = Personas.id
-    where Prestamos.aprobado is null and Prestamos.aprobado is null;
+    where Prestamos.aprobado = 0 and Prestamos.rechazado = 0;
 END$$
 
 DELIMITER ;
