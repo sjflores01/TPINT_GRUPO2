@@ -60,7 +60,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				usuario.setId(rs.getInt(11));
 
 				
-				Prestamo prestamo = new Prestamo(rs.getInt(1), usuario, rs.getDate(3), rs.getDouble(4),rs.getDouble(5),rs.getDouble(6), rs.getInt(7), rs.getInt(8));
+				Prestamo prestamo = new Prestamo(rs.getInt(1), usuario, rs.getDate(3), rs.getFloat(4),rs.getFloat(5),rs.getFloat(6), rs.getInt(7), rs.getInt(8));
 
 				lista.add(prestamo);
 

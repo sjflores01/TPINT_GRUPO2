@@ -8,9 +8,9 @@ public class Prestamo {
 	Integer id;
 	Usuario usuario;
 	Date fecha;
-	double importePedido;
-	double importeTotal;
-	double montoMensual;
+	float importePedido;
+	float importeTotal;
+	float montoMensual;
 	int cantCuotas;
 	int plazoPago;
 	boolean aprobado;
@@ -29,7 +29,7 @@ public class Prestamo {
 		this.rechazado = rechazado;
 	}
 	//Contstructor
-	public Prestamo(Integer id, Usuario usuario, Date fecha, double importePedido, double importeTotal, double montoMensual, int cantCuotas, int plazoPago) {
+	public Prestamo(Integer id, Usuario usuario, Date fecha, float importePedido, float importeTotal, float montoMensual, int cantCuotas, int plazoPago) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -65,22 +65,22 @@ public class Prestamo {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public double getImportePedido() {
+	public float getImportePedido() {
 		return importePedido;
 	}
-	public void setImportePedido(double importePedido) {
+	public void setImportePedido(float importePedido) {
 		this.importePedido = importePedido;
 	}
-	public double getImporteTotal() {
+	public float getImporteTotal() {
 		return importeTotal;
 	}
-	public void setImporteTotal(double importeTotal) {
+	public void setImporteTotal(float importeTotal) {
 		this.importeTotal = importeTotal;
 	}
-	public double getMontoMensual() {
+	public float getMontoMensual() {
 		return montoMensual;
 	}
-	public void setMontoMensual(double montoMensual) {
+	public void setMontoMensual(float montoMensual) {
 		this.montoMensual = montoMensual;
 	}
 	public int getCantCuotas() {
