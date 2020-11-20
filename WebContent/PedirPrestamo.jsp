@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
-	<%@page import="dominio.Usuario"%>
+	
+		<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Usuario"%>
+<%@page import="dominio.Cuenta"%>
+<%@page import="dominio.Movimiento"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -110,11 +114,12 @@
 	
 	<div class="container">
 	
-	<% 
-			
-			if(usuarioAdmin!=null)
-			{%>
 	
+	<%
+			Usuario usuario = (Usuario) request.getSession().getAttribute("cliente");
+			ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentasUsuario");
+			ArrayList<Movimiento> listaMovimientos = (ArrayList<Movimiento>) request.getAttribute("movimientos");
+		%>
 	
 		<div class="row mt-2">
 			<div class="col-md-12">
@@ -127,6 +132,18 @@
 			<div class="col-md-6" style="">
 				<form>
 				
+				
+				<label for="">Seleccione una cuenta</label> <select
+						class="form-control" id="selectCuenta" name="TXTcbu">
+						<%for(Cuenta cuenta:listaCuentas)
+						{%>
+						<option value="<%= cuenta.getCbu()%>">Cbu: <%= cuenta.getCbu() %> - <%= cuenta.getTipoCuenta().getDescripcion() %> </option>
+						<%} %>
+					</select>
+				
+				
+				
+				
 				<label for="">Monto a pedir:</label>
 				<input type="text" class="form-control" name="TXTmonto"
 								id="Monto" aria-describedby="mon toHelp" placeholder="Ingrese la cantidad de dinero deseada">
@@ -138,24 +155,12 @@
 						<option value="36">36</option>
 					</select>
 				
-					<label for="">Seleccione una cuenta</label> <select
-						class="form-control" id="sexo" name=sexo>
-						<option value="ahorroPesos">CA - Pesos</option>
-						<option value="ahorroDolares">CA - U$</option>
-						<option value="corrientePesos">CC - Pesos</option>
-					</select>
+					
 
 					<div style="height: 50px"></div>
-					
-			<%}%>
-			<%
-		          
+					<input type="submit" name="BtnPedirPrestamo" value="Solicitar">
 			
-			session.setAttribute("UsuarioAdminLogin",usuarioAdmin);	
 			
-		
-			
-			%>
 				</form>
 			</div>
 

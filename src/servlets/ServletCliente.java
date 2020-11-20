@@ -187,7 +187,24 @@ public class ServletCliente extends HttpServlet {
 		}
 		else if(request.getParameter("cargarPedirPrestamos") != null)
 		{
-			// boton para ir a pedir prestamos
+			
+			
+			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
+	
+			
+			listaCuentasUsuario = negCuenta.listarCuentasXUsuario(usuario.getId());
+			
+			
+			
+			
+			
+			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);							
+			redireccion = "CuentaMovimientos.jsp";
+			
+			
+			
+			
+			
 		}
 		else if(request.getParameter("cargarMiInfo") != null) {
 			
