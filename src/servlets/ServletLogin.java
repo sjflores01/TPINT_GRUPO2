@@ -47,6 +47,7 @@ public class ServletLogin extends HttpServlet {
 		{
 			Usuario usuarioAdmin = new Usuario();
 			Usuario usuarioUser = new Usuario();
+			Usuario cliente = new Usuario();
 			UsuarioNeg negUsuario = new UsuarioNegImpl();
 			
 			String username = request.getParameter("txtBoxUsuario");
@@ -54,7 +55,7 @@ public class ServletLogin extends HttpServlet {
 			
 			usuarioAdmin = negUsuario.confirmarAdmin(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));	
 			
-			
+			cliente = negUsuario.confirmarUser(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));
 			
 			
 			
@@ -75,7 +76,10 @@ public class ServletLogin extends HttpServlet {
 			{
 				usuarioUser = negUsuario.confirmarUser(request.getParameter("txtBoxUsuario"),request.getParameter("txtBoxClave"));
 				
+								
 				request.getSession().setAttribute("cliente", usuarioUser);
+				
+				request.getSession().setAttribute("clienteLogin", cliente);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("IndexUsuario.jsp");
 				

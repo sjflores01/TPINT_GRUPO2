@@ -75,6 +75,14 @@
 						href="ServletCliente?cargarMiInfo=<%=usuario.getId()%>">Mi
 							info</a></li>
 				</div>
+				
+				
+				<div class="col-md-2">
+						<li class="nav-item active"><a class="nav-link" href="ServletCliente?Logout=1">Salir
+								<span class="sr-only">(current)</span>
+						</a></li>
+					</div>
+				
 
 			</div>
 		</ul>

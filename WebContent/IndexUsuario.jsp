@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BANCO AGUANTE JAVA!</title>
+<title>IndexUsuario</title>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
@@ -18,6 +18,9 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
+	
+	
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
@@ -51,7 +54,18 @@
 	
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;">
-		<a class="navbar-brand" href="#">BANCO JAVA</a>
+		
+		
+	<a class="navbar-brand"
+		<%Usuario usuarioCliente = new Usuario();
+		
+		
+		
+		usuarioCliente =(Usuario)session.getAttribute("clienteLogin");%>
+		
+		
+		href="#">BANCO JAVA USUARIO: <%= usuarioCliente.getPersona().getNombre()%></a> 		
+		
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +75,7 @@
 			<ul class="navbar-nav">
 				<div class="row">
 					<div class="col-md-2">
-						<li class="nav-item active"><a class="nav-link" href="Index.jsp">Home
+						<li class="nav-item active"><a class="nav-link" href="IndexUsuario.jsp">Home
 								<span class="sr-only">(current)</span>
 						</a></li>
 					</div>
@@ -81,6 +95,13 @@
 						<li class="nav-item"><a class="nav-link" href="ServletCliente?cargarMiInfo=<%=usuario.getId()%>">Mi info</a>
 						</li>
 					</div>
+					
+					<div class="col-md-2">
+						<li class="nav-item active"><a class="nav-link" href="ServletCliente?Logout=1">Salir
+								<span class="sr-only">(current)</span>
+						</a></li>
+					</div>
+					
 					
 				</div>
 			</ul>

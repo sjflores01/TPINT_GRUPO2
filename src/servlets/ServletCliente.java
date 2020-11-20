@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import daoImpl.UsuarioDaoImpl;
+
 // import com.mysql.cj.Session;
 
 import dominio.Cuenta;
@@ -20,6 +22,7 @@ import negocio.CuentaNeg;
 import negocio.MovimientoNeg;
 import negocio.UsuarioNeg;
 import negocioImpl.CuentaNegImpl;
+import negocioImpl.FechaNegImpl;
 import negocioImpl.MovimientoNegImpl;
 import negocioImpl.UsuarioNegImpl;
 
@@ -189,7 +192,49 @@ public class ServletCliente extends HttpServlet {
 		else if(request.getParameter("cargarMiInfo") != null) {
 			
 			// boton para ir a donde el usuario ve su info
+			
+			
+				
+				String parametro = request.getParameter("cargarMiInfo");
+				String sexo;
+				String fecha;
+				Integer id = Integer.parseInt(parametro);
+				
+				UsuarioDaoImpl dao = new UsuarioDaoImpl();
+				Usuario Cliente;
+				
+				Cliente = dao.leerUsuario(id);
+				
+				if(Cliente.getPersona().getSexo() == 'M')
+				{
+					sexo = "Masculino";
+				} else {						
+					sexo = "Femenino"; 
+				}
+				
+
+				FechaNegImpl fechaNegImpl = new FechaNegImpl();
+				fecha = fechaNegImpl.getString(usuario.getPersona().getFnac());
+				
+				
+				request.setAttribute("usuarioCliente", usuario);
+				request.setAttribute("sexo", sexo);
+				request.setAttribute("fecha", fecha);
+				redireccion = "Cliente_Mi_Info.jsp";				
+			
+			
 		}
+		
+		else if (request.getParameter("Logout") != null) {
+
+			request.getSession().removeAttribute("ClienteLogin");
+			redireccion = "Login.jsp";
+
+		}		
+		
+		
+		
+		
 										
 		RequestDispatcher dis = request.getRequestDispatcher(redireccion);
 		dis.forward(request, response);

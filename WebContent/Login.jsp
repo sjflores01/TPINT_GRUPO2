@@ -8,7 +8,7 @@
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
 	
-		
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -82,7 +82,7 @@
 					<div class="form-row">
 						<div class="col-md-4">
 							<label>Usuario</label> <input type="text" class="form-control"
-								id="txtBoxUsuario" name="txtBoxUsuario"" placeholder="Usuario" required="por favor ingrese un nombre">
+								id="txtBoxUsuario" name="txtBoxUsuario" placeholder="Usuario" required="por favor ingrese un nombre">
 						</div>
 					</div>
 					<div class="form-row">
