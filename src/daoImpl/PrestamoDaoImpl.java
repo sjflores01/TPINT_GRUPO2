@@ -139,7 +139,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
 		
 		
 		
-		String query = "call solicitarPrestamo('"+pres.getCbu()+"',"+2+","+pres.getImportePedido()+","+pres.getImporteTotal()+","+pres.getMontoMensual()+","+pres.getCantCuotas()+")";
+		String query = "call solicitarPrestamo('"+pres.getCbu()+"',"+pres.getUsuario().getId()+","+pres.getImportePedido()+","+pres.getImporteTotal()+","+pres.getMontoMensual()+","+pres.getCantCuotas()+")";
 		java.sql.Connection cn = null;
 		
 		try {

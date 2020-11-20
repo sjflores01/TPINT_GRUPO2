@@ -39,6 +39,7 @@ public class PrestamoNegImpl implements PrestamoNeg{
 
 	@Override
 	public void solicitarPrestamo(Prestamo pres) {
+		
 		daoPrestamo.solicitarPrestamo(pres);
 		
 	}

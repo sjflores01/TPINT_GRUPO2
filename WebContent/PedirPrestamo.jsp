@@ -107,7 +107,7 @@
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
-				<form>
+				<form action="ServletCliente" method="get">
 				
 				
 				<label for="">Seleccione una cuenta</label> <select

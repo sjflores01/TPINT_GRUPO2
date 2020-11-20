@@ -237,7 +237,7 @@ public class ServletCliente extends HttpServlet {
 			
 			redireccion = "DetallePedirPrestamo.jsp";
 			
-		}else if(request.getAttribute("BtnPedirPrestamo2") != null)
+		}else if(request.getParameter("BtnPedirPrestamo2") != null)
 		{
 			String cbu;
 			String stringMonto;

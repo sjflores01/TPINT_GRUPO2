@@ -98,27 +98,27 @@
 		<div class="row mt-2 d-flex justify-content-center"
 			style="position: relative; top: 50px">
 			<div class="col-md-6" style="">
-				<form>
+				<form action="ServletCliente" method="get">
 				
 				
 				<label for="">Cuotas mensuales de</label> 
 				<input type="text" class="form-control" name="TXTmontoMensual"
-								id="Monto" aria-describedby="mon toHelp" value="<%=request.getAttribute("cuotaMensual") %>" disabled>
+								id="Montomens"  value="<%=request.getAttribute("cuotaMensual") %>" disabled>
 				
 				
 				
 				<label for="">tasa</label>
 				<input type="text" class="form-control" name="TXTtasa"
-								id="Monto" aria-describedby="mon toHelp" value ="25%" disabled>
+								id="tasa"  value ="25%" disabled>
 				
-				<input type="hidden" name="TXTcbu"
-						value="<%=request.getAttribute("cbu")%>" />
-				<input type="hidden" name="TXTcuotas"
-						value="<%=request.getAttribute("cuotas")%>" />
-				<input type="hidden" name="TXTmonto"
-						value="<%=request.getAttribute("monto")%>" />
-					<input type="hidden" name="TXTmontoDevolver"
-						value="<%=request.getAttribute("montoDevolver")%>" />
+				<input type="hidden" 
+						value="<%=request.getAttribute("cbu")%>" name="TXTcbu"/>
+				<input type="hidden" 
+						value="<%=request.getAttribute("cuotas")%>" name="TXTcuotas" />
+				<input type="hidden" 
+						value="<%=request.getAttribute("monto")%>" name="TXTmonto" />
+					<input type="hidden"
+						value="<%=request.getAttribute("montoDevolver")%>"  name="TXTmontoDevolver"/>
 					
 				
 					

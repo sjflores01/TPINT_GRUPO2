@@ -600,5 +600,6 @@ call chequearCbu('000332312320');
 call getIdCuenta('000332312314');
 call solicitarPrestamo('000332312313',2,70.40,12.41,2500,6);
 
+
 select * from Prestamos
 
