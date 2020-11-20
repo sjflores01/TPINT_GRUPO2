@@ -127,6 +127,21 @@
 		<%
 		}
 		%>
+		
+		
+			<%if(request.getAttribute("mensaje") != null) {
+			%>
+		
+		<div class="row mt-2 d-flex justify-content-center" style="position:relative; top:40px">
+			<div class="col-3 card title d-flex justify-content-center">
+			
+			<h6 style="text-align:center"><%=request.getAttribute("mensaje") %> </h6>
+			</div>
+		
+		</div>
+		<%
+		}
+		%>
 				
 				
 				

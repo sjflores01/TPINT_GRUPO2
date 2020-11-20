@@ -103,7 +103,7 @@
 				
 				<label for="">Cuotas mensuales de</label> 
 				<input type="text" class="form-control" name="TXTmontoMensual"
-								id="Montomens"  value="<%=request.getAttribute("cuotaMensual") %>" disabled>
+								id="Montomens"  value="<%=request.getAttribute("cuotaMensual") %>" readonly>
 				
 				
 				

@@ -172,7 +172,8 @@ public class ServletCliente extends HttpServlet {
 				
 				Movimiento movimiento = new Movimiento(cuenta.getCbu(), destino, monto, null, "Transferencia");
 				negMov.hacerTransferencia(movimiento);
-				
+				mensaje="Transferencia exitosa.";
+				request.setAttribute("mensaje", mensaje);
 				
 				
 				
@@ -244,17 +245,21 @@ public class ServletCliente extends HttpServlet {
 			String stringcuotas;
 			String stringMontoDevolver;
 			String stringCuotaMensual;
+			String mensaje;
 			
-			Float monto;
+			float monto;
 			int cuotas;
 			float montoDevolver;
 			float cuotaMensual;
+			
+			
 			
 			cbu = request.getParameter("TXTcbu");
 			stringMonto = request.getParameter("TXTmonto");
 			stringcuotas = request.getParameter("TXTcuotas");
 			stringMontoDevolver = request.getParameter("TXTmontoDevolver");
 			stringCuotaMensual = request.getParameter("TXTmontoMensual");
+			
 			
 			monto = Float.parseFloat(stringMonto);
 			cuotas = Integer.parseInt(stringcuotas);
@@ -267,8 +272,8 @@ public class ServletCliente extends HttpServlet {
 			PrestamoNegImpl presNeg = new PrestamoNegImpl();
 			presNeg.solicitarPrestamo(pres);
 			
-			
-			
+			mensaje="Solicitud de prestamo exitosa, pendiente aprovacion";
+			request.setAttribute("mensaje", mensaje);
 			
 			
 			
