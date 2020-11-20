@@ -37,76 +37,52 @@
 <body>
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
-		
-<%Usuario usuarioAdmin = new Usuario();
-		
-		
-		
-		usuarioAdmin =(Usuario)session.getAttribute("UsuarioAdminLogin"); %>
-		
-		
-		href="#">BANCO JAVA ADMINISTRADOR: <%= usuarioAdmin.getNombre()%></a> 		
-
-
+		href="#">BANCO JAVA</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 		aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<%
+			Usuario usuario = (Usuario) request.getSession().getAttribute("cliente");
+		
+		%>
 		<ul class="navbar-nav">
 			<div class="row">
-			
-			
-			<div class="col-md-2">
-						<li class="nav-item active"><a class="nav-link" href="IndexAdmin.jsp">Home
-								<span class="sr-only">(current)</span>
-						</a></li>
-					</div>
-			
-			
 				<div class="col-md-2">
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Clientes </a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="UsuarioDatosPersonales.jsp">Nuevo cliente</a> <a
-								class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Modificar cliente</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Eliminar cliente</a>
-						</div></li>
+					<li class="nav-item active"><a class="nav-link"
+						href="Index.jsp">Home <span class="sr-only">(current)</span>
+					</a></li>
 				</div>
 				<div class="col-md-2">
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Cuentas </a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="NuevaCuenta.jsp">Nueva cuenta</a> <a
-								class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Modificar cuenta</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="ServletCuenta?ListaCuentas=1&pagina=1">Eliminar cuenta</a>
-						</div></li>
-				</div>
-				<div class="col-md-3">
-					<li class="nav-item"><a class="nav-link" href="PedirPrestamo.jsp">Solicitudes
-							de prestamos</a></li>
-				</div>
-				<div class="col-md-2">
-					<li class="nav-item"><a class="nav-link" href="#">Informes</a>
+					<li class="nav-item"><a class="nav-link"
+						href="ServletCliente?cargarCuentas=<%=usuario.getId()%>">Cuentas</a>
 					</li>
 				</div>
+				<div class="col-md-2">
+					<li class="nav-item"><a class="nav-link"
+						href="ServletCliente?cargarPrestamos=<%=usuario.getId()%>">Ver
+							Prestamos</a></li>
+				</div>
+				<div class="col-md-2">
+					<li class="nav-item"><a class="nav-link"
+						href="ServletCliente?cargarPedirPrestamos=<%=usuario.getId()%>">Pedí
+							tu Prestamo</a></li>
+				</div>
+				<div class="col-md-2">
+					<li class="nav-item"><a class="nav-link"
+						href="ServletCliente?cargarMiInfo=<%=usuario.getId()%>">Mi
+							info</a></li>
+				</div>
 				
 				<div class="col-md-2">
-						<li class="nav-item active"><a class="nav-link" href="IndexAdmin.jsp">Salir
+						<li class="nav-item active"><a class="nav-link" href="ServletCliente?Logout=1">Salir
 								<span class="sr-only">(current)</span>
 						</a></li>
 					</div>
 				
-				
+
 			</div>
 		</ul>
 	</div>
@@ -116,9 +92,10 @@
 	
 	
 	<%
-			Usuario usuario = (Usuario) request.getSession().getAttribute("cliente");
+			
+			
 			ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listaCuentasUsuario");
-			ArrayList<Movimiento> listaMovimientos = (ArrayList<Movimiento>) request.getAttribute("movimientos");
+			
 		%>
 	
 		<div class="row mt-2">
@@ -149,7 +126,7 @@
 								id="Monto" aria-describedby="mon toHelp" placeholder="Ingrese la cantidad de dinero deseada">
 				
 				<label for="">Seleccione cantidad de Cuotas</label> <select
-						class="form-control" id="sexo" name=sexo>
+						class="form-control" id="sexo" name="TXTcuotas">
 						<option value="12">12</option>
 						<option value="24">24</option>
 						<option value="36">36</option>

@@ -17,6 +17,7 @@ import daoImpl.UsuarioDaoImpl;
 
 import dominio.Cuenta;
 import dominio.Movimiento;
+import dominio.Prestamo;
 import dominio.Usuario;
 import negocio.CuentaNeg;
 import negocio.MovimientoNeg;
@@ -24,7 +25,9 @@ import negocio.UsuarioNeg;
 import negocioImpl.CuentaNegImpl;
 import negocioImpl.FechaNegImpl;
 import negocioImpl.MovimientoNegImpl;
+import negocioImpl.PrestamoNegImpl;
 import negocioImpl.UsuarioNegImpl;
+import sun.management.counter.StringCounter;
 
 /**
  * Servlet implementation class ServletCliente
@@ -199,13 +202,78 @@ public class ServletCliente extends HttpServlet {
 			
 			
 			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);							
-			redireccion = "CuentaMovimientos.jsp";
+			redireccion = "PedirPrestamo.jsp";
 			
 			
 			
 			
 			
-		}
+		}else if(request.getParameter("BtnPedirPrestamo") != null)
+		{
+			String cbu;
+			String stringMonto;
+			String stringcuotas;
+			
+			Float monto;
+			int cuotas;
+			float montoDevolver;
+			float cuotaMensual;
+			
+			cbu = request.getParameter("TXTcbu");
+			stringMonto = request.getParameter("TXTmonto");
+			stringcuotas = request.getParameter("TXTcuotas");
+			
+			monto = Float.parseFloat(stringMonto);
+			cuotas = Integer.parseInt(stringcuotas);
+			
+			montoDevolver = monto * 1.25f;
+			cuotaMensual = montoDevolver / cuotas;
+			
+			request.setAttribute("cbu", cbu);
+			request.setAttribute("monto", monto);
+			request.setAttribute("cuotas", cuotas);
+			request.setAttribute("montoDevolver", montoDevolver);
+			request.setAttribute("cuotaMensual", cuotaMensual);
+			
+			redireccion = "DetallePedirPrestamo.jsp";
+			
+		}else if(request.getAttribute("BtnPedirPrestamo2") != null)
+		{
+			String cbu;
+			String stringMonto;
+			String stringcuotas;
+			String stringMontoDevolver;
+			String stringCuotaMensual;
+			
+			Float monto;
+			int cuotas;
+			float montoDevolver;
+			float cuotaMensual;
+			
+			cbu = request.getParameter("TXTcbu");
+			stringMonto = request.getParameter("TXTmonto");
+			stringcuotas = request.getParameter("TXTcuotas");
+			stringMontoDevolver = request.getParameter("TXTmontoDevolver");
+			stringCuotaMensual = request.getParameter("TXTmontoMensual");
+			
+			monto = Float.parseFloat(stringMonto);
+			cuotas = Integer.parseInt(stringcuotas);
+			montoDevolver = Float.parseFloat(stringMontoDevolver);
+			cuotaMensual = Float.parseFloat(stringCuotaMensual);
+			
+			
+			Prestamo pres = new Prestamo(0, usuario, null, monto, montoDevolver, cuotaMensual, cuotas, cuotas, 0, cbu);
+			
+			PrestamoNegImpl presNeg = new PrestamoNegImpl();
+			presNeg.solicitarPrestamo(pres);
+			
+			
+			
+			
+			
+			
+			
+		}		
 		else if(request.getParameter("cargarMiInfo") != null) {
 			
 			// boton para ir a donde el usuario ve su info

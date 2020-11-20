@@ -35,6 +35,13 @@ public class PrestamoNegImpl implements PrestamoNeg{
 	public void cancelarPrestamo(int id) {
 	     daoPrestamo.cancelarPrestamo(id);
 	}
+
+
+	@Override
+	public void solicitarPrestamo(Prestamo pres) {
+		daoPrestamo.solicitarPrestamo(pres);
+		
+	}
 	
 	
 }

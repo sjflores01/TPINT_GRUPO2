@@ -99,6 +99,7 @@ cuotasPagas int,
 plazoPago int,
 aprobado bool,
 rechazado bool,
+cbu varchar(30),
 FOREIGN KEY (idUsuario) REFERENCES Usuarios(id)
 );
 
@@ -531,7 +532,26 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
 
+CREATE PROCEDURE solicitarPrestamo(
+in cbu int,
+in idUsuarioParametro int,
+in importeSolicitado float,
+in totalApagar float,
+in importeMensual float,
+in cantidadCuotas int
+
+
+)
+
+BEGIN
+	
+   Insert into Prestamos (idUsuario, fecha, importePedido, importeTotal, montoMensual, cantCuotas, cuotasPagas,plazoPago, aprobado, rechazado, cbu) values (idUsuarioParametro, CURRENT_DATE, importeSolicitado, totalApagar, importeMensual, cantidadCuotas, 0, cantidadCuotas, false, false, cbu);
+    
+	  
+END$$
+DELIMITER ;
 
 
 
@@ -578,4 +598,7 @@ call listarMovimientos('000332312313');
 call listarMovimientos('000332312320');
 call chequearCbu('000332312320');
 call getIdCuenta('000332312314');
+call solicitarPrestamo('000332312313',2,70.40,12.41,2500,6);
+
+select * from Prestamos
 

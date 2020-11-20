@@ -10,4 +10,5 @@ public interface PrestamoNeg {
 	public ArrayList<Prestamo> listarPrestamos();
 	public void aprobarPrestamo(int id);
 	public void cancelarPrestamo(int id);
+	public void solicitarPrestamo(Prestamo pres);
 }

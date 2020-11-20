@@ -60,7 +60,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
 				usuario.setId(rs.getInt(11));
 
 				
-				Prestamo prestamo = new Prestamo(rs.getInt(1), usuario, rs.getDate(3), rs.getFloat(4),rs.getFloat(5),rs.getFloat(6), rs.getInt(7), rs.getInt(8));
+				Prestamo prestamo = new Prestamo(rs.getInt(1), usuario, rs.getDate(3), rs.getFloat(4),rs.getFloat(5),rs.getFloat(6),0, rs.getInt(7), rs.getInt(8),"d");
 
 				lista.add(prestamo);
 
@@ -120,6 +120,44 @@ public class PrestamoDaoImpl implements PrestamoDao {
 			e.printStackTrace();
 		}
 
+	}
+
+
+	@Override
+	public void solicitarPrestamo(Prestamo pres) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+		} catch (ClassNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		String query = "call solicitarPrestamo('"+pres.getCbu()+"',"+2+","+pres.getImportePedido()+","+pres.getImporteTotal()+","+pres.getMontoMensual()+","+pres.getCantCuotas()+")";
+		java.sql.Connection cn = null;
+		
+		try {
+			
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			java.sql.Statement st = cn.createStatement();
+			st.executeUpdate(query);
+			
+			
+		} catch (Exception e) {
+			
+			
+			e.printStackTrace();
+			
+		}
+		
+		
+		
 	}
 
 

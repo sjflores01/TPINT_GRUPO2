@@ -13,9 +13,10 @@ public class Prestamo {
 	float montoMensual;
 	int cantCuotas;
 	int plazoPago;
+	int cuotasPagas;	
 	boolean aprobado;
 	boolean rechazado;
-
+	String cbu;
 	public boolean isAprobado() {
 		return aprobado;
 	}
@@ -29,27 +30,45 @@ public class Prestamo {
 		this.rechazado = rechazado;
 	}
 	//Contstructor
-	public Prestamo(Integer id, Usuario usuario, Date fecha, float importePedido, float importeTotal, float montoMensual, int cantCuotas, int plazoPago) {
+	
+	public Prestamo() {
+		super();
+	}
+
+	public Prestamo(Integer id, Usuario usuario, Date fecha, float importePedido, float importeTotal,
+			float montoMensual, int cantCuotas, int plazoPago, int cuotasPagas, 
+			String cbu) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
 		this.fecha = fecha;
 		this.importePedido = importePedido;
 		this.importeTotal = importeTotal;
+		this.montoMensual = montoMensual;
 		this.cantCuotas = cantCuotas;
-		this.importePedido = importePedido;
 		this.plazoPago = plazoPago;
+		this.cuotasPagas = cuotasPagas;
+		
+		this.cbu = cbu;
 	}
-	public Prestamo() {
-		super();
-	}
-
 	//Getters and setters
 
 	public Integer getId() {
 		return id;
 	}
 
+	public int getCuotasPagas() {
+		return cuotasPagas;
+	}
+	public void setCuotasPagas(int cuotasPagas) {
+		this.cuotasPagas = cuotasPagas;
+	}
+	public String getCbu() {
+		return cbu;
+	}
+	public void setCbu(String cbu) {
+		this.cbu = cbu;
+	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
