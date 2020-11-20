@@ -513,7 +513,7 @@ in cbuParametro varchar(30)
 
 BEGIN
 	
-   Select Count(*) from Cuentas where cbu = cbuParametro;
+   Select Count(*) from Cuentas where cbu = cbuParametro and eliminada = 0;
     
 END$$
 DELIMITER ;
@@ -577,3 +577,4 @@ call listarMovimientos('000332312313');
 call listarMovimientos('000332312320');
 call chequearCbu('000332312320');
 call getIdCuenta('000332312314');
+
