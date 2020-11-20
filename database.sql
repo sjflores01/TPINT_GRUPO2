@@ -61,7 +61,7 @@ idUsuario int NOT NULL,
 fechaCreacion datetime,
 tipoCta int,
 cbu varchar(30) unique,
-saldo decimal,
+saldo float,
 eliminada bool,
 FOREIGN KEY (tipoCta) REFERENCES TiposDeCuenta(id),
 FOREIGN KEY (idUsuario) REFERENCES Usuarios(id),
@@ -77,7 +77,7 @@ INSERT INTO TiposDeMovimiento (descripcion) VALUES ('Credito');
 CREATE TABLE Movimientos (
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 idDestino int not null,
-fecha date,
+fecha datetime,
 detalle varchar(150),
 importe float,
 idTipo int,
@@ -241,7 +241,7 @@ CREATE PROCEDURE asignarCuenta (
 in nuevoIdUsuario int,
 in nuevoTipoCta int,
 in nuevoCbu varchar(30),
-in nuevoSaldo decimal
+in nuevoSaldo float
 )
 BEGIN
 
@@ -295,7 +295,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE `modificarCuenta`(
 in tipoCta int,
-in saldo decimal,
+in saldo float,
 in id int
 )
 BEGIN
@@ -461,8 +461,9 @@ in concepto varchar(150)
 
 BEGIN
 	
-    Insert into Movimientos (idDestino, idOrigen, fecha, detalle, importe, idTipo) values (idCuentaDestino, idCuentaOrigen, CURRENT_DATE, concepto, importeOperacion, 1);
-    
+    Insert into Movimientos (idDestino, idOrigen, fecha, detalle, importe, idTipo) values (idCuentaDestino, idCuentaOrigen, CURRENT_TIMESTAMP, concepto, importeOperacion, 1);
+    update Cuentas set saldo = saldo + importeOperacion where id = idCuentaDestino;
+    update Cuentas set saldo = saldo - importeOperacion where id = idCuentaOrigen;
     
     
 END$$
@@ -478,7 +479,8 @@ BEGIN
     select  O.cbu as cbuOrigen, D.cbu as cbuDestino, M.importe, M.fecha, M.detalle  from Movimientos as M 
     inner join Cuentas as O on M.idOrigen = O.id
     inner join Cuentas as D on M.idDestino = D.id
-	where O.cbu = cbuCuenta or D.cbu = cbuCuenta;
+	where O.cbu = cbuCuenta or D.cbu = cbuCuenta
+    order by fecha desc;
    
     
     
@@ -503,6 +505,32 @@ BEGIN
     
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE chequearCbu(
+in cbuParametro varchar(30)
+)
+
+BEGIN
+	
+   Select Count(*) from Cuentas where cbu = cbuParametro;
+    
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE getIdCuenta(
+in cbuParametro varchar(30)
+)
+
+BEGIN
+	
+   Select id from Cuentas where cbu = cbuParametro;
+    
+END$$
+DELIMITER ;
+
+
 
 
 
@@ -546,4 +574,6 @@ call hacerTransferencia(4,9,4477,'Transferencia');
 call hacerTransferencia(1,9,4477,'Transferencia');
 call hacerTransferencia(9,2,4477,'Transferencia');
 call listarMovimientos('000332312313');
-call listarMovimientos('000332312320')
+call listarMovimientos('000332312320');
+call chequearCbu('000332312320');
+call getIdCuenta('000332312314');

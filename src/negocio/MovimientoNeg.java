@@ -7,4 +7,5 @@ import dominio.Movimiento;
 public interface MovimientoNeg {
 
 	public ArrayList<Movimiento> listarMovimientos(String cbu);
+	public void hacerTransferencia(Movimiento mov);
 }

@@ -9,4 +9,5 @@ public interface MovimientoDao {
 
 	
 	public ArrayList<Movimiento> listarMovimientos(String cbu);
+	public void hacerTransferencia(Movimiento mov);
 }

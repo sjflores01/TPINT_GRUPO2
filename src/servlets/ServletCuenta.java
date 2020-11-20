@@ -149,7 +149,7 @@ String mensaje = "Cuenta Creada con exito";
 			
 			int id;
 			int tipoCta;
-			double saldo;
+			float saldo;
 			
 			ID = request.getParameter("TXTid");
 			CTA = request.getParameter("Cuentas");
@@ -157,7 +157,7 @@ String mensaje = "Cuenta Creada con exito";
 			
 			id = Integer.parseInt(ID);
 			tipoCta  = Integer.parseInt(CTA);
-			saldo  = Double.parseDouble(SALDO);
+			saldo  = Float.parseFloat(SALDO);
 			
 			CuentaNeg negCuenta = new CuentaNegImpl();
 			negCuenta.modificarCuenta(tipoCta, saldo, id);

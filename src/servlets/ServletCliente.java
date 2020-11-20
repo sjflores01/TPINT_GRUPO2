@@ -62,19 +62,19 @@ public class ServletCliente extends HttpServlet {
 		{
 			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
 			ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>();
-			
+			int idSeleccionada;
 			
 			listaCuentasUsuario = negCuenta.listarCuentasXUsuario(usuario.getId());
 			listaMovimientos = negMov.listarMovimientos(listaCuentasUsuario.get(0).getCbu());
-
+			idSeleccionada = listaCuentasUsuario.get(0).getId();
 			
 			
 			
 			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);
 			request.setAttribute("movimientos", listaMovimientos);
 			request.setAttribute("selected", listaCuentasUsuario.get(0).getCbu());
-			
-			
+			request.setAttribute("idSeleccionada", idSeleccionada);
+			request.setAttribute("saldo", listaCuentasUsuario.get(0).getSaldo());
 			
 			redireccion = "CuentaMovimientos.jsp";
 			
@@ -88,22 +88,96 @@ public class ServletCliente extends HttpServlet {
 			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
 			ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>();
 			String cbu = request.getParameter("TXTcbu");
-			
+			int idSeleccionada = 0;
+			float saldo = 0f;
 			
 			listaCuentasUsuario = negCuenta.listarCuentasXUsuario(usuario.getId());
 			listaMovimientos = negMov.listarMovimientos(cbu);
 			
+			
+			for(Cuenta cuenta : listaCuentasUsuario)
+			{
+				if(cuenta.getCbu().equals(cbu))
+				{
+					idSeleccionada = cuenta.getId();
+					saldo = cuenta.getSaldo();
+				}
+			}
 			
 			
 			
 			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);
 			request.setAttribute("movimientos", listaMovimientos);
 			request.setAttribute("selected", cbu);
+			request.setAttribute("idSeleccionada", idSeleccionada);
+			request.setAttribute("saldo", saldo );
 			
 			redireccion = "CuentaMovimientos.jsp";
 					
 			
-		}						
+		}else if(request.getParameter("BtnCargaTransferencia") != null) 
+		{
+		
+			String stringId = request.getParameter("TXTidCuenta");
+			int id = Integer.parseInt(stringId);
+			
+			
+			Cuenta cuenta = negCuenta.getCuenta(id);
+			
+			
+			request.setAttribute("cuenta", cuenta);
+			request.setAttribute("idSeleccionada", id);
+			redireccion = "HacerTransferencia.jsp";
+			
+		}else if(request.getParameter("BtnTransferir") != null)
+		{
+			
+			String destino = request.getParameter("TXTcbu");
+			String stringMonto = request.getParameter("TXTmonto");
+			String stringId = request.getParameter("TXTidCuenta");
+			String mensaje;
+			
+			int id = Integer.parseInt(stringId);
+			float monto = Float.parseFloat(stringMonto);
+			
+			Cuenta cuenta = negCuenta.getCuenta(id);
+			
+			
+			if(!negCuenta.chequearCbu(destino))
+			{
+				mensaje = "CBU invalido.";
+				
+				redireccion = "HacerTransferencia.jsp";
+				
+				request.setAttribute("cuenta", cuenta);
+				request.setAttribute("idSeleccionada", id);
+				request.setAttribute("mensaje", mensaje);
+			} else if (cuenta.getSaldo() < monto)
+			{
+				mensaje = "Saldo insuficiente";
+				
+				redireccion = "HacerTransferencia.jsp";
+				
+				redireccion = "HacerTransferencia.jsp";
+				request.setAttribute("cuenta", cuenta);
+				request.setAttribute("idSeleccionada", id);
+				request.setAttribute("mensaje", mensaje);
+			}  else {
+				
+				Movimiento movimiento = new Movimiento(cuenta.getCbu(), destino, monto, null, "Transferencia");
+				negMov.hacerTransferencia(movimiento);
+				
+				
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+		}
 		else if(request.getParameter("cargarPrestamos") != null)
 		{
 			// boton para ir a prestamos

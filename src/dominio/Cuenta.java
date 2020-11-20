@@ -10,10 +10,10 @@ public class Cuenta {
 	Date fechaCreacion;
 	TipoCuenta tipoCuenta;
 	String cbu;
-	double saldo;
+	float saldo;
 
 	//Contstructor
-	public Cuenta(Integer id, String cbu, double saldo, Usuario usuario, Date fechaCreacion, TipoCuenta tipoCuenta) {
+	public Cuenta(Integer id, String cbu, float saldo, Usuario usuario, Date fechaCreacion, TipoCuenta tipoCuenta) {
 		super();
 		this.id = id;
 		this.cbu = cbu;
@@ -68,11 +68,11 @@ public class Cuenta {
 		this.cbu = cbu;
 	}
 
-	public double getSaldo() {
+	public float getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(double saldo) {
+	public void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
 

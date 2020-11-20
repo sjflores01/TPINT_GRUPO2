@@ -99,8 +99,35 @@
 						<option value="<%= cuenta.getCbu()%>" <%if(cuenta.getCbu().equals(request.getAttribute("selected"))){ %> selected  <%} %> >Cbu: <%= cuenta.getCbu() %> - <%= cuenta.getTipoCuenta().getDescripcion() %> </option>
 						<%} %>
 					</select>
+					
+					<div class="container-fluid">
+					<div class="row" style="height:25px"> </div>
+					<div class="row d-flex justify-content-center">
+					<div class="col-8 d-flex justify-content-between">
 					<input type="submit" name="BtnVerMovimientos" value="ver Movimientos">
-
+					<input type="submit" name="BtnCargaTransferencia" value="Hacer Transferencia">
+					
+					</div>
+					
+					</div>
+					<div class="row" style="height:25px"> </div>
+					<div class="row d-flex justify-content-center">
+					<div class="col-8 d-flex justify-content-center">
+					
+					<div class="form-group">
+					 <label for="saldo">saldo</label>
+					<input class="form-control" type="text" name="TXTsaldo" id="saldo" value="<%=request.getAttribute("saldo")%>" disabled/>
+					</div>
+					
+					</div>
+					
+					</div>
+					
+					</div>
+					
+					
+					
+					<input type="hidden" name="TXTidCuenta" value="<%=request.getAttribute("idSeleccionada") %>" />
 					<div style="height: 50px"></div>
 					<table class="table">
 						<thead class="table-info">

@@ -28,7 +28,7 @@ public class CuentaNegImpl implements CuentaNeg{
 	}
 
 	@Override
-	public void modificarCuenta(int tipoCta, double saldo, int id) {
+	public void modificarCuenta(int tipoCta, float saldo, int id) {
 		daoCuenta.modificarCuenta(tipoCta, saldo, id);
 	}
 
@@ -50,6 +50,12 @@ public class CuentaNegImpl implements CuentaNeg{
 	@Override
 	public ArrayList<Cuenta> listarCuentasXUsuario(int idUsuario) {
 		return daoCuenta.listarCuentasXUsuario(idUsuario);
+	}
+
+	@Override
+	public Boolean chequearCbu(String cbu) {
+		
+		return daoCuenta.chequearCbu(cbu);
 	}
 
 	

@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import dao.Gestor;
 import dao.MovimientoDao;
 import dominio.Cuenta;
+import dominio.Direccion;
 import dominio.Movimiento;
+import dominio.Persona;
 
 public class MovimientoDaoImpl implements MovimientoDao{
 
@@ -73,6 +75,51 @@ public class MovimientoDaoImpl implements MovimientoDao{
 		
 		
 		return lista;
+		
+		
+		
+	}
+
+	@Override
+	public void hacerTransferencia(Movimiento mov) {
+		
+		CuentaDaoImpl cuentaDao = new CuentaDaoImpl();
+		int idOrigen;
+		int idDestino;
+		
+		idOrigen = cuentaDao.getIdConCbu(mov.getOrigen());
+		idDestino = cuentaDao.getIdConCbu(mov.getDestino());
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+		} catch (ClassNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+		
+		
+		
+				
+		String query = "call hacerTransferencia("+idOrigen+","+idDestino+","+mov.getMonto()+",'"+mov.getConcepto()+"')";
+		java.sql.Connection cn = null;
+		
+		try {
+			
+			cn = DriverManager.getConnection(gestor.getConectoinString(),gestor.getUser(),gestor.getPass());
+			java.sql.Statement st = cn.createStatement();
+			st.executeUpdate(query);
+			
+			
+		} catch (Exception e) {
+			
+			
+			e.printStackTrace();
+			
+		}
+		
+		
 		
 		
 		

@@ -20,4 +20,13 @@ public class MovimientoNegImpl implements MovimientoNeg {
 		
 	}
 
+	@Override
+	public void hacerTransferencia(Movimiento mov) {
+		
+		MovimientoDaoImpl dao = new MovimientoDaoImpl();
+		
+		dao.hacerTransferencia(mov);
+		
+	}
+
 }
