@@ -43,6 +43,35 @@ public class PrestamoNegImpl implements PrestamoNeg{
 		daoPrestamo.solicitarPrestamo(pres);
 		
 	}
+
+
+	@Override
+	public ArrayList<Prestamo> listarPrestamosActivosDeUser(int id) {
+	
+		return daoPrestamo.listarPrestamosActivosDeUsuario(id);
+	}
+
+
+	@Override
+	public int contarPrestamosPendientesDeUser(int id) {
+
+		return daoPrestamo.contarPrestamosPendientesDeUsuario(id);
+	}
+
+
+	@Override
+	public Prestamo leerPrestamo(int id) {
+		
+		return daoPrestamo.leerPrestamo(id);
+	}
+
+
+	@Override
+	public void pagarCuota(int idCuenta, int idPrestamo) {
+		
+		daoPrestamo.pagaCuota(idCuenta, idPrestamo);
+		
+	}
 	
 	
 }

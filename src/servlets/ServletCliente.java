@@ -187,8 +187,100 @@ public class ServletCliente extends HttpServlet {
 		}
 		else if(request.getParameter("cargarPrestamos") != null)
 		{
-			// boton para ir a prestamos
+			
+			ArrayList<Prestamo> prestamosActivos = new ArrayList<Prestamo>();
+			int pendientes = 0;
+			
+			PrestamoNegImpl presNeg = new PrestamoNegImpl();
+			
+			prestamosActivos = presNeg.listarPrestamosActivosDeUser(usuario.getId());
+			pendientes = presNeg.contarPrestamosPendientesDeUser(usuario.getId());
+			
+			request.setAttribute("prestamosActivos", prestamosActivos);
+			request.setAttribute("pendientes", pendientes);
+			redireccion="MisPrestamos.jsp";
+			
+		}else if(request.getParameter("cargaPagar") != null)
+		{
+		
+			String idPrestamoString = request.getParameter("cargaPagar");
+			int idPrestamo = Integer.parseInt(idPrestamoString);
+			
+			Prestamo pres;
+			ArrayList<Cuenta> cuentas;
+			
+			PrestamoNegImpl presNeg = new PrestamoNegImpl();
+			pres = presNeg.leerPrestamo(idPrestamo);
+			
+			cuentas = negCuenta.listarCuentasXUsuario(usuario.getId());
+			
+			request.setAttribute("cuentas", cuentas);
+			request.setAttribute("prestamo", pres);
+			
+			redireccion="PagarCuota.jsp";
+		}else if(request.getParameter("BtnPagarCuota") != null)
+		{
+			
+			Boolean saldo = false;
+			String mensaje;
+			Integer idCuentaQuePaga = -1;
+			String cbuSeleccionado = request.getParameter("TXTcbu");
+			String stringIdPres = request.getParameter("TXTidPrestamo");			
+			int idPrestamo;
+			ArrayList<Cuenta> cuentas;
+			
+			
+			
+			Prestamo pres;
+			
+			idPrestamo = Integer.parseInt(stringIdPres);
+			
+			
+			PrestamoNegImpl presNeg = new PrestamoNegImpl();
+			pres = presNeg.leerPrestamo(idPrestamo);
+			cuentas = negCuenta.listarCuentasXUsuario(usuario.getId());
+			
+			for(Cuenta c : cuentas)
+			{
+				if(c.getCbu().equals(cbuSeleccionado))
+				{
+					if(c.getSaldo() >= pres.getMontoMensual())
+					{
+						saldo = true;
+						idCuentaQuePaga = c.getId();
+					}
+				}
+			}
+			
+			if(!saldo) {
+				
+				mensaje = "Saludo insuficiente.";
+				
+				request.setAttribute("cuentas", cuentas);
+				request.setAttribute("prestamo", pres);
+				request.setAttribute("mensaje", mensaje);
+				
+				redireccion="PagarCuota.jsp";
+			} else {
+				
+				
+				presNeg.pagarCuota(idCuentaQuePaga, pres.getId());
+				
+				mensaje = "Cuota paga.";
+				
+				request.setAttribute("mensaje", mensaje);
+				redireccion="IndexUsuario.jsp";
+				
+				
+			}
+			
+			
+			
+			
+			
+			
 		}
+		
 		else if(request.getParameter("cargarPedirPrestamos") != null)
 		{
 			

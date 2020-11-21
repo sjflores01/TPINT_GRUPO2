@@ -414,6 +414,45 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE `leerPrestamo`(
+in idParametro int
+)
+BEGIN
+    Select * from Prestamos
+    inner join Usuarios on Prestamos.idUsuario = Usuarios.id
+    inner join Personas on Usuarios.idPersona = Personas.id
+    where Prestamos.id = idParametro;
+    
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `listarPrestamosActivosDeUser`(
+in idParametro int
+)
+BEGIN
+    Select * from Prestamos
+    inner join Usuarios on Prestamos.idUsuario = Usuarios.id
+    inner join Personas on Usuarios.idPersona = Personas.id
+    where Prestamos.aprobado = 1 and Prestamos.rechazado = 0 and idUsuario = idParametro;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `contarPrestamosPendientes`(
+in idParametro int
+)
+BEGIN
+    Select Count(*) from Prestamos
+    inner join Usuarios on Prestamos.idUsuario = Usuarios.id
+    inner join Personas on Usuarios.idPersona = Personas.id
+    where Prestamos.aprobado = 0 and Prestamos.rechazado = 0 and idUsuario = idParametro;
+END$$
+
+DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `aprobarPrestamo`(
@@ -425,6 +464,8 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
 
 
 DELIMITER $$
@@ -535,7 +576,7 @@ DELIMITER ;
 DELIMITER $$
 
 CREATE PROCEDURE solicitarPrestamo(
-in cbu int,
+in cbu varchar(30),
 in idUsuarioParametro int,
 in importeSolicitado float,
 in totalApagar float,
@@ -553,6 +594,49 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE PROCEDURE PagarCuota(
+in idCuentaPaga int,
+in idPrestamo int
+
+
+
+)
+
+BEGIN
+	
+   DECLARE montoDeCuota INT DEFAULT 0;
+   
+   
+   Update Prestamos set cuotasPagas = cuotasPagas + 1
+   where id = idPrestamo;
+   
+   Select montoMensual 
+   into montodeCuota
+   from prestamos where id = idPrestamo;
+   
+   Insert into Movimientos (idDestino, idOrigen, fecha, detalle, importe, idTipo) values (11, idCuentaPaga, CURRENT_TIMESTAMP, 'Cuota', montodeCuota, 1);
+    update Cuentas set saldo = saldo - montodeCuota where id = idCuentaPaga;
+   
+  
+   
+   -- HACER TRANSFERENCIA DE PAGO
+  
+	  
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE contarCuentas(
+in idParametro int
+
+)
+BEGIN
+    Select Count(*) from cuentas where idUsuario = idParametro;
+END$$
+
+DELIMITER ;
 
 
 
@@ -579,6 +663,14 @@ call asignarCuenta(6,1,'000332312317',10000);
 call asignarCuenta(7,1,'000332312318',10000);
 call asignarCuenta(8,1,'000332312319',10000);
 call asignarCuenta(2,1,'000332312320',10000);
+
+
+-- SI ASIGNAN MAS USUARIOS O CUENTAS, HAGANLO DESPUES DE ESTE BLOQUE PORQUE ACA ASIGNO AL USUARIO Y CUENTA DEL BANCO, Y SI LE METEN ANTES SE CORREN LAS ID
+insert into Usuarios (estado, nombreUsuario, clave) values (0,'BANCO','BANCO');
+insert into Cuentas (idUsuario, cbu, saldo, eliminada ) values (13,'BANCO', 99999999999999, 1);
+
+
+-- FIN
 call leerUsuario(1);
 call contarMails('tom@');
 call contarDni('99');
@@ -591,15 +683,22 @@ call hacerTransferencia(1,2,1000,'Transferencia');
 call hacerTransferencia(4,2,5487,'Transferencia');
 call hacerTransferencia(1,2,999,'Transferencia');
 call hacerTransferencia(2,3,457,'Transferencia');
-call hacerTransferencia(4,9,4477,'Transferencia');
-call hacerTransferencia(1,9,4477,'Transferencia');
-call hacerTransferencia(9,2,4477,'Transferencia');
+call hacerTransferencia(9,4,9000,'Transferencia');
 call listarMovimientos('000332312313');
 call listarMovimientos('000332312320');
 call chequearCbu('000332312320');
 call getIdCuenta('000332312314');
 call solicitarPrestamo('000332312313',2,70.40,12.41,2500,6);
- 
+ call listarPrestamos();
+call listarPrestamosActivosDeUser(2);
+call contarPrestamosPendientes (2);
+call leerPrestamo(1);
+call aprobarPrestamo(1);
+select * from Prestamos;
 
-select * from Prestamos
+
+
+
+
+
 
