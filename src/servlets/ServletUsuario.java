@@ -219,10 +219,15 @@ public class ServletUsuario extends HttpServlet {
 
 			} else if (negUsuario.chequearNombreUsuario(nombreUsuario)) {
 
-				negUsuario.cargarUsuario(usuario);
-				String mensaje = "Alta usuario exitosa";
-				request.setAttribute("mensaje", mensaje);
-				redireccion = "IndexAdmin.jsp";
+				if(negUsuario.cargarUsuario(usuario)) {
+					String mensaje = "Alta usuario exitosa";
+					request.setAttribute("mensaje", mensaje);
+					redireccion = "IndexAdmin.jsp";					
+				}else {
+					String mensaje = "Ocurrio una excepcion, por favor verifique los datos ingresados e intente nuevamente.";
+					request.setAttribute("mensaje", mensaje);
+					redireccion = "IndexAdmin.jsp";	
+				}
 
 			} else {
 
@@ -366,10 +371,16 @@ public class ServletUsuario extends HttpServlet {
 				redireccion = "ModificarUsuario.jsp";
 
 			} else {
-				negUsuario.modificarUsuario(usuario);
-				String mensaje = "Modificacion de usuario exitosa";
-				request.setAttribute("mensaje", mensaje);
-				redireccion = "IndexAdmin.jsp";
+				
+				if(negUsuario.modificarUsuario(usuario)) {
+					String mensaje = "Modificacion de usuario exitosa";
+					request.setAttribute("mensaje", mensaje);
+					redireccion = "IndexAdmin.jsp";					
+				}else {
+					String mensaje = "Ocurrio una excepcion, por favor verifique los datos ingresados e intente nuevamente.";
+					request.setAttribute("mensaje", mensaje);
+					redireccion = "IndexAdmin.jsp";	
+				}
 
 			}
 

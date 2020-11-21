@@ -17,15 +17,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
-	
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
-	
-	
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -39,6 +37,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
 	integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
 	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.js"></script>
 </head>
 <body>
 	<% Usuario usuario;
@@ -149,13 +153,13 @@
 						<div class="col">
 						 <label for="Nombre">Nombre:</label>
 							<input type="text" class="form-control" name="TXTnombrePersona"
-								id="nombre" aria-describedby="emailHelp" placeholder="Nombres" value=<%=usuarioCliente.getPersona().getNombre() %>>
+								id="nombre" aria-describedby="emailHelp" placeholder="Nombres" value=<%=usuarioCliente.getPersona().getNombre() %> readonyly>
 						</div>
 						<div class="col">
 						 <label for="Apellido">Apellido:</label>
 							<input type="text" class="form-control" name="TXTapellido"
 								id="apellido" aria-describedby="emailHelp"
-								placeholder="Apellidos" value=<%=usuarioCliente.getPersona().getApellido() %>>
+								placeholder="Apellidos" value=<%=usuarioCliente.getPersona().getApellido() %> readonyly>
 						</div>
 
 					</div>
@@ -164,12 +168,12 @@
 						<div class="col">
 						 <label for="Dni">Dni:</label>
 							<input type="text" class="form-control" name="TXTdni" id="dni"
-								aria-describedby="emailHelp" placeholder="DNI" value=<%=usuarioCliente.getPersona().getDni() %>>
+								aria-describedby="emailHelp" placeholder="DNI" value=<%=usuarioCliente.getPersona().getDni() %> readonyly>
 						</div>
 						<div class="col">
 						 <label for="cuil">Cuil:</label>
 							<input type="text" class="form-control" name="TXTcuil"
-								id="cuil" aria-describedby="emailHelp" placeholder="Cuil" value=<%=usuarioCliente.getPersona().getCuil() %>>
+								id="cuil" aria-describedby="emailHelp" placeholder="Cuil" value=<%=usuarioCliente.getPersona().getCuil() %> readonyly>
 						</div>
 						
 						<div class="col">
@@ -180,14 +184,14 @@
 					<div class="form-row">
 						<div class="col">
 							<input type="date" class="form-control" name="TXTfecha" id="nacimiento"
-								aria-describedby="emailHelp" placeholder="DD" value="<%= request.getAttribute("fecha") %>">
+								aria-describedby="emailHelp" placeholder="DD" value="<%= request.getAttribute("fecha") %>" readonyly>
 						</div>
 					
 						<div class="col" style="position:relative; bottom:30px">
 							<label for="sexo">Sexo:</label>
 							<input type="text" class="form-control" name="TXTsexo"
 								id="sexo" aria-describedby="emailHelp"
-								placeholder="Sexo" value=<%=usuarioCliente.getPersona().getSexo() %>>
+								placeholder="Sexo" value=<%=usuarioCliente.getPersona().getSexo() %> readonyly>
 						</div>
 					</div>
 					<div class="form-row">
@@ -198,12 +202,12 @@
 							
 							<input type="text" class="form-control" name="TXTapellido"
 								id="apellido" aria-describedby="emailHelp"
-								placeholder="Apellidos" value=<%=usuarioCliente.getPersona().getDireccion().getProvincia() %>>
+								placeholder="Apellidos" value=<%=usuarioCliente.getPersona().getDireccion().getProvincia() %> readonyly>
 						</div>
 						<div class="col">
 							<input type="text" style="position:relative; top:30px" class="form-control" name="TXTlocalidad"
 								id="localidad" aria-describedby="emailHelp"
-								placeholder="localidad" value=<%=usuarioCliente.getPersona().getDireccion().getLocalidad() %>>
+								placeholder="localidad" value=<%=usuarioCliente.getPersona().getDireccion().getLocalidad() %> readonyly>
 						</div>
 
 					</div>
@@ -211,7 +215,7 @@
 					<div class="form-row">
 						<div class="col">
 							<input type="text" class="form-control" name="TXTdomicilio" id="domicilio"
-								aria-describedby="emailHelp" placeholder="Domicilio" value=<%=usuarioCliente.getPersona().getDireccion().getCalle() %>>
+								aria-describedby="emailHelp" placeholder="Domicilio" value=<%=usuarioCliente.getPersona().getDireccion().getCalle() %> readonyly>
 						</div>
 						
 					</div>
@@ -219,12 +223,12 @@
 					<div class="form-row">
 						<div class="col">
 							<input type="text" class="form-control" name="TXTnumero" id="numero"
-								aria-describedby="emailHelp" placeholder="Numero" value=<%=usuarioCliente.getPersona().getDireccion().getNumero() %>>
+								aria-describedby="emailHelp" placeholder="Numero" value=<%=usuarioCliente.getPersona().getDireccion().getNumero() %> readonyly>
 						</div>
 						
 						<div class="col">
 							<input type="text" class="form-control" name="TXTdepto" id="depto"
-								aria-describedby="emailHelp" placeholder="Depto" value =<%=usuarioCliente.getPersona().getDireccion().getDepto() %>>
+								aria-describedby="emailHelp" placeholder="Depto" value =<%=usuarioCliente.getPersona().getDireccion().getDepto() %> readonyly>
 						</div>
 						
 					</div>
@@ -233,7 +237,7 @@
 						<div class="col">
 							 <input	type="text" class="form-control" name="TXTtelefono"
 								id="telefono" aria-describedby="emailHelp"
-								placeholder="telefono" value=<%=usuarioCliente.getPersona().getTelefono() %>>
+								placeholder="telefono" value=<%=usuarioCliente.getPersona().getTelefono() %> readonyly>
 						</div>
 					
 					</div>
@@ -242,7 +246,7 @@
 						<div class="col">
 							 <input	type="text" class="form-control" name="TXTcorreo"
 								id="mail" aria-describedby="emailHelp"
-								placeholder="Correo electronico" value=<%=usuarioCliente.getPersona().getEmail() %>>
+								placeholder="Correo electronico" value=<%=usuarioCliente.getPersona().getEmail() %> readonyly>
 						</div>
 					
 					</div>

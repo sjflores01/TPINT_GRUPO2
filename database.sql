@@ -658,7 +658,7 @@ in idParametro int
 
 )
 BEGIN
-    Select Count(*) from cuentas where idUsuario = idParametro;
+    Select Count(*) from cuentas where idUsuario = idParametro and eliminada = false;
 END$$
 
 DELIMITER ;
@@ -695,8 +695,8 @@ DELIMITER ;
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','M','tom@','542', '1998-01-30','tomUsuario','tomContraseña');
-call cargaUsuario('calle',234,'b','san fernando','buenos aires','1','54789223','oscar','gonzales','M','tom@','542', '1998-01-30','oscar','tomContraseña');
-call cargaUsuario('hola',234,'b','san fernando','buenos aires','2','54789116','kikozonasur','gonzales','M','tom@','542', '1998-01-30','vamoniubal','tomContraseña');
+call cargaUsuario('calle',234,'b','san fernando','buenos aires','1','54789223','Oscar','Rodriguez','M','eloski@oski.com','542', '1998-01-30','oscar','tomContraseña');
+call cargaUsuario('hola',234,'b','Zona Sur','santa fe','2','54789116','Kiko','Vamoniubal','M','kiko@niubal.com','542', '1998-01-30','vamoniubal','tomContraseña');
 call cargaUsuario('caseros',234,'b','san fernando','buenos aires','3','54789443','allbo','gonzales','M','tom@','542', '1998-01-30','allboys','tomContraseña');
 call cargaUsuario('hudson',234,'b','san fernando','buenos aires','4','54789555','capo','gonzales','M','tom@','542', '1998-01-30','capo','tomContraseña');
 call cargaUsuario('pappo',234,'b','san fernando','buenos aires','5','54789573','teo','gonzales','M','tom@','542', '1998-01-30','teo','tomContraseña');

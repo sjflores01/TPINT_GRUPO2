@@ -12,14 +12,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
 
-
-
-
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -33,9 +32,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
 	integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.css"/>
- 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#tablaClientes').DataTable();
@@ -101,7 +103,7 @@ usuarioAdmin = (Usuario) session.getAttribute("UsuarioAdminLogin");%>
 				</div>
 				<div class="col-md-3">
 					<li class="nav-item"><a class="nav-link"
-						href="PedirPrestamos.jsp">Solicitudes de prestamos</a></li>
+						href="ServletPrestamo?ListaPrestamos=1">Solicitudes de prestamos</a></li>
 				</div>
 				<div class="col-md-2">
 					<li class="nav-item"><a class="nav-link" href="#">Informes</a>
@@ -186,7 +188,7 @@ usuarioAdmin = (Usuario) session.getAttribute("UsuarioAdminLogin");%>
 								} else {
 							%>
 							<td><a class="btn btn-danger"
-								href="ServletCuenta?nuevaCuenta=<%=user.getId()%>" disabled>Ya
+								href="#" disabled>Ya
 									posee 3 cuentas</a></td>
 							<%
 								}

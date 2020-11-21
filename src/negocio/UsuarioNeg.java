@@ -6,8 +6,8 @@ import dominio.Usuario;
 
 public interface UsuarioNeg {
 	
-	public void cargarUsuario(Usuario usuario);
-	public void modificarUsuario(Usuario usuario);
+	public boolean cargarUsuario(Usuario usuario);
+	public boolean modificarUsuario(Usuario usuario);
 	public void eliminarUsuario(int id);
 	public ArrayList<Usuario> listarUsuarios(String search);
 	public Usuario leerUsuario(Integer id);

@@ -11,14 +11,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
-	
-	
+
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -32,6 +31,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
 	integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
 	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-large navbar-light"
@@ -74,7 +79,8 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="UsuarioDatosPersonales.jsp">Nuevo cliente</a>
-							<a class="dropdown-item" href="UsuarioDatosPersonales.jsp">Nuevo cliente</a>
+							<div class="dropdown-divider"></div>
+							<a	class="dropdown-item" href="ServletUsuario?ListaClientes=1&pagina=1">Listar clientes</a>
 							
 						</div></li>
 				</div>
@@ -84,11 +90,11 @@
 						
 				</div>
 				<div class="col-md-3">
-					<li class="nav-item"><a class="nav-link" href="PedirPrestamo.jsp">Solicitudes
+					<li class="nav-item"><a class="nav-link" href="ServletPrestamo?ListaPrestamos=1">Solicitudes
 							de prestamos</a></li>
 				</div>
 				<div class="col-md-2">
-					<li class="nav-item"><a class="nav-link" href="#">Informes</a>
+					<li class="nav-item"><a class="nav-link" href="SeleccionarInforme.jsp">Informes</a>
 					</li>
 				</div>
 				

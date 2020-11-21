@@ -66,6 +66,8 @@ public class ServletCliente extends HttpServlet {
 		}
 		else if(request.getParameter("cargarCuentas") != null)
 		{
+			if(request.getParameter("cargarCuentas") != "0") {
+				
 			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
 			ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>();
 			int idSeleccionada;
@@ -83,11 +85,12 @@ public class ServletCliente extends HttpServlet {
 			request.setAttribute("saldo", listaCuentasUsuario.get(0).getSaldo());
 			
 			redireccion = "CuentaMovimientos.jsp";
-			
-			
-			
-			
-			
+			}else {
+				
+				String mensaje = "Aun no tenes una cuenta activa. Por favor ponete en contacto con un representante para poder operar.";
+				request.setAttribute("mensaje", mensaje);
+				redireccion = "IndexUsuario.jsp";
+			}
 			
 		} else if(request.getParameter("BtnVerMovimientos") != null)
 		{
@@ -121,7 +124,8 @@ public class ServletCliente extends HttpServlet {
 			redireccion = "CuentaMovimientos.jsp";
 					
 			
-		}else if(request.getParameter("BtnCargaTransferencia") != null) 
+		}
+		else if(request.getParameter("BtnCargaTransferencia") != null) 
 		{
 		
 			String stringId = request.getParameter("TXTidCuenta");
@@ -364,7 +368,7 @@ public class ServletCliente extends HttpServlet {
 			PrestamoNegImpl presNeg = new PrestamoNegImpl();
 			presNeg.solicitarPrestamo(pres);
 			
-			mensaje="Solicitud de prestamo exitosa, pendiente aprovacion";
+			mensaje="Solicitud de prestamo exitosa, pendiente aprobacion";
 			request.setAttribute("mensaje", mensaje);
 			
 			
