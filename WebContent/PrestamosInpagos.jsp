@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Persona"%>
+<%@page import="dominio.Usuario"%>
+<%@page import="dominio.Informe"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,6 +33,15 @@
 </head>
 </head>
 <body>
+<%
+		ArrayList<Informe> lista;
+	if (request.getAttribute("lista") == null) {
+
+		lista = new ArrayList<Informe>();
+	} else {
+		lista = (ArrayList<Informe>) request.getAttribute("lista");
+	}
+	%>
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
 		href="#">BANCO JAVA ADMIN</a>
@@ -93,13 +106,13 @@
 				<div class="card overflow-auto">
 					<div class="card-header">
 						<div class="container">
-							<% // Foreach de cada solicutud %>
+						
 							<div class="row">
-								<div class="col-sm-3">Nombre:</div>
-								<div class="col-sm-2">DNI:</div>
-								<div class="col-sm-2">Monto solicitado:</div>
-								<div class="col-sm-2">Cuotas:</div>
-								<div class="col-sm-3"> Ultimas cuotas inpagas:</div>
+								<div class="col-sm-2">Cantidad de Prestamos:</div>
+								<div class="col-sm-2">Cuotas Pagas:</div>
+								<div class="col-sm-2">Promedio de Cuotas:</div>
+								<div class="col-sm-3">Promedio de Saldos Pedidos:</div>
+								<div class="col-sm-2">Saldo Mensual:</div>
 							</div>
 						</div>
 
@@ -109,17 +122,21 @@
 					<div class="card-body" style="height: 450px;">
 
 						<div class="container-fluid">
-							<% // Foreach de cada solicutud %>
-							<div class="row"  style="border-bottom: 1px solid black;">
-								<div class="col-sm-3"> <a class="" href="#">Tomas de pamphilis</a></div>
-								<div class="col-sm-2">24.257.420</div>
-								<div class="col-sm-2">$56.000.000</div>
-								<div class="col-sm-2">6</div>
-								<div class="col-sm-1" style="color:red">
-									3
-								</div>
-							
+								<%
+								for (Informe i : lista) {
+							%>
+							<div class="row" style="border-bottom: 1px solid black;">
+								<div class="col-sm-2"><%=i.getCantidadPrestamos()%></div>
+								<div class="col-sm-2"><%=i.getCuotasPagas()%></div>
+								<div class="col-sm-2"><%=i.getPromedioCuotas()%></div>
+								<div class="col-sm-3"><%=i.getPromedioSaldoPedido()%></div>
+								<div class="col-sm-2"><%=i.getSaldoMensual()%></div>
+
+
 							</div>
+							<%
+								}
+							%>
 						</div>
 
 					</div>

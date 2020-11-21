@@ -55,16 +55,11 @@ public class ServletInforme extends HttpServlet {
 			
 		} else if(request.getParameter("inpagos") != null) {
 			
-			String parametro = request.getParameter("cargaAprobar");
-			Integer id = Integer.parseInt(parametro);
-		
-			
-			ArrayList<Prestamo> lista = new ArrayList<Prestamo>();
-			PrestamoNeg negPrestamo = new PrestamoNegImpl();
+			ArrayList<Informe> lista = new ArrayList<Informe>();
+			InformeNeg negInforme = new InformeNegImpl();
 			
 			
-			negPrestamo.aprobarPrestamo(id);
-			lista = negPrestamo.listarPrestamos();
+			lista = negInforme.informeInpagos();
 											
 			request.setAttribute("lista", lista);
 			redireccion = "PrestamosInpagos.jsp";

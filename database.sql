@@ -409,7 +409,7 @@ BEGIN
     Select * from Prestamos
     inner join Usuarios on Prestamos.idUsuario = Usuarios.id
     inner join Personas on Usuarios.idPersona = Personas.id
-    where Prestamos.aprobado = 0 and Prestamos.rechazado = 0;
+    where Prestamos.aprobado = 0 and Prestamos.rechazado = 0 and cantCuotas > cuotasPagas;
 END$$
 
 DELIMITER ;
@@ -436,7 +436,7 @@ BEGIN
     Select * from Prestamos
     inner join Usuarios on Prestamos.idUsuario = Usuarios.id
     inner join Personas on Usuarios.idPersona = Personas.id
-    where Prestamos.aprobado = 1 and Prestamos.rechazado = 0 and idUsuario = idParametro;
+    where Prestamos.aprobado = 1 and Prestamos.rechazado = 0 and idUsuario = idParametro and cantCuotas > cuotasPagas;
 END$$
 
 DELIMITER ;
@@ -454,13 +454,38 @@ END$$
 
 DELIMITER ;
 
+
 DELIMITER $$
 CREATE PROCEDURE `aprobarPrestamo`(
-in id int
+in idParametro int
 )
 BEGIN
-    Update Prestamos set aprobado = true 
-    where Prestamos.id = id;
+  
+    DECLARE montoPedido float DEFAULT 0;
+	DECLARE cbuCuenta varchar(30);
+    DECLARE idCuenta int;
+  
+	Update Prestamos set aprobado = true 
+    where Prestamos.id = idParametro;
+    
+    Select cbu
+    into cbuCuenta
+    from Prestamos where Prestamos.id = idParametro;
+    
+    Select importePedido
+    into montoPedido
+    from Prestamos where Prestamos.id = idParametro;
+    
+	Select id 
+   into idCuenta
+   from Cuentas where cbu = cbuCuenta;
+    
+    
+    
+    Insert into Movimientos (idDestino, idOrigen, fecha, detalle, importe, idTipo) values (idCuenta, 11, CURRENT_TIMESTAMP, 'Prestamo', montoPedido, 1);
+    update Cuentas set saldo = saldo + montoPedido where Cuentas.id = idCuenta;
+    
+    
 END$$
 
 DELIMITER ;
@@ -654,6 +679,19 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE PROCEDURE `informeInpagos`()
+BEGIN
+SELECT
+COUNT(*) AS cantidadPrestamos,
+SUM(cuotasPagas) AS cuotasPagas,
+(SUM(cantCuotas)/COUNT(*)) AS promedioCuotas,
+(SUM(importePedido)/COUNT(*)) AS promedioSaldoPedido,
+SUM(montoMensual) AS saldoMensual
+FROM prestamos where (to_days(now()) - to_days(fecha)) > 60;
+END$$
+
+DELIMITER ;
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','M','tom@','542', '1998-01-30','tomUsuario','tomContraseña');

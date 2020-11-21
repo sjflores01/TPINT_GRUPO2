@@ -9,4 +9,5 @@ import dominio.Prestamo;
 public interface InformeNeg {
 
 	public ArrayList<Informe> informePrestamos();
+	public ArrayList<Informe> informeInpagos();
 }

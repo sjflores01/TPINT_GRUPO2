@@ -27,6 +27,12 @@ public class InformeNegImpl implements InformeNeg{
 	public ArrayList<Informe> informePrestamos() {
 		return daoInforme.informePrestamos();
 	}
+	
+	
+	@Override
+	public ArrayList<Informe> informeInpagos() {
+		return daoInforme.informeInpagos();
+	}
 
 	
 }

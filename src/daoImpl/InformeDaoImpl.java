@@ -57,6 +57,42 @@ public class InformeDaoImpl implements InformeDao {
 		return lista;
 	}
 	
+	public ArrayList<Informe> informeInpagos() {
+
+		ArrayList<Informe> lista = new ArrayList<Informe>();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		java.sql.Connection cn = null;
+
+		try {
+			cn = DriverManager.getConnection(gestor.getConectoinString(), gestor.getUser(), gestor.getPass());
+			
+			String query = "call informeInpagos()";
+			
+			java.sql.Statement st = cn.createStatement();
+			java.sql.ResultSet rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				
+				Informe i = new Informe(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDouble(4), rs.getDouble(5));
+				
+				lista.add(i);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+	
 	
 
 
