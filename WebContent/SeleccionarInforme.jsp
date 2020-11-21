@@ -100,7 +100,8 @@
 						<div class="card-body">
 							<h5 class="card-title">Prestamos activos</h5>
 							<div style="height:20px"></div>	
-						<a  style="position:relative; left:75px" class="btn btn-primary" href="#">continuar</a>
+						<a  style="position:relative; left:75px" class="btn btn-primary" 
+						href="ServletInforme?activos=1">continuar</a>
 
 						</div>
 					</div>
@@ -114,7 +115,8 @@
 						
 							<h5 class="card-title">Prestamos inpagos</h5>
 							<div style="height:20px"></div>	
-							<a style="position:relative; left:75px" class="btn btn-primary" href="#">continuar</a>
+							<a style="position:relative; left:75px" class="btn btn-primary" 
+							href="ServletInforme?inpagos=1">continuar</a>
 
 						</div>
 					</div>

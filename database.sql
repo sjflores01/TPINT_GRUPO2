@@ -639,6 +639,21 @@ END$$
 DELIMITER ;
 
 
+DELIMITER $$
+CREATE PROCEDURE `informePrestamos`()
+BEGIN
+SELECT
+COUNT(*) AS cantidadPrestamos,
+SUM(cuotasPagas) AS cuotasPagas,
+(SUM(cantCuotas)/COUNT(*)) AS promedioCuotas,
+(SUM(importePedido)/COUNT(*)) AS promedioSaldoPedido,
+SUM(montoMensual) AS saldoMensual
+FROM prestamos where aprobado = 1;
+END$$
+
+DELIMITER ;
+
+
 
 
 call cargaUsuario('calle',234,'b','san fernando','buenos aires','123456789','5486113','tomas','dp','M','tom@','542', '1998-01-30','tomUsuario','tomContraseña');

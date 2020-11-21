@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Persona"%>
+<%@page import="dominio.Usuario"%>
+<%@page import="dominio.Informe"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +13,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -29,6 +33,15 @@
 </head>
 </head>
 <body>
+<%
+		ArrayList<Informe> lista;
+	if (request.getAttribute("lista") == null) {
+
+		lista = new ArrayList<Informe>();
+	} else {
+		lista = (ArrayList<Informe>) request.getAttribute("lista");
+	}
+	%>
 	<nav class="navbar navbar-expand-large navbar-light"
 		style="background-color: #e3f2fd;"> <a class="navbar-brand"
 		href="#">BANCO JAVA ADMIN</a>
@@ -88,40 +101,45 @@
 		<div class="row mt-2 d-flex justify-content-center">
 			<div class="col-md-11">
 				<div class="card overflow-auto">
-				<div class="card-header">
-				<div class="container">
-						<% // Foreach de cada solicutud %> 
-						<div class="row">
-							<div class="col-sm-3">Nombre:</div>
-							<div class="col-sm-2">DNI:</div>
-							<div class="col-sm-2">Monto otorgado:</div>
-							<div class="col-sm-2">Monto de cuota:</div>
-							<div class="col-sm-2">Cuotas pagas:</div>
+					<div class="card-header">
+						<div class="container">
+						
+							<div class="row">
+								<div class="col-sm-2">Cantidad de Prestamos:</div>
+								<div class="col-sm-2">Cuotas Pagas:</div>
+								<div class="col-sm-2">Promedio de Cuotas:</div>
+								<div class="col-sm-3">Promedio de Saldos Pedidos:</div>
+								<div class="col-sm-2">Saldo Mensual:</div>
+							</div>
 						</div>
-					</div>
-				
-				</div>
-				
-				
-				<div class="card-body" style="height: 450px;">
 
-					<div class="container-fluid">
-						<% // Foreach de cada solicutud %> 
-						<div class="row" style="border-bottom: 1px solid black;">
-							<div class="col-sm-3"> <a class="" href="#">Tomas de pamphilis</a></div>
-							<div class="col-sm-2">24.257.420</div>
-							<div class="col-sm-2">$56.000</div>
-							<div class="col-sm-2">$12.000</div>
-							<div class="col-sm-1">3/6</div>
-							
-							
-						</div>
 					</div>
 
-				</div>
+
+					<div class="card-body" style="height: 450px;">
+
+						<div class="container-fluid">
+								<%
+								for (Informe i : lista) {
+							%>
+							<div class="row" style="border-bottom: 1px solid black;">
+								<div class="col-sm-2"><%=i.getCantidadPrestamos()%></div>
+								<div class="col-sm-2"><%=i.getCuotasPagas()%></div>
+								<div class="col-sm-2"><%=i.getPromedioCuotas()%></div>
+								<div class="col-sm-3"><%=i.getPromedioSaldoPedido()%></div>
+								<div class="col-sm-2"><%=i.getSaldoMensual()%></div>
+
+
+							</div>
+							<%
+								}
+							%>
+						</div>
+
+					</div>
 
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
