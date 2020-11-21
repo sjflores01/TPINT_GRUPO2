@@ -555,6 +555,28 @@ BEGIN
     
 END$$
 DELIMITER ;
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE listarMovimientosFiltrados(
+in cbuCuenta varchar(30),
+in importeFiltro float
+)
+
+BEGIN
+	
+    select  O.cbu as cbuOrigen, D.cbu as cbuDestino, M.importe, M.fecha, M.detalle  from Movimientos as M 
+    inner join Cuentas as O on M.idOrigen = O.id
+    inner join Cuentas as D on M.idDestino = D.id
+	where O.cbu = cbuCuenta or D.cbu = cbuCuenta
+    and M.importe <= importeFiltro
+    order by fecha desc;
+   
+    
+    
+    
+END$$
+DELIMITER ;
 
 
 

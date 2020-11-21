@@ -2,6 +2,7 @@ package negocioImpl;
 
 import java.util.ArrayList;
 
+import dao.MovimientoDao;
 import daoImpl.CuentaDaoImpl;
 import daoImpl.MovimientoDaoImpl;
 import dominio.Movimiento;
@@ -13,7 +14,7 @@ public class MovimientoNegImpl implements MovimientoNeg {
 	public ArrayList<Movimiento> listarMovimientos(String cbu) {
 		
 		
-		MovimientoDaoImpl dao = new MovimientoDaoImpl();
+		MovimientoDao dao = new MovimientoDaoImpl();
 			
 		return dao.listarMovimientos(cbu);
 		
@@ -23,10 +24,17 @@ public class MovimientoNegImpl implements MovimientoNeg {
 	@Override
 	public void hacerTransferencia(Movimiento mov) {
 		
-		MovimientoDaoImpl dao = new MovimientoDaoImpl();
+		MovimientoDao dao = new MovimientoDaoImpl();
 		
 		dao.hacerTransferencia(mov);
 		
+	}
+
+	@Override
+	public ArrayList<Movimiento> listarMovimientosImporteFiltrado(String cbu, String importe) {
+		
+		MovimientoDao dao = new MovimientoDaoImpl();
+		return dao.listarMovimientosImporteFiltrado(cbu,importe);
 	}
 
 }

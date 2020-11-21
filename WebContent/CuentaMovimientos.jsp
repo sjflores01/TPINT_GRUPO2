@@ -38,6 +38,13 @@
 
 <script type="text/javascript"
       src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/sc-2.0.3/sp-1.2.1/datatables.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#tablaMisPrestamos').DataTable({
+			"searching" : false
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -122,8 +129,7 @@
                                     <%
                                     	for (Cuenta cuenta : listaCuentas) {
                                     %>
-                                    <option
-                                          value="<%=cuenta.getCbu()%>"
+                                    <option value="<%=cuenta.getCbu()%>"
                                           <%if (cuenta.getCbu().equals(request.getAttribute("selected"))) {%>
                                           selected <%}%>>Cbu:
                                           <%=cuenta.getCbu()%> -
@@ -174,9 +180,28 @@
                                     </div>
 
                               </div>
+                              <div class="row d-flex justify-content-center">
+                                    <div class="col-md-4">
+                                          <input type="number"
+                                                name="txtBoxFiltrarImporte"
+                                                class="form-control"
+                                                placeholder="Importes menores o iguales a..." />
 
+                                    </div>
+                                    <div class="col-md-4">
+                                          <input type="number"
+                                                name="txtBoxFiltrarConcepto"
+                                                class="form-control"
+                                                placeholder="Importes menores o iguales a..." />
 
+                                    </div>
+                                    <div class="col-md-3">
+                                          <input type="submit"
+                                                name="BtnFiltrarMovimientos"
+                                                value="Filtrar" />
 
+                                    </div>
+                              </div>
                               <input type="hidden" name="TXTidCuenta"
                                     value="<%=request.getAttribute("idSeleccionada")%>" />
                               <div style="height: 50px"></div>

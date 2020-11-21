@@ -124,6 +124,37 @@ public class ServletCliente extends HttpServlet {
 			redireccion = "CuentaMovimientos.jsp";
 					
 			
+		}else if(request.getParameter("BtnFiltrarMovimientos")!= null)
+		{
+			ArrayList<Cuenta> listaCuentasUsuario = new ArrayList<Cuenta>();
+			ArrayList<Movimiento> listaMovimientos = new ArrayList<Movimiento>();
+			String cbu = request.getParameter("TXTcbu");
+			String importe = request.getParameter("txtBoxFiltrarImporte");
+			int idSeleccionada = 0;
+			float saldo = 0f;
+			
+			listaCuentasUsuario = negCuenta.listarCuentasXUsuario(usuario.getId());
+			listaMovimientos = negMov.listarMovimientosImporteFiltrado(cbu,importe);
+			
+			
+			for(Cuenta cuenta : listaCuentasUsuario)
+			{
+				if(cuenta.getCbu().equals(cbu))
+				{
+					idSeleccionada = cuenta.getId();
+					saldo = cuenta.getSaldo();
+				}
+			}
+			
+			
+			
+			request.setAttribute("listaCuentasUsuario", listaCuentasUsuario);
+			request.setAttribute("movimientos", listaMovimientos);
+			request.setAttribute("selected", cbu);
+			request.setAttribute("idSeleccionada", idSeleccionada);
+			request.setAttribute("saldo", saldo );
+			
+			redireccion = "CuentaMovimientos.jsp";
 		}
 		else if(request.getParameter("BtnCargaTransferencia") != null) 
 		{
